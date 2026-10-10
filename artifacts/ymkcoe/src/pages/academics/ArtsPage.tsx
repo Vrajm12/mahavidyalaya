@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 export default function ArtsPage() {
-  const [activeTab, setActiveTab] = useState<"curriculum" | "faculty" | "eligibility" | "resources">("curriculum");
+  const [activeTab, setActiveTab] = useState<"curriculum" | "faculty" | "eligibility" | "resources" | "pathways">("curriculum");
 
   const subjectsFYJC = [
     {
