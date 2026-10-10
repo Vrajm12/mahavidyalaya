@@ -772,13 +772,13 @@ export default function Triverse() {
                 }`}>
                   <div className={`w-full h-full rounded-2xl flex flex-col justify-between p-6 transition-colors duration-500 ${isDark ? 'bg-[#0B1020]/90' : 'bg-white'}`}>
                     <div className={`flex justify-between items-center text-[10px] font-mono pb-4 border-b ${isDark ? 'text-white/40 border-white/5' : 'text-slate-400 border-slate-100'}`}>
-                      <span>KBIPER PORTAL LIVE</span>
+                      <span>INDRAYANI PORTAL LIVE</span>
                       <span>PRODUCTION</span>
                     </div>
                     <div className="flex-1 flex flex-col items-center justify-center gap-3">
                       <span className={`text-xl font-black text-transparent bg-clip-text transition-colors duration-500 ${
                         isDark ? 'bg-gradient-to-r from-white to-white/40' : 'bg-gradient-to-r from-slate-900 to-slate-400'
-                      }`}>KBIPER PHARMACY</span>
+                      }`}>INDRAYANI MAHAVIDYALAYA</span>
                       <span className={`text-[10px] font-mono uppercase ${isDark ? 'text-[#8B5CF6]' : 'text-[#6C3CF0]'}`}>Responsive Layout</span>
                     </div>
                     <div className={`h-4 w-1/3 rounded-full ${isDark ? 'bg-white/10' : 'bg-slate-100'}`} />
@@ -794,7 +794,7 @@ export default function Triverse() {
                 </div>
                 
                 <h3 className={`text-4xl md:text-5xl font-black leading-none transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  KBIPER College Ecosystem
+                  Indrayani Mahavidyalaya Ecosystem
                 </h3>
                 
                 <p className={`font-light leading-relaxed text-sm md:text-base transition-colors ${isDark ? 'text-white/60' : 'text-slate-650'}`}>
@@ -1165,7 +1165,7 @@ export default function Triverse() {
             <div className="flex gap-6">
               <Link href="/">
                 <span className={`transition-colors cursor-pointer flex items-center gap-1 ${isDark ? 'hover:text-white' : 'hover:text-slate-800'}`}>
-                  <ChevronLeft className="w-3.5 h-3.5" /> Return to KBIPER site
+                  <ChevronLeft className="w-3.5 h-3.5" /> Return to Indrayani Mahavidyalaya site
                 </span>
               </Link>
               <a href="#" className={`transition-colors ${isDark ? 'hover:text-white' : 'hover:text-slate-800'}`}>Privacy Policy</a>
@@ -1183,9 +1183,9 @@ export default function Triverse() {
 const testimonials = [
   {
     quote: "Triverse Solutions rebuilt our digital presence from scratch. Their expertise in educational workflows, ERP integrations, and admission automation has saved us hundreds of operational hours. The UI is stunning and our students love it.",
-    author: "Dr. Sanjay R. Arote",
+    author: "Dr. S. K. Malghe",
     role: "Principal",
-    institution: "KBIPER Pharmacy College",
+    institution: "Indrayani Mahavidyalaya",
     rating: 5
   },
   {

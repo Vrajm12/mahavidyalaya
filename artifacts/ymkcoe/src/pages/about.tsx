@@ -1,7 +1,9 @@
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Building2, Target, Eye, Award, Quote } from "lucide-react";
+import { Building2, Target, Eye, Award, Quote, BookOpen, Atom, Briefcase } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 
 export default function About() {
   const containerRef = useRef(null);
@@ -23,10 +25,10 @@ export default function About() {
         >
           <img 
             src={`${import.meta.env.BASE_URL}hero-building.png`} 
-            alt="KBIPER Campus" 
+            alt="Indrayani Mahavidyalaya Campus" 
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#023859]/90 to-[#023859]/60 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60 z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
         </motion.div>
 
@@ -38,21 +40,20 @@ export default function About() {
             className="max-w-4xl"
           >
             <div className="inline-block px-3 py-1 bg-accent/20 border border-accent/50 text-accent rounded-full text-sm font-semibold tracking-wider mb-6">
-              ESTABLISHED 1965
+              IVM TRUST ESTABLISHED 1965
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              Empowering <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Future</span> Pharmacy Leaders
+              Indrayani <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Mahavidyalaya</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/80 border-l-4 border-accent pl-4 max-w-2xl drop-shadow">
-              Nurturing pharmaceutical excellence, fostering innovation, and building the leaders of tomorrow at Krishnarao Bhegade Institute of Pharmaceutical Education and Research.
+            <p className="text-lg md:text-xl text-white/90 border-l-4 border-accent pl-4 max-w-2xl drop-shadow">
+              A premier educational institution under Indrayani Vidya Mandir Trust, offering Junior College in Arts, Commerce, and Science, alongside university undergraduate programs in B.Sc. and BCS in Talegaon Dabhade, Pune.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Overlapping Vision & Mission */}
+      {/* Vision & Mission */}
       <section className="py-24 bg-background relative overflow-hidden">
-        {/* Decorative Background Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -74,7 +75,7 @@ export default function About() {
                   <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Our Vision</h2>
                 </div>
                 <p className="text-xl md:text-2xl leading-relaxed text-white/90 font-light">
-                  "To provide higher &amp; quality education and enable the students from economically weaker sections to become professionals in today's competitive world."
+                  "To impart value-based quality education, empower youth from diverse socio-economic backgrounds, and nurture students into self-reliant, enlightened, and ethically conscious citizens."
                 </p>
               </div>
             </motion.div>
@@ -93,10 +94,10 @@ export default function About() {
               </div>
               <ul className="space-y-6 text-muted-foreground">
                 {[
-                  "To foster excellence in teaching, scholarship & service to develop a cadre of students with positive attitude, leadership skills & habit of lifelong learning.",
-                  "To create an academic environment where the highest standards of scholarship & professional practice are observed.",
-                  "To ensure achievement of overall education goals through effective administration.",
-                  "To use latest technology for the betterment of students and staff."
+                  "To deliver high-standard instruction across Arts, Commerce, Science, and Computer Science.",
+                  "To foster scientific temper, literary appreciation, and commercial acumen through state-of-the-art laboratories.",
+                  "To build character, leadership, and lifelong learning through sports, NSS, and cultural forums.",
+                  "To facilitate meaningful industry internships, skill certifications, and campus placements."
                 ].map((item, idx) => (
                   <motion.li 
                     key={idx}
@@ -106,7 +107,7 @@ export default function About() {
                     transition={{ delay: 0.4 + (idx * 0.1) }}
                     className="flex gap-4 group"
                   >
-                    <Target className="w-6 h-6 text-accent flex-shrink-0 mt-1 transition-transform group-hover:scale-125 group-hover:rotate-12" />
+                    <Target className="w-6 h-6 text-accent flex-shrink-0 mt-1 transition-transform group-hover:scale-125" />
                     <span className="leading-relaxed text-base md:text-lg">{item}</span>
                   </motion.li>
                 ))}
@@ -116,126 +117,80 @@ export default function About() {
         </div>
       </section>
 
-      {/* Glassmorphic Accreditations */}
+      {/* Accreditations */}
       <section className="py-24 bg-[#EEF2F6] relative overflow-hidden">
-        {/* Background blobs for glassmorphism */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-accent/20 rounded-full blur-[80px]" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px]" />
-
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl font-bold text-primary mb-4"
-            >
-              Excellence Recognized
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-lg text-muted-foreground"
-            >
-              We hold ourselves to the highest standards of educational quality and professional practice.
-            </motion.p>
+            <h2 className="text-4xl font-bold text-primary mb-4">
+              Institutional Distinctions
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Built upon recognized academic affiliations and sprawling infrastructure under Indrayani Vidya Mandir Trust.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Award, title: "AICTE Approved", desc: "Approved by the All India Council for Technical Education." },
-              { icon: Building2, title: "DBATU Affiliated", desc: "Affiliated to Dr. Babasaheb Ambedkar Technological University, Lonere." },
-              { icon: Award, title: "Established 1965", desc: "Over 60 years of academic excellence under Indrayani Vidya Mandir." },
-              { icon: Building2, title: "15-Acre Campus", desc: "State-of-the-art infrastructure on a sprawling campus at Talegaon Dabhade." }
+              { icon: Award, title: "SPPU Affiliated", desc: "Senior College degrees (B.Sc., BCS) affiliated to Savitribai Phule Pune University." },
+              { icon: Award, title: "MSBSHSE Board", desc: "Junior College (Classes 11 & 12) affiliated to Maharashtra State Board, Pune Division." },
+              { icon: Building2, title: "15-Acre Campus", desc: "Expansive green campus with modern laboratories, library, and sports complexes." },
+              { icon: Building2, title: "Founded in 1965", desc: "Over 60 years of foundational educational service to Maval and Pune region." }
             ].map((item, idx) => (
-              <motion.div 
+              <div 
                 key={idx}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white/60 backdrop-blur-xl border border-white/40 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(2,56,89,0.1)] hover:border-accent/50 transition-all duration-300 group"
+                className="bg-white/80 backdrop-blur-xl border border-white/50 p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all"
               >
-                <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
-                  <item.icon className="w-8 h-8 text-primary group-hover:text-accent transition-colors" />
+                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary">
+                  <item.icon className="w-8 h-8" />
                 </div>
                 <h3 className="font-bold text-xl text-primary mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Editorial Leadership Section */}
-      <section className="py-32 bg-primary relative overflow-hidden text-white">
-        {/* Subtle geometric overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        
+      {/* Leadership Profile */}
+      <section className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center gap-16">
-              {/* Image Column */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, type: "spring" }}
-                className="lg:w-2/5 relative"
-              >
-                <div className="aspect-[3/4] rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white/10">
-                  <img src={`${import.meta.env.BASE_URL}principal_sanjay_arote.jpg`} alt="Dr. Sanjay R. Arote" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                </div>
-                {/* Floating badge */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute -bottom-6 -right-6 bg-accent text-primary p-6 rounded-2xl shadow-xl backdrop-blur-sm border border-accent/50"
-                >
-                  <p className="font-bold text-xl">Principal</p>
-                  <p className="text-sm font-medium opacity-80">Since 2015</p>
-                </motion.div>
-              </motion.div>
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-2/5 relative">
+              <div className="aspect-[3/4] rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white/10 bg-muted">
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80"
+                  alt="Dr. S. K. Malghe - Principal"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-accent text-primary p-6 rounded-2xl shadow-xl">
+                <p className="font-bold text-xl">Principal</p>
+                <p className="text-xs font-semibold uppercase opacity-90">Indrayani Mahavidyalaya</p>
+              </div>
+            </div>
 
-              {/* Text Column */}
-              <motion.div 
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="lg:w-3/5 relative"
-              >
-                <Quote className="absolute -top-16 -left-10 w-40 h-40 text-white/5 -z-10 rotate-180" />
-                
-                <h2 className="text-sm font-bold tracking-[0.2em] text-accent uppercase mb-4">Leadership Message</h2>
-                <h3 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                  Dr. Sanjay R. Arote <span className="block text-xl md:text-2xl font-medium text-white/60 mt-2">(M. Pharm., Ph.D.)</span>
-                </h3>
-                
-                <div className="space-y-6 text-lg md:text-xl leading-relaxed text-white/80 font-light relative">
-                  <p>
-                    "Welcome to Krishnarao Bhegade Institute of Pharmaceutical Education and Research (KBIPER). Pharmacy is a noble profession that serves the healthcare system of the nation."
-                  </p>
-                  <p>
-                    "At KBIPER, we strive to build a strong foundation for our students by providing them with an ideal environment for learning and growth. Our state-of-the-art laboratories, experienced faculty, and industry-oriented curriculum ensure that our students are equipped to face the challenges of the rapidly evolving pharmaceutical landscape."
-                  </p>
-                </div>
-                
-                <div className="mt-12 pt-8 border-t border-white/10 flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-full border-2 border-accent flex items-center justify-center">
-                    <span className="font-serif text-3xl font-bold text-accent italic">S</span>
-                  </div>
-                  <div>
-                    <p className="font-serif italic text-xl">Dr. Sanjay R. Arote</p>
-                    <p className="text-sm text-accent tracking-widest uppercase mt-1">Principal, KBIPER</p>
-                  </div>
-                </div>
-              </motion.div>
+            <div className="lg:w-3/5 space-y-6">
+              <Quote className="w-16 h-16 text-white/10" />
+              <h2 className="text-xs font-bold tracking-[0.2em] text-accent uppercase">Leadership Desk</h2>
+              <h3 className="text-4xl md:text-5xl font-bold leading-tight">
+                Dr. S. K. Malghe <span className="block text-xl font-normal text-white/70 mt-1">(M.Sc., Ph.D.)</span>
+              </h3>
+              <p className="text-lg text-white/85 leading-relaxed font-light">
+                "Welcome to Indrayani Mahavidyalaya. Our mission has always been to provide high-quality education in Arts, Commerce, Science, and Computer Science to students of Talegaon Dabhade and Maval. We combine academic discipline with creative and sporting opportunities to nurture well-rounded global professionals."
+              </p>
+              <div className="pt-4 flex gap-4">
+                <Link href="/principal-message">
+                  <Button className="bg-accent hover:bg-accent/90 text-primary font-bold">
+                    Read Full Principal's Message →
+                  </Button>
+                </Link>
+                <Link href="/admissions">
+                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                    Admission Information
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

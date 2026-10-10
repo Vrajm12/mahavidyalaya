@@ -147,7 +147,7 @@ export default function PlacementsMessage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <MapPin className="w-4.5 h-4.5 text-accent shrink-0" />
-                    <span>Placement Desk, Ground Floor, KBIPER</span>
+                    <span>Placement Desk, Ground Floor, Indrayani Mahavidyalaya</span>
                   </div>
                 </div>
 
@@ -202,7 +202,7 @@ export default function PlacementsMessage() {
                 </div>
                 
                 <h2 className="text-2xl md:text-3xl font-extrabold text-primary leading-tight">
-                  Welcome to KBIPER Training & Placement Cell
+                  Welcome to Indrayani Mahavidyalaya Training & Placement Cell
                 </h2>
 
                 {/* Styled Quote Box */}
@@ -226,8 +226,8 @@ export default function PlacementsMessage() {
                   </p>
                   <p className="font-extrabold text-primary">
                     Warm Regards,<br />
-                    Mr. Shyam S. Awate<br />
-                    <span className="text-xs text-muted-foreground font-medium">Dean Training & Placement & III ED Cell, IVM's KBIPER</span>
+                    Training & Placement Officer<br />
+                    <span className="text-xs text-muted-foreground font-medium">Training & Placement Cell, Indrayani Vidya Mandir Trust</span>
                   </p>
                 </div>
               </motion.div>

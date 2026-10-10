@@ -70,10 +70,10 @@ const SHOWCASE_DATABASE: ShowcaseItem[] = [
   },
   {
     id: 4,
-    title: "KBIPER Campus Block & Courtyard",
+    title: "Indrayani Main Academic Block & Courtyard",
     category: "Campus Facilities",
     url: `${import.meta.env.BASE_URL}hero-building.png`, // uses existing high-res asset
-    description: "Krishnarao Bhegade Institute main educational block at Talegaon Dabhade, Pune featuring modern classrooms.",
+    description: "Indrayani Mahavidyalaya main educational block at Talegaon Dabhade, Pune featuring modern smart classrooms.",
     quickStats: "Modern Facade | 15-Acre Green Campus",
     specs: [
       "Smart digital whiteboard lecture theatres",
@@ -84,10 +84,10 @@ const SHOWCASE_DATABASE: ShowcaseItem[] = [
   },
   {
     id: 5,
-    title: "Pharma-Fiesta Cultural Celebrations",
+    title: "Indrayani Mahotsav Cultural Celebrations",
     category: "Student Vibe",
     url: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop",
-    description: "Students participating in annual group dances, dramatic arts, scientific model displays, and research posters.",
+    description: "Students participating in annual group dances, dramatic arts, scientific model displays, and academic exhibits.",
     quickStats: "Annual Mega Gala | Creative Expression",
     specs: [
       "State-level model exhibition championships",
@@ -129,7 +129,7 @@ const SHOWCASE_DATABASE: ShowcaseItem[] = [
     title: "Student Recreation & Wellness Hall",
     category: "Sports & Wellness",
     url: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200&auto=format&fit=crop",
-    description: "KBIPER student recreation lobby featuring table tennis, badminton double courts, chess, and carrom spaces.",
+    description: "Indrayani Mahavidyalaya student recreation lobby featuring table tennis, badminton double courts, chess, and carrom spaces.",
     quickStats: "Indoor Sports Center | Wellness Gym",
     specs: [
       "Professional double badminton wooden courts",

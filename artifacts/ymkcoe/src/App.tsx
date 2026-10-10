@@ -12,6 +12,27 @@ const Courses = lazy(() => import("@/pages/courses"));
 const Faculty = lazy(() => import("@/pages/faculty"));
 const Admissions = lazy(() => import("@/pages/admissions"));
 const CheckEligibility = lazy(() => import("@/pages/check-eligibility"));
+
+// 3D Academic Stream Pages
+const ArtsPage = lazy(() => import("@/pages/academics/ArtsPage"));
+const CommercePage = lazy(() => import("@/pages/academics/CommercePage"));
+const SciencePage = lazy(() => import("@/pages/academics/SciencePage"));
+
+// Junior & Senior College Pages
+const JuniorCollegePage = lazy(() => import("@/pages/junior-college"));
+const SeniorCollegePage = lazy(() => import("@/pages/senior-college"));
+const BscPage = lazy(() => import("@/pages/bsc"));
+const BcsPage = lazy(() => import("@/pages/bcs"));
+
+// Core Institutional Pages
+const PrincipalsMessagePage = lazy(() => import("@/pages/principals-message"));
+const VisionMissionPage = lazy(() => import("@/pages/vision-mission"));
+const TrustPage = lazy(() => import("@/pages/trust"));
+const CampusPage = lazy(() => import("@/pages/campus"));
+const DownloadsPage = lazy(() => import("@/pages/downloads"));
+const NoticesPage = lazy(() => import("@/pages/notices"));
+const StudentCornerPage = lazy(() => import("@/pages/student-corner"));
+
 const Placements = lazy(() => import("@/pages/placements"));
 const PlacementsMessage = lazy(() => import("@/pages/placements/message"));
 const PlacementsTraining = lazy(() => import("@/pages/placements/training"));
@@ -78,6 +99,31 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/principal-message" component={PrincipalsMessagePage} />
+        <Route path="/principals-message" component={PrincipalsMessagePage} />
+        <Route path="/vision-mission" component={VisionMissionPage} />
+        <Route path="/trust" component={TrustPage} />
+
+        {/* 3D Stream Portals */}
+        <Route path="/arts" component={ArtsPage} />
+        <Route path="/academics/arts" component={ArtsPage} />
+        <Route path="/commerce" component={CommercePage} />
+        <Route path="/academics/commerce" component={CommercePage} />
+        <Route path="/science" component={SciencePage} />
+        <Route path="/academics/science" component={SciencePage} />
+
+        {/* Junior & Senior College Portals */}
+        <Route path="/junior-college" component={JuniorCollegePage} />
+        <Route path="/senior-college" component={SeniorCollegePage} />
+        <Route path="/bsc" component={BscPage} />
+        <Route path="/bcs" component={BcsPage} />
+
+        {/* Campus & Documents */}
+        <Route path="/campus" component={CampusPage} />
+        <Route path="/downloads" component={DownloadsPage} />
+        <Route path="/notices" component={NoticesPage} />
+        <Route path="/student-corner" component={StudentCornerPage} />
+
         <Route path="/courses" component={Courses} />
         <Route path="/faculty" component={Faculty} />
         <Route path="/admissions/check-eligibility" component={CheckEligibility} />
@@ -96,7 +142,7 @@ function Router() {
         <Route path="/admin" component={AdminLogin} />
         <Route path="/admin/dashboard" component={AdminDashboard} />
         
-        {/* Academics & New Routes */}
+        {/* Academics & Routes */}
         <Route path="/academics/departmental-info" component={DepartmentalInfo} />
         <Route path="/syllabus/:course?" component={Syllabus} />
         <Route path="/calendar/:type?" component={AcademicCalendar} />

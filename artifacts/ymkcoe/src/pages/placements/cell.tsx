@@ -76,22 +76,22 @@ const COORDINATORS: Coordinator[] = [
   {
     name: "Mr. Rohit Jagtap",
     role: "Student Placement Coordinator",
-    deptOrClass: "Final Year B.Pharm",
-    email: "rohit.jagtap@student.kbiper.org",
+    deptOrClass: "Final Year BCS",
+    email: "rohit.jagtap@student.indrayanicollege.com",
     type: "Student"
   },
   {
     name: "Ms. Snehal Shinde",
     role: "Student Placement Coordinator",
-    deptOrClass: "Final Year B.Pharm",
-    email: "snehal.shinde@student.kbiper.org",
+    deptOrClass: "Third Year B.Sc.",
+    email: "snehal.shinde@student.indrayanicollege.com",
     type: "Student"
   },
   {
     name: "Mr. Vivek Awate",
     role: "Student Placement Coordinator",
-    deptOrClass: "Second Year D.Pharm",
-    email: "vivek.awate@student.kbiper.org",
+    deptOrClass: "Final Year BCS",
+    email: "vivek.awate@student.indrayanicollege.com",
     type: "Student"
   }
 ];

@@ -1,472 +1,847 @@
+import React, { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { ArrowRight, GraduationCap, Users, Building, Trophy, Calendar, CheckCircle2, MessageSquare, Quote, Landmark, History } from "lucide-react";
-import { useGetNews, useGetDashboardStats, useGetCourses } from "@workspace/api-client-react";
-import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  ArrowRight,
+  GraduationCap,
+  Users,
+  Building,
+  Trophy,
+  Calendar,
+  CheckCircle2,
+  MessageSquare,
+  Landmark,
+  History,
+  Sparkles,
+  BookOpen,
+  Atom,
+  Briefcase,
+  Layers,
+  Cpu,
+  ChevronRight,
+  Scroll,
+  BarChart3,
+  FlaskConical,
+  Compass,
+  MapPin,
+  ExternalLink,
+} from "lucide-react";
+import { ArtsCanvas3D } from "@/components/3d/ArtsCanvas3D";
+import { CommerceCanvas3D } from "@/components/3d/CommerceCanvas3D";
+import { ScienceCanvas3D } from "@/components/3d/ScienceCanvas3D";
 import { CampusShowcase } from "@/components/layout/CampusShowcase";
 
 export default function Home() {
-  const { data: coursesData } = useGetCourses();
-  const courses = Array.isArray(coursesData) ? coursesData : [];
-  const { data: news = [] } = useGetNews({ category: "announcement" });
-  const { data: stats } = useGetDashboardStats();
-
-  const [activeLeader, setActiveLeader] = useState<{
-    name: string;
-    role: string;
-    organization: string;
-    image?: string;
-    initials?: string;
-    message: string;
-  } | null>(null);
-
-  const featuredCourses = courses.slice(0, 4);
-  const recentNews = Array.isArray(news) ? news.slice(0, 3) : [];
+  const [activeStreamTab, setActiveStreamTab] = useState<"arts" | "commerce" | "science">("arts");
 
   return (
     <AppLayout>
-      {/* Hero Section */}
-      <section className="relative w-full h-[600px] md:h-[700px] flex items-center bg-primary overflow-hidden">
+      {/* 1. CINEMATIC COLLEGIATE HERO */}
+      <section className="relative w-full min-h-[660px] lg:min-h-[780px] flex items-center bg-[#071626] overflow-hidden text-white">
         
-        {/* Right Side Building Image with Responsive Fade Gradients */}
-        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[55%] h-full z-0 select-none">
+        {/* Campus Architectural Background Image with Deep Collegiate Lighting */}
+        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[60%] h-full z-0 select-none">
           <img
             src={`${import.meta.env.BASE_URL}hero-building.png`}
-            alt="KBIPER Campus"
-            className="w-full h-full object-cover object-bottom"
+            alt="Indrayani Mahavidyalaya Campus Building"
+            className="w-full h-full object-cover object-center lg:object-right opacity-85"
           />
-          {/* Gradients to fade building into background: vertical fade for mobile, horizontal fade for desktop */}
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/80 to-primary lg:hidden"></div>
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-primary via-primary/50 to-transparent"></div>
+          {/* Subtle vignette and cinematic lighting falloffs */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#071626] via-[#071626]/75 to-transparent lg:hidden" />
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#071626] via-[#071626]/85 to-transparent" />
         </div>
 
+        {/* Ambient atmospheric glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-
-        <div className="container mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="container mx-auto px-4 md:px-6 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Text and CTA block on the left */}
-          <div className="lg:col-span-6 text-white space-y-6 lg:pr-8 flex flex-col items-start text-left">
-            <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium backdrop-blur-sm">
-              <span className="flex h-2 w-2 rounded-full bg-accent mr-2"></span>
-              Admissions Open for 2026-27
+          {/* Hero Headline & Identity */}
+          <div className="lg:col-span-8 space-y-6 text-left max-w-3xl">
+            
+            {/* Sanstha Trust Tag */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-amber-300 text-xs font-semibold tracking-wider uppercase">
+              <Landmark className="w-3.5 h-3.5 text-amber-400" />
+              <span>Indrayani Vidya Mandir Trust • Est. 1965</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
-              Empowering <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-300">Healthcare</span> With Excellence
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-lg leading-relaxed">
-              Indrayani Vidya Mandir's Krishnarao Bhegade Institute of Pharmaceutical Education & Research prepares the next generation of pharmacists and healthcare innovators.
+
+            <div className="space-y-2">
+              <span className="text-xs sm:text-sm font-mono tracking-widest text-amber-400 uppercase font-bold block">
+                Junior & Senior College • Talegaon Dabhade, Pune
+              </span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-extrabold tracking-tight text-white leading-[1.06]">
+                INDRAYANI <br />
+                <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-white">
+                  MAHAVIDYALAYA
+                </span>
+              </h1>
+            </div>
+
+            <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl font-sans font-normal">
+              An esteemed institution under Indrayani Vidya Mandir Trust fostering academic rigor, character, and professional competence. Offering Higher Secondary education in <strong>Arts, Commerce, and Science (11th & 12th)</strong> alongside Savitribai Phule Pune University undergraduate degrees in <strong>B.Sc. and BCS</strong>.
             </p>
-            {/* Pharmacy Programs Quick Links */}
-            <div className="flex items-center gap-3 text-sm font-semibold tracking-wider text-white/95 uppercase pt-2 select-none">
-              <Link href="/academics/departmental-info?tab=dpharm">
-                <span className="hover:text-accent transition-colors duration-200 cursor-pointer border-b border-transparent hover:border-accent pb-0.5">D. Pharm</span>
+
+            {/* Quick Program Links */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-semibold">
+              <Link href="/arts">
+                <span className="px-3.5 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-amber-300 cursor-pointer transition-all flex items-center gap-1.5">
+                  <Scroll className="w-3 h-3" /> Arts (11th & 12th)
+                </span>
               </Link>
-              <span className="text-white/30 font-light">|</span>
-              <Link href="/academics/departmental-info?tab=bpharm">
-                <span className="hover:text-accent transition-colors duration-200 cursor-pointer border-b border-transparent hover:border-accent pb-0.5">B. Pharm</span>
+              <Link href="/commerce">
+                <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-emerald-300 cursor-pointer transition-all flex items-center gap-1.5">
+                  <BarChart3 className="w-3 h-3" /> Commerce (11th & 12th)
+                </span>
               </Link>
-              <span className="text-white/30 font-light">|</span>
-              <Link href="/academics/departmental-info?tab=mpharm">
-                <span className="hover:text-accent transition-colors duration-200 cursor-pointer border-b border-transparent hover:border-accent pb-0.5">M. Pharm</span>
+              <Link href="/science">
+                <span className="px-3.5 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/30 text-cyan-300 cursor-pointer transition-all flex items-center gap-1.5">
+                  <Atom className="w-3 h-3" /> Science (11th & 12th)
+                </span>
+              </Link>
+              <Link href="/senior-college">
+                <span className="px-3.5 py-1.5 rounded-full bg-blue-500/15 hover:bg-blue-500/25 border border-blue-400/30 text-blue-300 cursor-pointer transition-all flex items-center gap-1.5">
+                  <GraduationCap className="w-3 h-3" /> Senior College (B.Sc. & BCS)
+                </span>
               </Link>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-start w-full sm:w-auto">
+
+            {/* Primary Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
               <Link href="/admissions">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 h-14 text-base w-full sm:w-auto shadow-lg shadow-accent/20">
-                  Apply Now <ArrowRight className="ml-2 h-5 w-5" />
+                <Button size="lg" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 h-12 rounded-xl shadow-xl shadow-amber-950/40 text-sm">
+                  Admissions Open 2026-27 <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link href="/academics/departmental-info">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base w-full sm:w-auto backdrop-blur-sm">
-                  Explore Departments
+              <a href="#stream-showcase">
+                <Button size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10 h-12 rounded-xl backdrop-blur-sm text-sm">
+                  Explore 3D Stream Worlds
                 </Button>
-              </Link>
+              </a>
             </div>
+
           </div>
+
+          <div className="hidden lg:block lg:col-span-4" />
+        </div>
+
+        {/* Heritage Corner Seal */}
+        <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/15 text-white/90 select-none">
+          <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/30 flex items-center justify-center font-serif font-bold text-amber-300 text-sm">
+            IVM
+          </div>
+          <div className="text-left text-xs leading-tight">
+            <span className="block font-bold">Indrayani Vidya Mandir</span>
+            <span className="text-[10px] text-amber-300/80 font-mono">Talegaon Dabhade • Maval</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. VERIFIED INSTITUTIONAL TELEMETRY STRIP */}
+      <section className="bg-card border-b border-border shadow-sm">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border">
+            
+            <div className="py-6 px-4 text-center sm:text-left flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                <History className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-xl font-bold font-serif text-foreground">Est. 1965</span>
+                <span className="text-xs text-muted-foreground font-medium">IVM Trust Philanthropic Heritage</span>
+              </div>
+            </div>
+
+            <div className="py-6 px-4 text-center sm:text-left flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-xl font-bold font-serif text-foreground">Talegaon Dabhade</span>
+                <span className="text-xs text-muted-foreground font-medium">Maval, Pune District, Maharashtra</span>
+              </div>
+            </div>
+
+            <div className="py-6 px-4 text-center sm:text-left flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-xl font-bold font-serif text-foreground">MSBSHSE & SPPU</span>
+                <span className="text-xs text-muted-foreground font-medium">Board & University Affiliated</span>
+              </div>
+            </div>
+
+            <div className="py-6 px-4 text-center sm:text-left flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+                <Layers className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="block text-xl font-bold font-serif text-foreground">Junior & Senior</span>
+                <span className="text-xs text-muted-foreground font-medium">Higher Secondary & Undergrad Degrees</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 3. INTERACTIVE 3D ACADEMIC STREAM SHOWCASE */}
+      <section className="py-20 md:py-28 bg-background relative overflow-hidden" id="stream-showcase">
+        <div className="container mx-auto px-4 md:px-6 space-y-12">
           
-          {/* Empty spacer for the right side image on desktop */}
-          <div className="hidden lg:block lg:col-span-6"></div>
-        </div>
-
-        {/* Floating DTE Code Badge */}
-        <div className="absolute bottom-6 right-6 z-20 flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent hover:bg-accent/90 text-white shadow-xl shadow-accent/20 border-2 border-white/20 transition-all duration-300 hover:scale-105 select-none">
-          <div className="text-center font-bold">
-            <span className="block text-[9px] md:text-[10px] uppercase tracking-wider text-white/90 leading-tight">DTE Code</span>
-            <span className="block text-lg md:text-xl font-extrabold tracking-tight leading-tight mt-0.5">6902</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Strip */}
-      <section className="bg-white border-b border-border relative z-20 shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
-            <div className="py-8 px-4 text-center">
-              <div className="flex justify-center mb-3 text-accent"><GraduationCap className="h-8 w-8" /></div>
-              <div className="text-3xl font-bold text-primary mb-1">2017</div>
-              <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Established</div>
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider font-mono">
+              <Sparkles className="w-3.5 h-3.5" />
+              Bespoke Academic 3D Environments
             </div>
-            <div className="py-8 px-4 text-center">
-              <div className="flex justify-center mb-3 text-accent"><Users className="h-8 w-8" /></div>
-              <div className="text-3xl font-bold text-primary mb-1">15 Acres</div>
-              <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Campus Area</div>
-            </div>
-            <div className="py-8 px-4 text-center">
-              <div className="flex justify-center mb-3 text-accent"><Building className="h-8 w-8" /></div>
-              <div className="text-3xl font-bold text-primary mb-1">190</div>
-              <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Total Seats</div>
-            </div>
-            <div className="py-8 px-4 text-center">
-              <div className="flex justify-center mb-3 text-accent"><Trophy className="h-8 w-8" /></div>
-              <div className="text-3xl font-bold text-primary mb-1">PCI</div>
-              <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Approved</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust & Society Section */}
-      <section className="py-20 bg-muted/20 border-b border-border">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/5 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider mb-3">
-              <Landmark className="h-3.5 w-3.5" />
-              Founding Legacy
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Indrayani Vidya Mandir (IVM)</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Serving the Maval region since 1965, Indrayani Vidya Mandir is a premier educational society built on values of social reform and academic empowerment.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight text-foreground">
+              Distinctive Discipline Worlds
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Every academic stream at Indrayani Mahavidyalaya possesses its own intellectual culture. Explore our interactive 3D digital environments representing the physical workspace of each discipline.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            {/* The Society legacy */}
-            <Card className="border border-border shadow-sm hover:shadow-md transition-all duration-300">
-              <CardContent className="p-8 md:p-10 space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                    <History className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-primary">About the Society &amp; Trust</h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Established in 1965, Indrayani Vidya Mandir stands as a pioneer institute of educational excellence in the region. The society was founded through the guidance of eminent personalities, including the celebrated writer and social leader <strong>Acharya P. K. Atre</strong>, Dr. M. M. Altekar, and other visionaries who aimed to bring affordable, high-quality instruction to the local community.
-                </p>
-                <div className="border-t border-border/60 pt-6">
-                  <h4 className="font-semibold text-primary mb-3">Blessed by Towering Leaders</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    IVM's journey has been nurtured by prominent figures such as Prof. Ramkrishna More, Balasaheb Kibe, Dadasaheb Dhore, Balasaheb Barmukh, and former VC Dr. G. S. Mahajani, along with Balasaheb Desai (former Finance Minister of Maharashtra).
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Interactive Stream Switcher Navigation */}
+          <div className="flex flex-wrap gap-2 border-b border-border pb-4">
+            <button
+              onClick={() => setActiveStreamTab("arts")}
+              className={`flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all ${
+                activeStreamTab === "arts"
+                  ? "bg-[#290912] text-amber-200 border border-amber-500/40 shadow-lg shadow-amber-950/20"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              <Scroll className="w-4 h-4 text-amber-400" />
+              <span>Arts: Literature & Culture</span>
+            </button>
 
-            {/* Campus & Institutions */}
-            <Card className="border border-border shadow-sm hover:shadow-md transition-all duration-300">
-              <CardContent className="p-8 md:p-10 space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                    <Building className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-primary">Campus &amp; Institutions</h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Set on a sprawling <strong>15-acre green campus</strong> with top-tier infrastructure, IVM has continuously expanded its offerings. In addition to Krishnarao Bhegade Institute of Pharmaceutical Education and Research (KBIPER), the trust established the Indrayani Institute of Pharmaceutical Education and Research in 2017, offering advanced UG programs in Medicine and Health Sciences (B. Pharmacy) to meet modern healthcare demands.
-                </p>
-                <div className="border-t border-border/60 pt-6">
-                  <h4 className="font-semibold text-primary mb-3">Modern Infrastructure &amp; Amenities</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    The campus features outstanding resources, including a modern auditorium, cafeteria, gymnasium, healthcare assistance, comfortable girls' and boys' hostels, advanced labs, a digital library, and full Wi-Fi connectivity.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            <button
+              onClick={() => setActiveStreamTab("commerce")}
+              className={`flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all ${
+                activeStreamTab === "commerce"
+                  ? "bg-[#042422] text-emerald-200 border border-emerald-500/40 shadow-lg shadow-emerald-950/20"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              <BarChart3 className="w-4 h-4 text-emerald-400" />
+              <span>Commerce: Finance & Markets</span>
+            </button>
+
+            <button
+              onClick={() => setActiveStreamTab("science")}
+              className={`flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all ${
+                activeStreamTab === "science"
+                  ? "bg-[#041a2e] text-cyan-200 border border-cyan-500/40 shadow-lg shadow-cyan-950/20"
+                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              <Atom className="w-4 h-4 text-cyan-400" />
+              <span>Science: Quantum & Computing</span>
+            </button>
           </div>
+
+          {/* DYNAMIC STREAM ENVIRONMENT PANEL */}
+          <div className="relative rounded-3xl overflow-hidden border border-border shadow-2xl min-h-[580px] flex flex-col lg:flex-row">
+            
+            {/* ARTS TAB CONTENT */}
+            {activeStreamTab === "arts" && (
+              <>
+                {/* Left Narrative Panel */}
+                <div className="lg:w-1/2 p-8 md:p-12 bg-gradient-to-br from-[#1a050b] via-[#240810] to-[#120307] text-white flex flex-col justify-between space-y-6 z-10">
+                  <div className="space-y-5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-mono">
+                      <Scroll className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Junior College • Class 11 & 12 Arts</span>
+                    </div>
+
+                    <h3 className="text-3xl sm:text-4xl font-serif font-bold text-white">
+                      The Living World of <br />
+                      <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-200 to-amber-100">
+                        Literature & Cultural Form
+                      </span>
+                    </h3>
+
+                    <p className="text-amber-100/80 text-sm leading-relaxed">
+                      Immersive literary humanities study. Explores ancient manuscripts, Maratha historiography, classical poetry, constitutional democracy, and philosophical inquiry.
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-amber-500/20">
+                      <span className="text-xs uppercase font-mono tracking-wider text-amber-400 block font-bold">
+                        Key Subjects (MSBSHSE Board):
+                      </span>
+                      <div className="grid grid-cols-2 gap-2 text-xs text-amber-100/90">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Compulsory English</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Marathi / Hindi</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>History & Heritage</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Political Science</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Geography</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Economics / Sociology</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-4">
+                    <Link href="/arts">
+                      <Button className="bg-amber-600 hover:bg-amber-500 text-white font-semibold px-6 rounded-xl">
+                        Enter Arts 3D Experience <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Link href="/admissions">
+                      <Button variant="outline" className="border-amber-400/30 text-amber-200 hover:bg-white/10 rounded-xl">
+                        Apply for Arts FYJC
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right Interactive 3D Canvas */}
+                <div className="lg:w-1/2 min-h-[380px] lg:min-h-full bg-[#120307] relative">
+                  <ArtsCanvas3D className="w-full h-full" />
+                </div>
+              </>
+            )}
+
+            {/* COMMERCE TAB CONTENT */}
+            {activeStreamTab === "commerce" && (
+              <>
+                {/* Left Narrative Panel */}
+                <div className="lg:w-1/2 p-8 md:p-12 bg-gradient-to-br from-[#021817] via-[#042422] to-[#01100f] text-white flex flex-col justify-between space-y-6 z-10">
+                  <div className="space-y-5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-mono">
+                      <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Junior College • Class 11 & 12 Commerce</span>
+                    </div>
+
+                    <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white">
+                      The Architecture of <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-200 font-extrabold">
+                        Finance & Enterprise
+                      </span>
+                    </h3>
+
+                    <p className="text-emerald-100/80 text-sm leading-relaxed">
+                      Sophisticated economic structures, corporate balance sheets, Tally computerized accounting labs, and foundational training for CA, CS, and CMA certifications.
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-emerald-500/20">
+                      <span className="text-xs uppercase font-mono tracking-wider text-emerald-400 block font-bold">
+                        Key Subjects (MSBSHSE Board):
+                      </span>
+                      <div className="grid grid-cols-2 gap-2 text-xs text-emerald-100/90 font-mono">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Book-Keeping & Accountancy</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Organization of Commerce (OCM)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Economics (Micro & Macro)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Secretarial Practice (SP)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Commercial Mathematics</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Compulsory English & IT</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-4">
+                    <Link href="/commerce">
+                      <Button className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 rounded-xl">
+                        Enter Commerce 3D Experience <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Link href="/admissions">
+                      <Button variant="outline" className="border-emerald-400/30 text-emerald-200 hover:bg-white/10 rounded-xl">
+                        Apply for Commerce FYJC
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right Interactive 3D Canvas */}
+                <div className="lg:w-1/2 min-h-[380px] lg:min-h-full bg-[#021313] relative">
+                  <CommerceCanvas3D className="w-full h-full" />
+                </div>
+              </>
+            )}
+
+            {/* SCIENCE TAB CONTENT */}
+            {activeStreamTab === "science" && (
+              <>
+                {/* Left Narrative Panel */}
+                <div className="lg:w-1/2 p-8 md:p-12 bg-gradient-to-br from-[#02101f] via-[#041c30] to-[#010b14] text-white flex flex-col justify-between space-y-6 z-10">
+                  <div className="space-y-5">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-mono">
+                      <Atom className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Junior (11th & 12th) & Senior College (B.Sc. & BCS)</span>
+                    </div>
+
+                    <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white">
+                      The Frontier of <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-300 font-extrabold">
+                        Discovery & Computation
+                      </span>
+                    </h3>
+
+                    <p className="text-cyan-100/80 text-sm leading-relaxed">
+                      Quantum atomic mechanics, chemical molecular synthesis, life sciences laboratories, and professional undergraduate software degrees in B.Sc. and BCS under SPPU.
+                    </p>
+
+                    <div className="space-y-2 pt-2 border-t border-cyan-500/20">
+                      <span className="text-xs uppercase font-mono tracking-wider text-cyan-400 block font-bold">
+                        Academic Structure:
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-cyan-100/90 font-mono">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>11th & 12th Science (MSBSHSE)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>B.Sc. 3-Year Degree (SPPU)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>BCS Computer Science (SPPU)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>Modern Research Labs</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-4">
+                    <Link href="/science">
+                      <Button className="bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-6 rounded-xl">
+                        Enter Science 3D Experience <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Link href="/admissions">
+                      <Button variant="outline" className="border-cyan-400/30 text-cyan-200 hover:bg-white/10 rounded-xl">
+                        Apply for Science
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Right Interactive 3D Canvas */}
+                <div className="lg:w-1/2 min-h-[380px] lg:min-h-full bg-[#020d18] relative">
+                  <ScienceCanvas3D className="w-full h-full" />
+                </div>
+              </>
+            )}
+
+          </div>
+
+          {/* 3 Stream Quick Gateway Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <Link href="/arts">
+              <div className="p-6 rounded-2xl bg-card border border-border/80 hover:border-amber-500/50 hover:shadow-lg transition-all cursor-pointer group">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">Class 11 & 12</span>
+                  <Scroll className="w-5 h-5 text-amber-600" />
+                </div>
+                <h4 className="text-xl font-serif font-bold text-foreground group-hover:text-amber-600 transition-colors">
+                  Arts Stream Portal
+                </h4>
+                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                  Languages, History, Political Science, Economics & Civil Services foundation.
+                </p>
+                <div className="pt-4 flex items-center text-xs font-bold text-amber-600">
+                  <span>Explore Arts Curriculum</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/commerce">
+              <div className="p-6 rounded-2xl bg-card border border-border/80 hover:border-emerald-500/50 hover:shadow-lg transition-all cursor-pointer group">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">Class 11 & 12</span>
+                  <BarChart3 className="w-5 h-5 text-emerald-600" />
+                </div>
+                <h4 className="text-xl font-sans font-bold text-foreground group-hover:text-emerald-600 transition-colors">
+                  Commerce Stream Portal
+                </h4>
+                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                  Book-Keeping, OCM, Economics, Tally Accounting Lab, and CA/CS pathways.
+                </p>
+                <div className="pt-4 flex items-center text-xs font-bold text-emerald-600">
+                  <span>Explore Commerce Curriculum</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/science">
+              <div className="p-6 rounded-2xl bg-card border border-border/80 hover:border-cyan-500/50 hover:shadow-lg transition-all cursor-pointer group">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400">11th, 12th, B.Sc., BCS</span>
+                  <Atom className="w-5 h-5 text-cyan-600" />
+                </div>
+                <h4 className="text-xl font-sans font-bold text-foreground group-hover:text-cyan-600 transition-colors">
+                  Science & Computing Portal
+                </h4>
+                <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                  Physics, Chemistry, Biology, Computer Science, B.Sc. & BCS degrees.
+                </p>
+                <div className="pt-4 flex items-center text-xs font-bold text-cyan-600">
+                  <span>Explore Science & Degrees</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </div>
+              </div>
+            </Link>
+          </div>
+
         </div>
       </section>
 
-      {/* Leadership Messages Section */}
-      <section className="py-20 bg-background border-b border-border">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/5 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-wider mb-3">
-              <MessageSquare className="h-3.5 w-3.5" />
-              Leadership Desk
+      {/* 4. SENIOR COLLEGE DEGREE PROGRAMS (B.Sc. & BCS) */}
+      <section className="py-20 bg-muted/30 border-y border-border">
+        <div className="container mx-auto px-4 md:px-6 space-y-12">
+          
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div className="max-w-2xl space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-500/10 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+                <GraduationCap className="w-3.5 h-3.5" />
+                Savitribai Phule Pune University (SPPU)
+              </div>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">
+                Senior College Undergraduate Programs
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                Beyond Higher Secondary, Indrayani Mahavidyalaya delivers 3-year undergraduate degree programs affiliated with Savitribai Phule Pune University.
+              </p>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Messages from our Leadership</h2>
-            <p className="text-lg text-muted-foreground">
-              Hear from the leaders guiding our vision and commitment to engineering innovation.
+
+            <Link href="/senior-college">
+              <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary hover:text-white rounded-xl">
+                Senior College Overview <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* B.Sc. Card */}
+            <div className="p-8 rounded-3xl bg-card border border-border/80 hover:shadow-xl transition-all space-y-6 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline" className="font-mono text-xs">3-Year Degree • 6 Semesters</Badge>
+                  <Layers className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-2xl font-serif font-bold text-foreground">
+                  B.Sc. — Bachelor of Science
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Comprehensive university degree covering Physics, Chemistry, Botany, Zoology, and Mathematics with intensive practical laboratory training.
+                </p>
+                <div className="space-y-2 pt-2 border-t border-border/50 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                    <span>Affiliated with Savitribai Phule Pune University (SPPU)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                    <span>Eligibility: 12th Science (HSC) pass in relevant groups</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border/40 flex items-center justify-between">
+                <Link href="/bsc">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl">
+                    View B.Sc. Curriculum & Laboratory Details
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* BCS Card */}
+            <div className="p-8 rounded-3xl bg-card border border-border/80 hover:shadow-xl transition-all space-y-6 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline" className="font-mono text-xs">3-Year Professional Degree • 6 Semesters</Badge>
+                  <Cpu className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-2xl font-sans font-bold text-foreground">
+                  BCS — Bachelor of Computer Science
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Professional computational degree focused on modern software engineering, data structures, Java, Python, web architecture, cloud systems, and machine learning.
+                </p>
+                <div className="space-y-2 pt-2 border-t border-border/50 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                    <span>Affiliated with Savitribai Phule Pune University (SPPU)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                    <span>Eligibility: 12th Science with Mathematics</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border/40 flex items-center justify-between">
+                <Link href="/bcs">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl">
+                    View BCS Curriculum & Software Labs
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. PARENT TRUST HERITAGE & VISION */}
+      <section className="py-20 md:py-28 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-mono uppercase tracking-widest text-primary font-bold">
+              Founding Philanthropic Legacy
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">
+              Indrayani Vidya Mandir Trust
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Serving the educational aspirations of Maval, Pune, and Maharashtra since 1965 through values of academic integrity, social upliftment, and holistic student growth.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            
+            <div className="p-8 md:p-10 rounded-3xl bg-card border border-border/80 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
+                  <Landmark className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-foreground">
+                    Historical Foundation
+                  </h3>
+                  <span className="text-xs text-muted-foreground font-mono">Talegaon Dabhade • Established 1965</span>
+                </div>
+              </div>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Indrayani Vidya Mandir Trust was established in 1965 under the inspiring counsel of celebrated litterateur <strong>Acharya P. K. Atre</strong>, distinguished scholar Dr. M. M. Altekar, and committed public leaders of Maval.
+              </p>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                The Trust has continually created higher educational opportunities for generations of students from rural and semi-urban backgrounds, instilling civic responsibility alongside contemporary academic prowess.
+              </p>
+
+              <div className="pt-2">
+                <Link href="/trust">
+                  <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary hover:text-white rounded-xl">
+                    Read Complete Sanstha History & Trustees <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="p-8 md:p-10 rounded-3xl bg-muted/40 border border-border/80 space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center">
+                  <Building className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-foreground">
+                    Sprawling Educational Campus
+                  </h3>
+                  <span className="text-xs text-muted-foreground font-mono">Talegaon-Chakan Road • Maval</span>
+                </div>
+              </div>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Situated along the scenic Talegaon-Chakan route, the collegiate campus features dedicated academic wings for Arts, Commerce, and Science, modern analytical laboratories, a computerized accounting facility, an automated knowledge library, sports grounds, and seminar halls.
+              </p>
+
+              <div className="pt-2">
+                <Link href="/campus">
+                  <Button variant="outline" className="border-primary/30 text-primary hover:bg-primary hover:text-white rounded-xl">
+                    View Campus Facilities & Infrastructure <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. VERIFIED INSTITUTIONAL LEADERSHIP */}
+      <section className="py-20 md:py-24 bg-muted/20 border-t border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <span className="text-xs font-mono uppercase tracking-widest text-primary font-bold">
+              Administrative Leadership
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground">
+              Messages from the Leadership
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              Guiding the visionary path of Indrayani Mahavidyalaya towards holistic student excellence and civic leadership.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* President Card */}
-            <Card className="border border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full">
-              <CardContent className="p-8 flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 border-b border-border pb-4">
-                    <img 
-                      src={`${import.meta.env.BASE_URL}president.jpg`} 
-                      alt="Hon. Shri Ramdas Kakade" 
-                      className="h-14 w-14 rounded-full object-cover shrink-0 shadow-sm border border-border bg-muted"
-                    />
-                    <div>
-                      <h3 className="font-bold text-base text-primary leading-tight">Hon. Shri Ramdas Kakade</h3>
-                      <p className="text-xs text-muted-foreground mt-0.5">President</p>
-                      <p className="text-[10px] text-accent font-semibold uppercase tracking-wider">Indrayani Vidya Mandir</p>
-                    </div>
-                  </div>
-                  <div className="text-muted-foreground text-sm leading-relaxed relative italic">
-                    <Quote className="absolute -top-3 -left-2 h-8 w-8 text-primary/5 -z-10" />
-                    "Indrayani Vidya Mandir has a distinctive mission and history that has made it the leader in the field of education in Maval area. Today’s Education not only focuses on imparting knowledge and skills but also on the overall development of the students. The Indrayani Institute of Yashoda Mahadeo Kakade College..."
+            
+            {/* President */}
+            <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 border-b border-border/60 pb-4">
+                  <img
+                    src={`${import.meta.env.BASE_URL}president.jpg`}
+                    alt="Hon. Shri Ramdas Kakade"
+                    className="w-16 h-16 rounded-2xl object-cover shrink-0 shadow-sm border border-border bg-muted"
+                  />
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-foreground leading-snug">Hon. Shri Ramdas Kakade</h3>
+                    <p className="text-xs text-muted-foreground">President</p>
+                    <p className="text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold uppercase">Indrayani Vidya Mandir Trust</p>
                   </div>
                 </div>
-                <Button
-                  variant="link"
-                  size="sm"
-                  onClick={() => setActiveLeader({
-                    name: "Hon. Shri Ramdas Kakade",
-                    role: "President",
-                    organization: "Indrayani Vidya Mandir",
-                    image: `${import.meta.env.BASE_URL}president.jpg`,
-                    message: `"Indrayani Vidya Mandir has a distinctive mission and history that has made it the leader in the field of education in Maval area. Today’s Education not only focuses on imparting knowledge and skills but also on the overall development of the students. The Indrayani Institute of Krishnarao Bhegade Institute of Pharmaceutical Education and Research (KBIPER) is geared up to provide you with the experienced faculty, facilities and infrastructure to prepare you for the tough challenges ahead. We are providing our students an opportunity for personal development and bringing about social reforms in this very vital sector. We believe that the students leaving this campus should leave with confidence in their abilities, a sense of responsibility towards society and be fully equipped to face the challenges of life with dignity."`
-                  })}
-                  className="text-accent hover:text-accent/80 font-bold p-0 self-start mt-2 h-auto"
-                >
-                  Read Full Message →
-                </Button>
-              </CardContent>
-            </Card>
+                <p className="text-xs text-muted-foreground italic leading-relaxed">
+                  "Indrayani Vidya Mandir has an abiding mission to empower every student with knowledge, character, and leadership skills. Indrayani Mahavidyalaya is committed to equipping youth across Maval and Maharashtra to meet modern challenges with confidence."
+                </p>
+              </div>
 
-            {/* Secretary Card */}
-            <Card className="border border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full">
-              <CardContent className="p-8 flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 border-b border-border pb-4">
-                    <img 
-                      src={`${import.meta.env.BASE_URL}secretary.jpg`} 
-                      alt="Hon. Shri Chandrakant Shete" 
-                      className="h-14 w-14 rounded-full object-cover shrink-0 shadow-sm border border-border bg-muted"
-                    />
-                    <div>
-                      <h3 className="font-bold text-base text-primary leading-tight">Hon. Shri Chandrakant Shete</h3>
-                      <p className="text-xs text-muted-foreground mt-0.5">Secretary</p>
-                      <p className="text-[10px] text-accent font-semibold uppercase tracking-wider">Indrayani Vidya Mandir</p>
-                    </div>
-                  </div>
-                  <div className="text-muted-foreground text-sm leading-relaxed relative italic">
-                    <Quote className="absolute -top-3 -left-2 h-8 w-8 text-primary/5 -z-10" />
-                    "Learning is not a process that ends with the conclusion of one's college career. It is indeed a lifelong process. This college is oriented to the total formation of a ward and to adaptations of various methods suiting the dynamics of a changing world in order to achieve common goals and..."
+              <Link href="/trust">
+                <Button variant="link" className="p-0 text-amber-600 dark:text-amber-400 text-xs font-bold">
+                  Read Trust Profile →
+                </Button>
+              </Link>
+            </div>
+
+            {/* Secretary */}
+            <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 border-b border-border/60 pb-4">
+                  <img
+                    src={`${import.meta.env.BASE_URL}secretary.jpg`}
+                    alt="Hon. Shri Chandrakant Shete"
+                    className="w-16 h-16 rounded-2xl object-cover shrink-0 shadow-sm border border-border bg-muted"
+                  />
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-foreground leading-snug">Hon. Shri Chandrakant Shete</h3>
+                    <p className="text-xs text-muted-foreground">Secretary</p>
+                    <p className="text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold uppercase">Indrayani Vidya Mandir Trust</p>
                   </div>
                 </div>
-                <Button
-                  variant="link"
-                  size="sm"
-                  onClick={() => setActiveLeader({
-                    name: "Hon. Shri Chandrakant Shete",
-                    role: "Secretary",
-                    organization: "Indrayani Vidya Mandir",
-                    image: `${import.meta.env.BASE_URL}secretary.jpg`,
-                    message: `"Learning is not a process that ends with the conclusion of one's college career. It is indeed a lifelong process. This college is oriented to the total formation of a ward and to adaptations of various methods suiting the dynamics of a changing world in order to achieve common goals and objectives. Our commitment to such learning will always persist in all our endeavors. Our faculty continues to provide their expertise through the continuing education programmes. The departments have also established rich and formal relationships with the industry through courses and regular classroom interactions, inviting industry professionals, and conducting seminars and other soft skill programmes. I sincerely hope that our students will use the facilities provided to them on our campus, find their profession, and justify the trust placed in them by their family, Society, and Nation."`
-                  })}
-                  className="text-accent hover:text-accent/80 font-bold p-0 self-start mt-2 h-auto"
-                >
-                  Read Full Message →
-                </Button>
-              </CardContent>
-            </Card>
+                <p className="text-xs text-muted-foreground italic leading-relaxed">
+                  "Education is a lifelong journey of empowerment. We provide modern laboratories, dedicated faculty, and an environment of mutual respect to ensure every student realizes their highest potential."
+                </p>
+              </div>
 
-            {/* Principal Card */}
-            <Card className="border border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between h-full">
-              <CardContent className="p-8 flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 border-b border-border pb-4">
-                    <div className="h-14 w-14 rounded-full bg-gradient-to-tr from-primary to-primary-light flex items-center justify-center font-bold text-white text-lg shrink-0 shadow-sm overflow-hidden relative">
-                      <img src={`${import.meta.env.BASE_URL}principal_sanjay_arote.jpg`} alt="Dr. Sanjay R. Arote" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-base text-primary leading-tight">Dr. Sanjay R. Arote</h3>
-                      <p className="text-xs text-muted-foreground mt-0.5">Principal (M. Pharm., Ph.D.)</p>
-                      <p className="text-[10px] text-accent font-semibold uppercase tracking-wider">KBIPER</p>
-                    </div>
+              <Link href="/trust">
+                <Button variant="link" className="p-0 text-amber-600 dark:text-amber-400 text-xs font-bold">
+                  Read Leadership Overview →
+                </Button>
+              </Link>
+            </div>
+
+            {/* Principal */}
+            <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-4 border-b border-border/60 pb-4">
+                  <div className="w-16 h-16 rounded-2xl bg-primary text-white flex items-center justify-center font-serif font-bold text-xl shrink-0">
+                    SK
                   </div>
-                  <div className="text-muted-foreground text-sm leading-relaxed relative italic">
-                    <Quote className="absolute -top-3 -left-2 h-8 w-8 text-primary/5 -z-10" />
-                    "Welcome to Krishnarao Bhegade Institute of Pharmaceutical Education and Research. Our institution is dedicated to nurturing the next generation of pharmacy professionals. Through cutting edge research, practical learning and holistic development..."
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-foreground leading-snug">Dr. S. K. Malghe</h3>
+                    <p className="text-xs text-muted-foreground">Principal (M.Sc., Ph.D.)</p>
+                    <p className="text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold uppercase">Indrayani Mahavidyalaya</p>
                   </div>
                 </div>
-                <Button
-                  variant="link"
-                  size="sm"
-                  onClick={() => setActiveLeader({
-                    name: "Dr. Sanjay R. Arote",
-                    role: "Principal (M. Pharm., Ph.D.)",
-                    organization: "KBIPER",
-                    initials: "SA",
-                    message: `Message from the Principal's Desk
+                <p className="text-xs text-muted-foreground italic leading-relaxed">
+                  "Welcome to Indrayani Mahavidyalaya. Whether enrolling in Junior College Arts, Commerce, and Science or undergraduate degrees in B.Sc. and BCS, you will find an inspiring environment for scientific inquiry, literary expression, and professional development."
+                </p>
+              </div>
 
-It gives me immense pleasure to welcome you to Krishnarao Bhegade Institute of Pharmaceutical Education and Research (KBIPER).
-
-Pharmacy is a noble profession that serves the healthcare system of the nation. At KBIPER, we strive to build a strong foundation for our students by providing them with an ideal environment for learning and growth. Our state-of-the-art laboratories, experienced faculty, and industry-oriented curriculum ensure that our students are equipped to face the challenges of the rapidly evolving pharmaceutical landscape.
-
-We believe in fostering not just academic excellence but also the holistic development of our students, empowering them with the knowledge and values necessary to become successful professionals and responsible citizens.
-
-I look forward to welcoming you to our campus and witnessing your journey toward a bright and successful future.
-
-Dr. Sanjay R. Arote
-Principal, KBIPER`
-                  })}
-                  className="text-accent hover:text-accent/80 font-bold p-0 self-start mt-2 h-auto"
-                >
-                  Read Full Message →
+              <Link href="/principal-message">
+                <Button variant="link" className="p-0 text-primary text-xs font-bold">
+                  Read Principal's Message →
                 </Button>
-              </CardContent>
-            </Card>
+              </Link>
+            </div>
+
           </div>
+
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Why Choose Us?</h2>
-            <p className="text-lg text-muted-foreground">
-              We cultivate a mindset of innovation, critical thinking, and practical problem-solving in the field of pharmacy.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-none shadow-md hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8">
-                <div className="h-12 w-12 rounded-lg bg-primary/5 flex items-center justify-center text-primary mb-6">
-                  <CheckCircle2 className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">Industry-Aligned Curriculum</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Our syllabus is regularly updated in consultation with industry experts to ensure our graduates are job-ready from day one.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-md hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8">
-                <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent mb-6">
-                  <Building className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">State-of-the-Art Labs</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Experience hands-on learning in our modern laboratories equipped with the latest technology and industrial-grade equipment.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="border-none shadow-md hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8">
-                <div className="h-12 w-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary mb-6">
-                  <Users className="h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">Excellent Placement Record</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Our dedicated placement cell works tirelessly to bring top-tier healthcare and pharmaceutical companies to campus. We have extensive earlier placements data proving our successful track record.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Campus Gallery */}
+      {/* 7. AUTHENTIC CAMPUS SHOWCASE */}
       <CampusShowcase />
 
-      {/* CTA Section */}
-      <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-30"></div>
-        <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-          <h2 className="text-2xl md:text-4xl font-bold mb-6">Turn Inspirations into Achievements</h2>
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-10">
-            Join thousands of successful alumni who started their careers at Indrayani Vidya Mandir's Pharmacy Institute. Admissions for the upcoming academic year are now open.
+      {/* 8. ADMISSIONS CALL TO ACTION */}
+      <section className="py-20 md:py-24 bg-[#071626] text-white relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center max-w-3xl space-y-6">
+          <Badge className="bg-amber-500/20 text-amber-300 border-amber-400/30 text-xs px-3.5 py-1 font-mono">
+            Admissions 2026-27 Open
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold tracking-tight">
+            Begin Your Academic Journey at Indrayani Mahavidyalaya
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+            Applications for Class 11 (FYJC) Arts, Commerce, and Science (via CAP), and undergraduate B.Sc. and BCS are now welcoming students.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link href="/admissions">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 h-14 text-base shadow-lg w-full sm:w-auto">
-                Apply for Admission
+              <Button size="lg" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 h-12 rounded-xl text-sm shadow-xl shadow-amber-950/50">
+                Explore Admissions Information
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 text-base backdrop-blur-sm w-full sm:w-auto">
-                Contact Admissions Office
+              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 h-12 rounded-xl text-sm">
+                Contact College Campus Office
               </Button>
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Leadership Full Message Modal */}
-      <Dialog open={!!activeLeader} onOpenChange={(open) => !open && setActiveLeader(null)}>
-        <DialogContent className="max-w-4xl w-[90vw] p-0 overflow-hidden bg-background border border-border rounded-lg shadow-2xl">
-          <div className="flex flex-col md:flex-row h-full max-h-[85vh]">
-            {/* Left side: Content / Text */}
-            <div className="flex-1 p-6 md:p-8 overflow-y-auto space-y-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 border-b border-border pb-4">
-                  {activeLeader?.image ? (
-                    <img 
-                      src={activeLeader.image} 
-                      alt={activeLeader.name} 
-                      className="h-16 w-16 rounded-full object-cover shrink-0 shadow-sm border border-border"
-                    />
-                  ) : (
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-tr from-primary to-primary-light flex items-center justify-center font-bold text-white text-xl shrink-0 shadow-sm">
-                      {activeLeader?.initials}
-                    </div>
-                  )}
-                  <div>
-                    <DialogTitle className="font-bold text-xl text-primary leading-tight">
-                      {activeLeader?.name}
-                    </DialogTitle>
-                    <p className="text-sm text-muted-foreground mt-0.5">{activeLeader?.role}</p>
-                    <p className="text-xs text-accent font-semibold uppercase tracking-wider">{activeLeader?.organization}</p>
-                  </div>
-                </div>
-                
-                {/* Full Message on the Left */}
-                <div className="text-muted-foreground text-sm md:text-base leading-relaxed whitespace-pre-line italic relative pl-6 pr-2">
-                  <Quote className="absolute top-0 left-0 h-6 w-6 text-primary/10" />
-                  {activeLeader?.message}
-                </div>
-              </div>
-              
-              <div className="pt-4 border-t border-border flex justify-end">
-                <Button 
-                  onClick={() => setActiveLeader(null)} 
-                  variant="outline"
-                  className="font-semibold"
-                >
-                  Close Message
-                </Button>
-              </div>
-            </div>
-            
-            {/* Right side: Large Image */}
-            <div className="hidden md:block w-[35%] bg-muted relative shrink-0 border-l border-border select-none">
-              {activeLeader?.image ? (
-                <img 
-                  src={activeLeader.image} 
-                  alt={activeLeader.name} 
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-tr from-primary to-primary-light flex flex-col items-center justify-center font-bold text-white text-6xl shadow-sm">
-                  {activeLeader?.initials}
-                  <span className="text-sm font-medium mt-4 tracking-wide uppercase opacity-75">{activeLeader?.role}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </AppLayout>
   );
 }

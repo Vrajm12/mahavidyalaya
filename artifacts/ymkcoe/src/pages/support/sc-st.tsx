@@ -37,31 +37,31 @@ interface CommitteeMember {
 const SC_ST_MEMBERS: CommitteeMember[] = [
   { 
     id: "1", 
-    name: "Dr. Sanjay R. Bhegade", 
+    name: "Dr. S. K. Malghe", 
     role: "Chairman", 
-    designation: "Principal & Professor", 
+    designation: "Principal", 
     department: "College Administration", 
-    phone: "+91 9876543210", 
-    email: "principal.kbiper@gmail.com",
+    phone: "02114-222225", 
+    email: "principal@indrayanicollege.com",
     isHead: true 
   },
   { 
     id: "2", 
-    name: "Prof. Milind Gaikwad", 
+    name: "Prof. S. R. Deshmukh", 
     role: "Coordinator", 
-    designation: "Assistant Professor", 
-    department: "Pharmaceutical Chemistry", 
-    phone: "+91 9876543231", 
-    email: "milind.gaikwad@kbiper.edu.in" 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Arts", 
+    phone: "02114-222225", 
+    email: "deshmukh@indrayanicollege.com" 
   },
   { 
     id: "3", 
-    name: "Prof. Sushma Kamble", 
+    name: "Dr. V. R. Bhalerao", 
     role: "Member", 
-    designation: "Assistant Professor", 
-    department: "Pharmacognosy", 
-    phone: "+91 9876543232", 
-    email: "sushma.kamble@kbiper.edu.in" 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Commerce", 
+    phone: "02114-222225", 
+    email: "bhalerao@indrayanicollege.com" 
   },
   { 
     id: "4", 
@@ -69,16 +69,16 @@ const SC_ST_MEMBERS: CommitteeMember[] = [
     role: "Member (Office Representative)", 
     designation: "Head Clerk", 
     department: "Administrative Office", 
-    phone: "+91 9876543204", 
-    email: "prakash.shinde@kbiper.edu.in" 
+    phone: "02114-222225", 
+    email: "office@indrayanicollege.com" 
   },
   { 
     id: "5", 
     name: "Ms. Snehal Waghmare", 
     role: "Student Representative", 
-    designation: "Student (Second Year M.Pharm)", 
-    department: "M. Pharmacy Department", 
-    email: "snehal.w@student.kbiper.edu.in" 
+    designation: "Student (Third Year BCS)", 
+    department: "Faculty of Computer Science", 
+    email: "snehal.w@student.indrayanicollege.com" 
   }
 ];
 
@@ -128,7 +128,7 @@ const LEGAL_SAFEGUARDS = [
   },
   {
     title: "Zero-Tolerance Policy on Campus",
-    desc: "KBIPER strictly enforces rules against discrimination. Any offensive comments, unequal treatment in laboratories, or exclusion from student activities will result in immediate suspension."
+    desc: "Indrayani Mahavidyalaya strictly enforces rules against discrimination. Any offensive comments, unequal treatment in classrooms or laboratories, or exclusion from student activities will result in immediate suspension."
   },
   {
     title: "Remedial Coaching & Career Support",
@@ -416,7 +416,7 @@ export default function ScStCell() {
                       <Mail className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                       <div>
                         <span>Or reach our cell committee members via secure email:</span>
-                        <a href="mailto:milind.gaikwad@kbiper.edu.in" className="block text-accent font-bold hover:underline mt-1 break-all">milind.gaikwad@kbiper.edu.in</a>
+                        <a href="mailto:deshmukh@indrayanicollege.com" className="block text-accent font-bold hover:underline mt-1 break-all">deshmukh@indrayanicollege.com</a>
                       </div>
                     </div>
                   </div>
@@ -494,7 +494,7 @@ export default function ScStCell() {
                                 required
                                 value={contactDetail}
                                 onChange={(e) => setContactDetail(e.target.value)}
-                                placeholder="e.g. rahul.g@student.kbiper.edu.in"
+                                placeholder="e.g. rahul.g@student.indrayanicollege.com"
                                 className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-muted-foreground/35"
                               />
                             </div>
@@ -715,7 +715,7 @@ export default function ScStCell() {
                       <h3 className="text-xl font-bold text-primary flex items-center gap-2">
                         <Scale className="w-5.5 h-5.5 text-accent" /> Statutory Guidelines & Constitutional Safeguards
                       </h3>
-                      <p className="text-xs text-muted-foreground mt-1">KBIPER enforces all constitutional directives and UGC regulations to safeguard SC/ST students and staff members:</p>
+                      <p className="text-xs text-muted-foreground mt-1">Indrayani Mahavidyalaya enforces all constitutional directives and UGC regulations to safeguard SC/ST students and staff members:</p>
                     </div>
 
                     <div className="space-y-4">

@@ -24,7 +24,7 @@ const SPORTS_TOURNAMENTS = [
     teams: "12 Class Teams Registered"
   },
   {
-    name: "KBIPER Football Championship",
+    name: "Indrayani Inter-Collegiate Football Championship",
     category: "Outdoor Sport (Boys)",
     schedule: "Jan 21-23, 2026",
     coordinator: "Mr. Rohit Jagtap",
@@ -104,7 +104,7 @@ export default function SportsEvents() {
               Pharma <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Cup</span>
             </h1>
             <p className="text-base md:text-lg text-white/80 font-light max-w-2xl mx-auto">
-              Promoting physical fitness, sportsmanship, and teamwork. KBIPER's annual sports meet features indoor and outdoor athletic competitions.
+              Promoting physical fitness, sportsmanship, and teamwork. Indrayani Mahavidyalaya's annual sports meet features indoor and outdoor athletic competitions.
             </p>
           </motion.div>
         </div>
@@ -265,7 +265,7 @@ export default function SportsEvents() {
                             className="flex h-12 w-full rounded-xl bg-white border border-muted px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
                           >
                             <option>Pharma-Cup Cricket League</option>
-                            <option>KBIPER Football Championship</option>
+                            <option>Indrayani Inter-Collegiate Football Championship</option>
                             <option>Inter-Class Badminton Meet</option>
                             <option>Pharma Mind Chess Tournament</option>
                           </select>

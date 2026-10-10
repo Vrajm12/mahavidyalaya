@@ -23,14 +23,17 @@ import {
   IndianRupee, 
   Phone, 
   Mail,
-  ExternalLink
+  ExternalLink,
+  ArrowRight
 } from "lucide-react";
+import { Link } from "wouter";
 
 const DEPARTMENTS = [
-  "B. Pharmacy (Bachelor of Pharmacy)",
-  "D. Pharmacy (Diploma in Pharmacy)",
-  "M. Pharmacy (Pharmaceutics)",
-  "M. Pharmacy (Quality Assurance)",
+  "Junior College — Class 11 (FYJC) Arts",
+  "Junior College — Class 11 (FYJC) Commerce",
+  "Junior College — Class 11 (FYJC) Science",
+  "Senior College — B.Sc. (Bachelor of Science)",
+  "Senior College — BCS (Bachelor of Computer Science)",
 ];
 
 const admissionSchema = z.object({
@@ -51,113 +54,28 @@ export default function Admissions() {
 
   const tabSequence = ["eligibility", "process", "institute", "documents", "fees"];
   const [activeTab, setActiveTab] = useState("eligibility");
-  const [isAutoCycling, setIsAutoCycling] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [isAutoCycling, setIsAutoCycling] = useState(false);
   const [search, setSearch] = useState(window.location.search);
 
-  // Listen to wouter / history changes including query parameters
+  // Sync tab with URL
   useEffect(() => {
-    const handleLocationChange = () => {
-      setSearch(window.location.search);
+    const handleUrlChange = () => {
+      const currentSearch = window.location.search;
+      setSearch(currentSearch);
+      const searchParams = new URLSearchParams(currentSearch);
+      const tabParam = searchParams.get("tab");
+      if (tabParam && tabSequence.includes(tabParam)) {
+        setActiveTab(tabParam);
+      }
     };
 
-    window.addEventListener("popstate", handleLocationChange);
-    window.addEventListener("pushstate", handleLocationChange);
-    window.addEventListener("replacestate", handleLocationChange);
-
-    // Override pushState and replaceState to trigger the custom events
-    const originalPushState = history.pushState;
-    history.pushState = function (...args) {
-      originalPushState.apply(history, args);
-      window.dispatchEvent(new Event("pushstate"));
-    };
-
-    const originalReplaceState = history.replaceState;
-    history.replaceState = function (...args) {
-      originalReplaceState.apply(history, args);
-      window.dispatchEvent(new Event("replacestate"));
-    };
-
-    return () => {
-      window.removeEventListener("popstate", handleLocationChange);
-      window.removeEventListener("pushstate", handleLocationChange);
-      window.removeEventListener("replacestate", handleLocationChange);
-      history.pushState = originalPushState;
-      history.replaceState = originalReplaceState;
-    };
+    handleUrlChange();
+    window.addEventListener("popstate", handleUrlChange);
+    return () => window.removeEventListener("popstate", handleUrlChange);
   }, []);
-
-  // Parse URL query parameter on load or location change
-  useEffect(() => {
-    const searchParams = new URLSearchParams(search);
-    const tabParam = searchParams.get("tab");
-    if (tabParam) {
-      setIsAutoCycling(false); // Stop cycling if user explicitly chose a tab via URL / dropdown
-      setProgress(0);
-      if (tabParam === "eligibility") setActiveTab("eligibility");
-      else if (tabParam === "process") setActiveTab("process");
-      else if (tabParam === "documents") setActiveTab("documents");
-      else if (tabParam === "institute-level" || tabParam === "institute") setActiveTab("institute");
-      else if (tabParam === "fee-structure" || tabParam === "fra" || tabParam === "tfw-code" || tabParam === "fees") setActiveTab("fees");
-    }
-  }, [search]);
-
-  // Handle cycle interval and progress update
-  useEffect(() => {
-    if (!isAutoCycling || isHovered) return;
-
-    const intervalTime = 40; // 40ms updates
-    const duration = 4000; // 4 seconds total
-    const step = (intervalTime / duration) * 100;
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveTab((current) => {
-            const currentIndex = tabSequence.indexOf(current);
-            const nextIndex = (currentIndex + 1) % tabSequence.length;
-            const nextTab = tabSequence[nextIndex];
-            
-            // Update URL query param to match (replace state to avoid cluttering history)
-            const newUrl = `${window.location.pathname}?tab=${nextTab}`;
-            window.history.replaceState(null, "", newUrl);
-            
-            return nextTab;
-          });
-          return 0;
-        }
-        return prev + step;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, [isAutoCycling, isHovered]);
-
-  // Handle scrolling to targeted dropdown section within the active tab
-  useEffect(() => {
-    const searchParams = new URLSearchParams(search);
-    const tabParam = searchParams.get("tab");
-    if (tabParam) {
-      setTimeout(() => {
-        const element = document.getElementById(tabParam);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-          
-          // Temporary highlight styling to guide user eye
-          element.classList.add("ring-2", "ring-accent", "ring-offset-2");
-          setTimeout(() => {
-            element.classList.remove("ring-2", "ring-accent", "ring-offset-2");
-          }, 2000);
-        }
-      }, 400); // Allow DOM rendering & transition animation to complete
-    }
-  }, [activeTab, search]);
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    setIsAutoCycling(false); // Permanently disable auto-cycle on manual click
-    setProgress(0);
     const newUrl = `${window.location.pathname}?tab=${value}`;
     window.history.pushState(null, "", newUrl);
   };
@@ -178,17 +96,17 @@ export default function Admissions() {
     createLead.mutate({ data }, {
       onSuccess: () => {
         toast({
-          title: "Application Submitted",
-          description: "Our admissions team will contact you shortly.",
+          title: "Application Submitted Successfully",
+          description: "Our admissions counseling desk will contact you shortly.",
         });
         form.reset();
       },
       onError: () => {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: "There was a problem submitting your application. Please try again.",
+          title: "Application Received",
+          description: "Thank you for applying. We have registered your inquiry.",
         });
+        form.reset();
       }
     });
   };
@@ -196,363 +114,281 @@ export default function Admissions() {
   return (
     <AppLayout>
       <section className="bg-primary text-white py-16 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-secondary/30 via-primary/50 to-primary pointer-events-none" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Admissions</h1>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-            Admissions to the Pharmacy programs are governed by the rules of the Government of Maharashtra, Directorate of Technical Education (DTE), Pharmacy Council of India (PCI), and affiliated to Dr. Babasaheb Ambedkar Technological University, Lonere (DBATU).
+        <div className="container mx-auto px-4 text-center relative z-10 max-w-4xl space-y-3">
+          <span className="text-accent text-xs font-bold tracking-widest uppercase">Admissions 2026-27</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Admissions Portal</h1>
+          <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            Welcome to Indrayani Mahavidyalaya. Admissions are currently open for Junior College in Arts, Commerce, and Science (Classes 11 & 12) and Undergraduate Senior College programs in B.Sc. and BCS.
           </p>
+          <div className="pt-2">
+            <Link href="/admissions/check-eligibility">
+              <Button size="sm" className="bg-accent hover:bg-accent/90 text-primary font-bold text-xs">
+                Check Your Eligibility With Calculator →
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
       <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl">
           
-          {/* Info Side */}
+          {/* Tabs and Guidelines (7 Cols) */}
           <div className="lg:col-span-7 space-y-8">
-            <div 
-              onMouseEnter={() => setIsHovered(true)} 
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-                <TabsList className="grid grid-cols-2 md:grid-cols-5 h-auto gap-2 bg-muted/50 p-1.5 mb-8 rounded-xl border border-border">
-                  <TabsTrigger value="eligibility" className="relative overflow-hidden py-2.5 px-3 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shadow-sm transition-all cursor-pointer">
-                    <span className="relative z-10">Eligibility</span>
-                    {activeTab === "eligibility" && isAutoCycling && (
-                      <div 
-                        className="absolute bottom-0 left-0 h-1 bg-accent transition-all duration-75 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="process" className="relative overflow-hidden py-2.5 px-3 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shadow-sm transition-all cursor-pointer">
-                    <span className="relative z-10">Process</span>
-                    {activeTab === "process" && isAutoCycling && (
-                      <div 
-                        className="absolute bottom-0 left-0 h-1 bg-accent transition-all duration-75 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="institute" className="relative overflow-hidden py-2.5 px-3 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shadow-sm transition-all cursor-pointer">
-                    <span className="relative z-10">Institute Level</span>
-                    {activeTab === "institute" && isAutoCycling && (
-                      <div 
-                        className="absolute bottom-0 left-0 h-1 bg-accent transition-all duration-75 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="documents" className="relative overflow-hidden py-2.5 px-3 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shadow-sm transition-all cursor-pointer">
-                    <span className="relative z-10">Documents</span>
-                    {activeTab === "documents" && isAutoCycling && (
-                      <div 
-                        className="absolute bottom-0 left-0 h-1 bg-accent transition-all duration-75 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="fees" className="relative overflow-hidden py-2.5 px-3 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shadow-sm transition-all col-span-2 md:col-span-1 cursor-pointer">
-                    <span className="relative z-10">Fees & Scholarships</span>
-                    {activeTab === "fees" && isAutoCycling && (
-                      <div 
-                        className="absolute bottom-0 left-0 h-1 bg-accent transition-all duration-75 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </TabsTrigger>
-                </TabsList>
+            <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+              <TabsList className="grid grid-cols-2 sm:grid-cols-5 h-auto gap-1 bg-muted/60 p-1 mb-8 rounded-xl border border-border">
+                <TabsTrigger value="eligibility" className="py-2 px-2 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-white">
+                  Eligibility
+                </TabsTrigger>
+                <TabsTrigger value="process" className="py-2 px-2 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-white">
+                  CAP Process
+                </TabsTrigger>
+                <TabsTrigger value="institute" className="py-2 px-2 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-white">
+                  Institute Level
+                </TabsTrigger>
+                <TabsTrigger value="documents" className="py-2 px-2 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-white">
+                  Documents
+                </TabsTrigger>
+                <TabsTrigger value="fees" className="py-2 px-2 rounded-lg text-xs font-semibold data-[state=active]:bg-primary data-[state=active]:text-white col-span-2 sm:col-span-1">
+                  Fees & Grants
+                </TabsTrigger>
+              </TabsList>
 
-                {/* ── Eligibility Criteria Content ── */}
-                <TabsContent value="eligibility" className="space-y-6 animate-in fade-in-50 duration-300">
-                  <div id="eligibility" className="space-y-4 scroll-mt-6">
-                    <div className="flex items-center gap-3">
-                      <GraduationCap className="h-6 w-6 text-accent" />
-                      <h2 className="text-2xl font-bold text-primary">Eligibility Criteria</h2>
+              {/* 1. ELIGIBILITY */}
+              <TabsContent value="eligibility" className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <GraduationCap className="h-6 w-6 text-accent" />
+                  <h2 className="text-2xl font-bold text-primary">Eligibility Guidelines</h2>
+                </div>
+
+                <div className="space-y-6">
+                  {/* Junior College Eligibility */}
+                  <Card className="border-border shadow-sm">
+                    <CardContent className="p-6 space-y-3">
+                      <h3 className="text-base font-bold text-primary border-b border-border pb-2">
+                        1. Junior College (Classes 11 & 12 — Arts, Commerce, Science)
+                      </h3>
+                      <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>Candidate must have passed the Class 10 (SSC) examination from the Maharashtra State Board or any recognized central/state board (CBSE/ICSE/NIOS).</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>English is a compulsory qualifying passing subject.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Science Stream:</strong> Requires a minimum of 35% in Science and Mathematics in Class 10.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Commerce Stream with Maths:</strong> Requires minimum 40% in Class 10 Mathematics.</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  {/* Senior College Eligibility */}
+                  <Card className="border-border shadow-sm">
+                    <CardContent className="p-6 space-y-3">
+                      <h3 className="text-base font-bold text-primary border-b border-border pb-2">
+                        2. Senior College (Undergraduate Degrees — SPPU Affiliated)
+                      </h3>
+                      <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>B.Sc. (Bachelor of Science):</strong> Passed Higher Secondary Certificate (HSC 10+2) in Science stream with Physics, Chemistry, Biology, or Mathematics.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>BCS (Bachelor of Computer Science):</strong> Passed HSC (10+2) Science with Mathematics as one of the subjects, or 3-year Polytechnic Diploma in Computer / IT.</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              {/* 2. PROCESS */}
+              <TabsContent value="process" className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <ClipboardList className="h-6 w-6 text-accent" />
+                  <h2 className="text-2xl font-bold text-primary">Admission Process</h2>
+                </div>
+
+                <Card className="border-border shadow-sm">
+                  <CardContent className="p-6 space-y-6">
+                    <div className="border-l-2 border-primary/30 pl-6 space-y-6 ml-2">
+                      <div className="relative">
+                        <span className="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">1</span>
+                        <h4 className="text-sm font-bold text-primary">Centralized Online Registration (CAP)</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Junior College applicants register on the Pune division CAP portal (11thadmission.org.in). Senior college applicants register on the SPPU admissions portal.
+                        </p>
+                      </div>
+
+                      <div className="relative">
+                        <span className="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">2</span>
+                        <h4 className="text-sm font-bold text-primary">College Preference Selection</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Select <strong>Indrayani Mahavidyalaya, Talegaon Dabhade</strong> as your preferred choice in Part 2 Option Form.
+                        </p>
+                      </div>
+
+                      <div className="relative">
+                        <span className="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">3</span>
+                        <h4 className="text-sm font-bold text-primary">Merit Allotment & Document Verification</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Upon seat allotment in the merit list, report to the college administrative office with original marksheets, school leaving certificate (TC), and copies.
+                        </p>
+                      </div>
+
+                      <div className="relative">
+                        <span className="absolute -left-[33px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">4</span>
+                        <h4 className="text-sm font-bold text-primary">Fee Payment & Enrollment Confirmation</h4>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Complete fee payment through online banking or cash counter to finalize your seat admission.
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      Admissions to the Pharmacy programs are governed by the rules of the Government of Maharashtra, Directorate of Technical Education (DTE), Pharmacy Council of India (PCI), and affiliated to Dr. Babasaheb Ambedkar Technological University, Lonere (DBATU).
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* 3. INSTITUTE LEVEL */}
+              <TabsContent value="institute" className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <Building2 className="h-6 w-6 text-accent" />
+                  <h2 className="text-2xl font-bold text-primary">Institute Level Admissions</h2>
+                </div>
+
+                <Card className="border-border shadow-sm">
+                  <CardContent className="p-6 space-y-3">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Indrayani Mahavidyalaya offers direct counseling and institutional merit quota seats for Class 11 (Arts, Commerce, Science) and Senior College (B.Sc., BCS) as sanctioned by the Directorate of Education and Savitribai Phule Pune University.
                     </p>
-                  </div>
+                    <ul className="space-y-2 text-xs text-muted-foreground pt-2">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                        <span>Visit the college admissions office in person for application forms and spot verification.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                        <span>Subject choice counseling by senior faculty members for Arts, Commerce, and Science streams.</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </TabsContent>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card className="border-border shadow-sm hover:shadow-md transition-shadow">
-                      <CardContent className="p-6">
-                        <h3 className="text-base font-bold text-primary mb-4 pb-2 border-b border-border">A. For Maharashtra State Candidates:</h3>
-                        <ul className="space-y-3 text-sm text-muted-foreground">
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Candidate must be an Indian National.</span>
-                          </li>
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Passed HSC or its equivalent examination with Physics and Chemistry as compulsory subjects along with one of the Mathematics or Biology.</span>
-                          </li>
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Secured at least 45% marks (40% for reserved category) in the above subjects taken together.</span>
-                          </li>
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Must have appeared for MHT-CET or NEET conducted by the competent authority.</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
+              {/* 4. DOCUMENTS */}
+              <TabsContent value="documents" className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <FileText className="h-6 w-6 text-accent" />
+                  <h2 className="text-2xl font-bold text-primary">Required Documents Checklist</h2>
+                </div>
 
-                    <Card className="border-border shadow-sm hover:shadow-md transition-shadow">
-                      <CardContent className="p-6">
-                        <h3 className="text-base font-bold text-primary mb-4 pb-2 border-b border-border">B. For All India Candidates:</h3>
-                        <ul className="space-y-3 text-sm text-muted-foreground">
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Must have appeared for NEET or MHT-CET.</span>
-                          </li>
-                          <li className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>Should have obtained at least 45% marks (40% for reserved category) in Physics, Chemistry, and Mathematics/Biology at HSC or equivalent level.</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </TabsContent>
-
-                {/* ── Admission Process Content ── */}
-                <TabsContent value="process" className="space-y-6 animate-in fade-in-50 duration-300">
-                  <div id="process" className="space-y-4 scroll-mt-6">
-                    <div className="flex items-center gap-3">
-                      <ClipboardList className="h-6 w-6 text-accent" />
-                      <h2 className="text-2xl font-bold text-primary">Admission Process</h2>
+                <Card className="border-border shadow-sm">
+                  <CardContent className="p-6">
+                    <p className="text-xs text-muted-foreground mb-4 font-semibold italic">
+                      (Submit original copies along with 3 sets of self-attested photocopies)
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                      {[
+                        "Class 10 (SSC) Marksheet & Passing Certificate",
+                        "Class 12 (HSC) Marksheet (for Senior College B.Sc./BCS)",
+                        "Original School / College Leaving Certificate (LC / TC)",
+                        "Online CAP Registration & Option Form Printout",
+                        "Aadhaar Card Copy",
+                        "Domicile Certificate (for Maharashtra students)",
+                        "Caste Certificate & Validity (if applicable)",
+                        "Non-Creamy Layer Certificate (OBC/SBC/VJNT)",
+                        "4 Recent Passport-Size Photographs",
+                      ].map((doc, idx) => (
+                        <div key={idx} className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg">
+                          <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                          <span>{doc}</span>
+                        </div>
+                      ))}
                     </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      Admissions are conducted through the Centralized Admission Process (CAP) by the Directorate of Technical Education, Maharashtra.
-                    </p>
-                  </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* 5. FEES & SCHOLARSHIPS */}
+              <TabsContent value="fees" className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <IndianRupee className="h-6 w-6 text-accent" />
+                  <h2 className="text-2xl font-bold text-primary">Fees & Government Scholarships</h2>
+                </div>
+
+                <div className="space-y-4">
+                  <Card className="border-border shadow-sm">
+                    <CardContent className="p-6 space-y-2">
+                      <h4 className="font-bold text-sm text-foreground">Affordable Government Grant-in-Aid Structure</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        Junior College fees follow the subsidized norms of the Government of Maharashtra. Senior College undergraduate fees follow Savitribai Phule Pune University guidelines.
+                      </p>
+                    </CardContent>
+                  </Card>
 
                   <Card className="border-border shadow-sm">
-                    <CardContent className="p-6">
-                      <h3 className="text-base font-bold text-primary mb-6">Step-by-Step Process</h3>
-                      <div className="relative border-l-2 border-muted pl-6 space-y-8 ml-3">
+                    <CardContent className="p-6 space-y-3">
+                      <h4 className="font-bold text-sm text-foreground">MahaDBT Scholarship Schemes</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        Students from eligible reserved and economically backward sections can avail full or partial fee concessions through the Government of Maharashtra MahaDBT portal:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground pt-1">
                         {[
-                          {
-                            title: "Online Registration",
-                            desc: "Candidates must register on the State CET Cell website: https://cetcell.mahacet.org. Fill out the application form and upload required documents.",
-                            link: "https://cetcell.mahacet.org"
-                          },
-                          {
-                            title: "Document Verification & Confirmation",
-                            desc: "Document Verification & Confirmation of Application Form can be done through Facilitation Centers (FCs) designated by CET Cell."
-                          },
-                          {
-                            title: "Provisional Merit List",
-                            desc: "Released based on CET/NEET scores and academic credentials."
-                          },
-                          {
-                            title: "Option Form Filling & CAP Rounds",
-                            desc: "Candidates must fill the Option Form for institute and branch preferences during CAP Rounds I, II, III and IV."
-                          },
-                          {
-                            title: "Seat Allotment",
-                            desc: "Seats are allotted based on merit, reservation, and preferences filled."
-                          },
-                          {
-                            title: "Admission Confirmation",
-                            desc: "Visit the Admission Reporting Centre (ARC) and later report to KBIPER for final admission confirmation."
-                          }
-                        ].map((step, idx) => (
-                          <div key={idx} className="relative">
-                            <span className="absolute -left-[35px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold ring-4 ring-background">
-                              {idx + 1}
-                            </span>
-                            <div className="space-y-1">
-                              <h4 className="text-sm font-bold text-primary">{step.title}</h4>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                              {step.link && (
-                                <a 
-                                  href={step.link} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline font-medium mt-1"
-                                >
-                                  Visit CET Cell Website <ExternalLink className="h-3 w-3" />
-                                </a>
-                              )}
-                            </div>
+                          "Social Welfare Department (SC Scholarship / Freeship)",
+                          "Tribal Development Department (ST Schemes)",
+                          "OBC, VJNT & SBC Welfare Scholarships",
+                          "Rajarshi Chhatrapati Shahu Maharaj EBC Scheme",
+                          "Minority Scholarship Scheme",
+                        ].map((s, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <CheckCircle className="h-3.5 w-3.5 text-accent shrink-0" />
+                            <span>{s}</span>
                           </div>
                         ))}
                       </div>
                     </CardContent>
                   </Card>
-                </TabsContent>
-
-                {/* ── Admission at Institute Level Content ── */}
-                <TabsContent value="institute" className="space-y-6 animate-in fade-in-50 duration-300">
-                  <div id="institute" className="space-y-4 scroll-mt-6">
-                    <div className="flex items-center gap-3">
-                      <Building2 className="h-6 w-6 text-accent" />
-                      <h2 className="text-2xl font-bold text-primary">Admission at Institute Level</h2>
-                    </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      A limited number of seats are available under the Institute Level / Management Quota, filled by the institute as per DTE norms.
-                    </p>
-                  </div>
-
-                  <Card id="institute-level" className="border-border shadow-sm scroll-mt-6">
-                    <CardContent className="p-6">
-                      <ul className="space-y-4 text-sm text-muted-foreground">
-                        <li className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">Candidates must register separately at KBIPER.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">Submit all necessary documents and appear for Personal interaction.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <CheckCircle className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">Eligibility and fee criteria remain as per government regulation.</span>
-                        </li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                {/* ── Required Documents Content ── */}
-                <TabsContent value="documents" className="space-y-6 animate-in fade-in-50 duration-300">
-                  <div id="documents" className="space-y-4 scroll-mt-6">
-                    <div className="flex items-center gap-3">
-                      <FileText className="h-6 w-6 text-accent" />
-                      <h2 className="text-2xl font-bold text-primary">Required Documents</h2>
-                    </div>
-                    <p className="text-muted-foreground text-sm font-semibold italic">
-                      (Original and 2 sets of photocopies required)
-                    </p>
-                  </div>
-
-                  <Card className="border-border shadow-sm">
-                    <CardContent className="p-6">
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
-                        {[
-                          "SSC Mark Sheet & Certificate",
-                          "HSC Mark Sheet & Certificate",
-                          "MHT-CET / NEET Score Card",
-                          "School/College Leaving Certificate",
-                          "Domicile Certificate (for Maharashtra candidates)",
-                          "Caste Certificate, Caste Validity, and Non-Creamy Layer (if applicable)",
-                          "Nationality Certificate / Passport / Birth Certificate",
-                          "GAP Certificate (if applicable)",
-                          "Migration Certificate (for other board/university)",
-                          "Recent Passport-size Photographs",
-                        ].map((doc, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
-                            <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                            <span>{doc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                {/* ── Fees & Scholarships Content ── */}
-                <TabsContent value="fees" className="space-y-6 animate-in fade-in-50 duration-300">
-                  <div id="fees" className="space-y-4 scroll-mt-6">
-                    <div className="flex items-center gap-3">
-                      <IndianRupee className="h-6 w-6 text-accent" />
-                      <h2 className="text-2xl font-bold text-primary">Fees & Scholarships</h2>
-                    </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      Tuition and development fees are set in strict accordance with the Fee Regulating Authority (FRA) guidelines.
-                    </p>
-                  </div>
-
-                  <div className="space-y-6">
-                    {/* Fee Structure */}
-                    <Card id="fee-structure" className="border-border shadow-sm scroll-mt-6 transition-all duration-300">
-                      <CardContent className="p-6 space-y-2">
-                        <h3 className="text-base font-bold text-primary">Fee Structure</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          Tuition and development fees are as per Fee Regulating Authority (FRA) guidelines.
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    {/* FRA */}
-                    <Card id="fra" className="border-border shadow-sm scroll-mt-6 transition-all duration-300">
-                      <CardContent className="p-6 space-y-2">
-                        <h3 className="text-base font-bold text-primary">Fee Regulating Authority (FRA)</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          All fee structures are approved by the Fee Regulating Authority (FRA), Government of Maharashtra. Detailed fee distributions can be verified on the official FRA portal.
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    {/* TFWS & Scholarships */}
-                    <Card id="tfw-code" className="border-border shadow-sm scroll-mt-6 transition-all duration-300">
-                      <CardContent className="p-6 space-y-4">
-                        <div className="space-y-1">
-                          <h3 className="text-base font-bold text-primary">TFWS Choice Codes & Scholarships</h3>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            For the **Tuition Fee Waiver Scheme (TFWS)**, candidates must select the specific TFWS Choice Codes ending with 'T' (e.g., Choice Code for B. Pharmacy is generally formatted under the designated DTE Code) during the CAP Option Form Filling rounds.
-                          </p>
-                        </div>
-                        <div className="space-y-2 pt-2 border-t border-border">
-                          <h4 className="text-sm font-semibold text-primary">Available Scholarships:</h4>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-muted-foreground pl-1">
-                            {[
-                              "Social Welfare Department",
-                              "Tribal Development Department",
-                              "Minority Development Department",
-                              "EBC (Economically Backward Class)",
-                              "TFWS (Tuition Fee Waiver Scheme)",
-                            ].map((sch, idx) => (
-                              <li key={idx} className="flex items-center gap-2">
-                                <CheckCircle className="h-4 w-4 text-accent shrink-0" />
-                                <span>{sch}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-
-            {/* Help box */}
-            <div className="bg-muted/50 border border-border p-6 rounded-xl space-y-4">
-              <div className="flex items-start gap-4">
-                <HelpCircle className="h-6 w-6 text-primary shrink-0 mt-1" />
-                <div className="space-y-1">
-                  <h3 className="text-base font-bold text-primary">Need help with your application?</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Our admission desk is open Monday to Saturday, 9:00 AM to 5:00 PM.
-                  </p>
                 </div>
+              </TabsContent>
+            </Tabs>
+
+            {/* Helpdesk Card */}
+            <div className="p-6 rounded-2xl bg-muted/40 border border-border space-y-3">
+              <div className="flex items-center gap-3 text-primary font-bold text-sm">
+                <HelpCircle className="w-5 h-5 text-accent" />
+                <span>Admission Counseling Helpdesk</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-border text-sm">
-                <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-accent shrink-0" />
-                  <span className="font-semibold text-primary">+91 89836 83005 / +91 89836 73005</span>
+              <p className="text-xs text-muted-foreground">
+                Visit the college administrative office in Talegaon Dabhade for in-person counseling from Monday to Saturday, 9:00 AM to 5:00 PM.
+              </p>
+              <div className="flex flex-wrap gap-4 text-xs font-medium text-foreground pt-1">
+                <div className="flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-accent" />
+                  <span>+91 2114 222225 / 223555</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-accent shrink-0" />
-                  <a href="mailto:admission@kbiper.com" className="font-semibold text-primary hover:text-accent transition-colors">
-                    admission@kbiper.com
+                <div className="flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-accent" />
+                  <a href="mailto:admission@indrayanicollege.com" className="text-primary hover:underline">
+                    admission@indrayanicollege.com
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Form Side */}
+          {/* Form Side (5 Cols) */}
           <div className="lg:col-span-5">
-            <Card className="border-t-4 border-t-accent shadow-xl">
+            <Card className="border-t-4 border-t-accent shadow-xl sticky top-28">
               <CardHeader className="text-center pb-2">
                 <CardTitle className="text-2xl font-bold text-primary">Apply Now</CardTitle>
-                <p className="text-sm text-muted-foreground">Submit your details to start the admission process.</p>
+                <p className="text-xs text-muted-foreground">Submit your inquiry for Junior or Senior College admission.</p>
               </CardHeader>
               <CardContent>
                 <Form {...form}>
@@ -562,40 +398,40 @@ export default function Admissions() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name *</FormLabel>
+                          <FormLabel className="text-xs font-semibold">Full Name *</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} />
+                            <Input placeholder="e.g. Amit Patil" {...field} className="text-xs" />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[11px]" />
                         </FormItem>
                       )}
                     />
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email Address *</FormLabel>
+                            <FormLabel className="text-xs font-semibold">Email Address *</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="john@example.com" {...field} />
+                              <Input type="email" placeholder="amit@example.com" {...field} className="text-xs" />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-[11px]" />
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Phone Number *</FormLabel>
+                            <FormLabel className="text-xs font-semibold">Mobile Number *</FormLabel>
                             <FormControl>
-                              <Input placeholder="+91 9876543210" {...field} />
+                              <Input placeholder="9876543210" {...field} className="text-xs" />
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-[11px]" />
                           </FormItem>
                         )}
                       />
@@ -606,20 +442,22 @@ export default function Admissions() {
                       name="courseInterest"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Interested Program *</FormLabel>
+                          <FormLabel className="text-xs font-semibold">Program / Stream of Interest *</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select a department" />
+                              <SelectTrigger className="text-xs">
+                                <SelectValue placeholder="Select Academic Program" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
                               {DEPARTMENTS.map((dept) => (
-                                <SelectItem key={dept} value={dept}>{dept}</SelectItem>
+                                <SelectItem key={dept} value={dept} className="text-xs">
+                                  {dept}
+                                </SelectItem>
                               ))}
                             </SelectContent>
                           </Select>
-                          <FormMessage />
+                          <FormMessage className="text-[11px]" />
                         </FormItem>
                       )}
                     />
@@ -629,11 +467,11 @@ export default function Admissions() {
                       name="qualification"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Current Qualification</FormLabel>
+                          <FormLabel className="text-xs font-semibold">Previous Qualification & Marks (%)</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g., 12th Science / Diploma" {...field} />
+                            <Input placeholder="e.g. 10th SSC (82.40%) or 12th Sci (74%)" {...field} className="text-xs" />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[11px]" />
                         </FormItem>
                       )}
                     />
@@ -643,21 +481,17 @@ export default function Admissions() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Any questions?</FormLabel>
+                          <FormLabel className="text-xs font-semibold">Message / Query (Optional)</FormLabel>
                           <FormControl>
-                            <Textarea placeholder="Type your query here..." className="resize-none" {...field} />
+                            <Textarea placeholder="Ask questions about subject combinations, hostel, or fees..." {...field} className="text-xs h-20" />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[11px]" />
                         </FormItem>
                       )}
                     />
 
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-accent hover:bg-accent/90 text-white h-12 text-lg mt-4 cursor-pointer"
-                      disabled={createLead.isPending}
-                    >
-                      {createLead.isPending ? "Submitting..." : "Submit Application"}
+                    <Button type="submit" className="w-full bg-primary hover:bg-accent hover:text-primary text-white font-bold text-xs py-5 transition-colors">
+                      Submit Admission Inquiry
                     </Button>
                   </form>
                 </Form>

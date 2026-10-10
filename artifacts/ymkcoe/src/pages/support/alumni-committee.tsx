@@ -80,40 +80,40 @@ interface CommitteeMember {
 const ALUMNI_COMMITTEE: CommitteeMember[] = [
   { 
     id: "1", 
-    name: "Dr. Sanjay R. Bhegade", 
+    name: "Dr. S. K. Malghe", 
     role: "Patron / Chairman", 
     designation: "Principal", 
     department: "College Administration", 
-    phone: "+91 9876543210", 
-    email: "principal.kbiper@gmail.com",
+    phone: "02114-222225", 
+    email: "principal@indrayanicollege.com",
     isHead: true 
   },
   { 
     id: "2", 
-    name: "Prof. Milind Gaikwad", 
+    name: "Prof. S. R. Deshmukh", 
     role: "Alumni Coordinator", 
-    designation: "Assistant Professor", 
-    department: "Pharmaceutical Chemistry", 
-    phone: "+91 9876543231", 
-    email: "milind.gaikwad@kbiper.edu.in" 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Arts", 
+    phone: "02114-222225", 
+    email: "alumni@indrayanicollege.com" 
   },
   { 
     id: "3", 
-    name: "Dr. Rekha Patil", 
+    name: "Dr. V. R. Bhalerao", 
     role: "Treasurer Member", 
-    designation: "Professor", 
-    department: "Pharmacology Department", 
-    phone: "+91 9876543241", 
-    email: "rekha.patil@kbiper.edu.in" 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Commerce", 
+    phone: "02114-222225", 
+    email: "bhalerao@indrayanicollege.com" 
   },
   { 
     id: "4", 
-    name: "Mr. Mayur Lohkare", 
+    name: "Prof. K. N. Patil", 
     role: "Alumni Representative President", 
-    designation: "Lecturer (Alumnus)", 
-    department: "Pharmacognosy", 
-    phone: "+91 9876543265", 
-    email: "mayur.lohkare@kbiper.edu.in" 
+    designation: "Assistant Professor & HOD", 
+    department: "Faculty of Computer Science", 
+    phone: "02114-222225", 
+    email: "patil@indrayanicollege.com" 
   }
 ];
 
@@ -147,7 +147,7 @@ export default function AlumniCommittee() {
     setIsRegistered(true);
     toast({
       title: "Alumni Registration Complete",
-      description: "Welcome to the official KBIPER Alumni network!",
+      description: "Welcome to the official Indrayani Mahavidyalaya Alumni network!",
     });
   };
 
@@ -233,7 +233,7 @@ export default function AlumniCommittee() {
               >
                 <div className="text-left mb-6">
                   <h3 className="text-xl font-extrabold text-primary">Distinguished Alumni Registry</h3>
-                  <p className="text-xs text-muted-foreground mt-0.5">KBIPER graduates holding leadership, research, and entrepreneurial positions in global healthcare sectors.</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Indrayani Mahavidyalaya graduates holding leadership, research, and entrepreneurial positions across diverse industry sectors.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6.5">
@@ -356,7 +356,7 @@ export default function AlumniCommittee() {
                 {!isRegistered ? (
                   <form onSubmit={handleRegisterSubmit} className="bg-white border border-muted p-6 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.02)] space-y-6">
                     <div>
-                      <h3 className="text-lg font-extrabold text-primary">Join the KBIPER Alumni Network</h3>
+                      <h3 className="text-lg font-extrabold text-primary">Join the Indrayani Mahavidyalaya Alumni Network</h3>
                       <p className="text-xs text-muted-foreground mt-1">Register to keep in touch with campus updates, coordinate reunions, and mentor current pharmacy students.</p>
                     </div>
 
@@ -462,7 +462,7 @@ export default function AlumniCommittee() {
 
                     <div>
                       <h3 className="text-2xl font-bold text-primary">Registration Confirmed</h3>
-                      <p className="text-xs text-muted-foreground mt-1 max-w-xs mx-auto">Your details have been recorded in the KBIPER Alumni registry ledger. Thank you for connecting!</p>
+                      <p className="text-xs text-muted-foreground mt-1 max-w-xs mx-auto">Your details have been recorded in the Indrayani Mahavidyalaya Alumni registry ledger. Thank you for connecting!</p>
                     </div>
 
                     <button

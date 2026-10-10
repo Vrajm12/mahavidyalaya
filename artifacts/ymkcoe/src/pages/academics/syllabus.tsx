@@ -6,26 +6,29 @@ import {
   GraduationCap, 
   ChevronDown, 
   FileDown, 
-  Pill, 
-  FlaskConical, 
+  Atom, 
+  TrendingUp, 
+  Code, 
+  Palette, 
   Microscope, 
-  Leaf, 
+  Sparkles,
   FileCheck, 
   Award, 
   Clock, 
   Layers, 
-  Briefcase,
-  HelpCircle
+  HelpCircle,
+  Search,
+  CheckCircle2
 } from "lucide-react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Subject {
   code: string;
   name: string;
   type: "Theory" | "Practical" | "Theory & Lab";
-  domain: "Pharmaceutics" | "Chemistry" | "Pharmacology" | "Pharmacognosy" | "Quality Assurance" | "Practice & Laws";
-  credits: number;
+  domain: "Language" | "Social Sciences" | "Commerce & Accounts" | "Physical Sciences" | "Computer Science" | "Mathematics";
+  credits?: number;
   hoursPerWeek: string;
   keyUnits: string[];
   careerRelevance: string;
@@ -54,7 +57,7 @@ interface ProgramData {
     schema: string;
     theoryCount: string;
     labCount: string;
-    internship: string;
+    affiliation: string;
   };
   downloadUrl: string;
   fileSize: string;
@@ -62,114 +65,147 @@ interface ProgramData {
 }
 
 const SYLLABUS_DATABASE: Record<string, ProgramData> = {
-  bpharm_fy: {
-    title: "Bachelor of Pharmacy (FY)",
-    subtitle: "B. Pharmacy (Revised Syllabus - FY only)",
-    description: "The B.Pharm first year curriculum is designed under Pharmacy Council of India (PCI) guidelines to prepare competent pharmaceutical professionals. It covers the complete drug cycle—from design and organic synthesis to formulation development, analytical testing, pharmacological screening, and clinical trials.",
-    accent: "text-blue-500",
-    bgAccent: "bg-blue-600 hover:bg-blue-700",
-    iconColor: "text-blue-400",
-    bannerGradient: "from-blue-600/20 via-primary to-[#011a2a]",
+  junior_arts: {
+    title: "Junior College — Arts (XI & XII)",
+    subtitle: "Maharashtra State Board (MSBSHSE) Curriculum",
+    description: "The Arts stream fosters critical thinking, cultural appreciation, historical context, and communicative eloquence. Curated for civil service aspirants, media practitioners, literary scholars, and legal luminaries.",
+    accent: "text-amber-600",
+    bgAccent: "bg-amber-600 hover:bg-amber-700",
+    iconColor: "text-amber-500",
+    bannerGradient: "from-amber-600/20 via-primary to-[#011a2a]",
     stats: {
-      totalCredits: "50 Credits",
-      schema: "Revised PCI Syllabus Schema",
-      theoryCount: "8 Theory Modules",
-      labCount: "6 Laboratory Practicals",
-      internship: "General Orientation"
+      totalCredits: "600 Marks / Year",
+      schema: "Maharashtra State Board HSC Scheme",
+      theoryCount: "6 Core Subjects",
+      labCount: "Continuous Internal Assessment",
+      affiliation: "MSBSHSE, Pune Board"
     },
-    downloadUrl: "/documents/B_Pharm_New_Syllabus_FY.pdf",
-    fileSize: "1.6 MB",
+    downloadUrl: "/documents/Indrayani_Junior_Arts_Syllabus.pdf",
+    fileSize: "1.4 MB",
     years: [
       {
-        yearName: "First Year",
+        yearName: "Class 11 (FYJC)",
         semesters: [
           {
-            semesterName: "Semester I",
+            semesterName: "Annual Curriculum",
             subjects: [
               {
-                code: "BP101T",
-                name: "Human Anatomy and Physiology I",
+                code: "ART-101",
+                name: "Compulsory English",
                 type: "Theory",
-                domain: "Pharmacology",
-                credits: 4,
+                domain: "Language",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Integumentary & Skeletal System", "Muscular & Nervous System", "Cardiovascular & Lymphatic System", "Cell and Tissue Physiology"],
-                careerRelevance: "Essential physiological foundation required for understanding drug action (Pharmacology) and diagnostics."
+                keyUnits: ["Prose & Literary Appreciation", "Poetry & Poetic Devices", "Writing Skills (Summary, Mind Mapping, Framing)", "Drama: History of English Drama"],
+                careerRelevance: "Global communication proficiency, competitive entrance preparation, and analytical drafting."
               },
               {
-                code: "BP102T",
-                name: "Pharmaceutical Analysis I",
+                code: "ART-102",
+                name: "Second Language: Marathi / Hindi",
                 type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
+                domain: "Language",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Acid-Base & Oxidation-Reduction Titrations", "Precipitation & Gravimetric Titrations", "Complexometry & Diazotization Methods", "Sources of Impurities & Limit Tests"],
-                careerRelevance: "Crucial for industrial Quality Control (QC) laboratories and testing chemical purities of materials."
+                keyUnits: ["Gadhya (Prose) & Padhya (Poetry)", "Vyavaharik Marathi / Prayojanmulak Hindi", "Vyakaran & Bhasha Abhyas", "Sahitya Pravah"],
+                careerRelevance: "Civil services regional paper, regional media, publishing, translation, and administrative competence."
               },
               {
-                code: "BP103T",
-                name: "Pharmaceutics I",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Dosage Forms Classification & Calculations", "Powders, Monophasic & Biphasic Liquids", "Suppositories & Pharmaceutical Incompatibilities", "Historical Background of Pharmacy and Pharmacopoeias"],
-                careerRelevance: "The core science of drug compounding, manufacturing, and commercial dosage form formulations."
+                code: "ART-103",
+                name: "History",
+                type: "Theory",
+                domain: "Social Sciences",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Early Societies & Ancient Civilizations", "Imperial States & Feudal Transformations", "Colonial Encounters & Modern Historiography", "Cultural Heritage & Archeological Sites of Maharashtra"],
+                careerRelevance: "Foundational baseline for UPSC/MPSC civil services, archeological research, and heritage management."
               },
               {
-                code: "BP104T",
-                name: "Pharmaceutical Inorganic Chemistry",
+                code: "ART-104",
+                name: "Political Science",
                 type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
+                domain: "Social Sciences",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Gastrointestinal Agents & Electrolytes", "Topical Agents & Dental Products", "Essential Radiopharmaceuticals", "Limit tests for Heavy Metals & Arsenic"],
-                careerRelevance: "Required for synthesis of inorganic drug compounds, minerals research, and diagnostic radiolabels."
+                keyUnits: ["The State & Sovereignty", "Basic Concepts: Liberty, Equality, Justice", "Indian Constitution: Preamble, Rights & Directive Principles", "Organs of Government: Legislature, Executive & Judiciary"],
+                careerRelevance: "Essential groundwork for Law (LLB), Public Administration, Public Policy, and Judicial Services."
+              },
+              {
+                code: "ART-105",
+                name: "Economics",
+                type: "Theory",
+                domain: "Social Sciences",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Basic Concepts in Economics", "Money & Banking System", "Economic Growth vs Development", "Rural Development in India & Agriculture Economy"],
+                careerRelevance: "Prerequisite for banking, economic analytics, corporate consulting, and public planning."
+              },
+              {
+                code: "ART-106",
+                name: "Sociology / Psychology",
+                type: "Theory",
+                domain: "Social Sciences",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Introduction to Sociology / Human Behavior", "Social Institutions: Family, Marriage, Kinship", "Social Stratification & Change in India", "Cognitive Processes & Emotional Well-being"],
+                careerRelevance: "Counseling psychology, human resource development, NGO leadership, and societal research."
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        yearName: "Class 12 (SYJC - HSC)",
+        semesters: [
           {
-            semesterName: "Semester II",
+            semesterName: "HSC Board Curriculum",
             subjects: [
               {
-                code: "BP201T",
-                name: "Human Anatomy and Physiology II",
-                type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Central Nervous & Endocrine Systems", "Respiratory & Digestive Systems", "Urinary & Reproductive Systems", "Introduction to Genetics & Reproduction"],
-                careerRelevance: "Enables clinical understanding of diseases and biological targets of pharmaceutical therapies."
+                code: "ART-201",
+                name: "English (HSC Board Standard)",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Advanced Reading & Textual Analytics", "Communication & Interview Techniques", "Report Writing & Expansion of Ideas", "Novel Appreciation: To Sir, With Love; Around the World"],
+                careerRelevance: "Standardized HSC board competence required for national university admissions and professional aptitude tests."
               },
               {
-                code: "BP202T",
-                name: "Pharmaceutical Organic Chemistry I",
+                code: "ART-202",
+                name: "Second Language: Marathi / Hindi (HSC)",
                 type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
+                domain: "Language",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Isomerism & Nomenclature", "Alkanes, Alkenes & Conjugated Dienes", "Alkyl Halides & Carbonyl Compounds", "Carboxylic acids & Aliphatic Amines"],
-                careerRelevance: "Core chemistry principles needed for designing synthetic pathways of API drug molecules."
+                keyUnits: ["Adhunik Marathi/Hindi Sahitya", "Mudrit Madhyamasathi Lekhan (Print & Electronic Journalism)", "Nivadak Nibandh Va Samalochna", "Upyojit Vyakaran"],
+                careerRelevance: "State administrative exams, state legislative documentation, media anchoring, and content curation."
               },
               {
-                code: "BP203T",
-                name: "Biochemistry",
+                code: "ART-203",
+                name: "History (India and the World)",
                 type: "Theory",
-                domain: "Pharmacology",
-                credits: 4,
+                domain: "Social Sciences",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Biomolecules & Enzyme Kinetics", "Carbohydrate & Lipid Metabolism", "Biological Oxidation & Amino Acid Pathways", "Nucleic Acid Synthesis & Genetic Coding"],
-                careerRelevance: "Essential for laboratory diagnostics, biotechnology research, and enzyme-inhibitor drug discovery."
+                keyUnits: ["Renaissance in Europe & Scientific Inventions", "Colonial Dominance & Anti-Colonial Struggles in India", "Mahatma Gandhi & Mass Mobilization", "Post-Independence India & Nation Building"],
+                careerRelevance: "Crucial for UPSC General Studies Papers, defense academy tests (CDS/NDA), and educational pedagogy."
               },
               {
-                code: "BP204T",
-                name: "Pathophysiology",
+                code: "ART-204",
+                name: "Political Science (Contemporary World Politics & India)",
                 type: "Theory",
-                domain: "Pharmacology",
-                credits: 4,
+                domain: "Social Sciences",
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Cell Injury & Inflammation Mechanism", "Cardiovascular & Endocrine Disorders", "Cancer & Immunological Diseases", "Infectious & Neurological Pathologies"],
-                careerRelevance: "Provides clinical background on disease progression, vital for medical writers and drug design researchers."
+                keyUnits: ["World Politics since 1991 & Globalization", "Key Concepts: Human Rights & Environmental Security", "India's Foreign Policy & Regional Cooperation (SAARC, ASEAN)", "National Integration & Challenges to Security"],
+                careerRelevance: "Diplomatic affairs, international relations, legal clerkships, and governance think tanks."
+              },
+              {
+                code: "ART-205",
+                name: "Economics (Micro & Macro Economics)",
+                type: "Theory",
+                domain: "Social Sciences",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Introduction to Microeconomics & Utility Analysis", "Demand & Elasticity of Demand Analysis", "National Income Accounting", "Public Finance in India & Central Budgeting"],
+                careerRelevance: "Financial analysis, civil services economics paper, academic research, and market intelligence."
+              },
+              {
+                code: "ART-206",
+                name: "Sociology / Psychology (HSC Board)",
+                type: "Theory",
+                domain: "Social Sciences",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Structure of Indian Society & Cultural Diversity", "Social Movements in Contemporary India", "Social Problems: Poverty, Unemployment, Elderly Care", "Personality Development, Mental Health & Stress Coping"],
+                careerRelevance: "Corporate HR, social work (MSW), mental health advocacy, and public community leadership."
               }
             ]
           }
@@ -177,454 +213,147 @@ const SYLLABUS_DATABASE: Record<string, ProgramData> = {
       }
     ]
   },
-  bpharm_sy_ty_final: {
-    title: "Bachelor of Pharmacy (SY, TY & Final)",
-    subtitle: "B. Pharmacy (Standard Syllabus - SY, TY & Final Year)",
-    description: "The B.Pharm second, third and final year curriculum is designed under Pharmacy Council of India (PCI) guidelines. It covers advanced drug formulations, pharmacology, toxicology, regulatory compliance, quality control, and clinical evaluations.",
-    accent: "text-blue-500",
-    bgAccent: "bg-blue-600 hover:bg-blue-700",
-    iconColor: "text-blue-400",
-    bannerGradient: "from-blue-600/20 via-primary to-[#011a2a]",
-    stats: {
-      totalCredits: "158 Credits",
-      schema: "Standard PCI Syllabus Schema",
-      theoryCount: "24 Theory Modules",
-      labCount: "14 Laboratory Practicals",
-      internship: "150 Hours Training"
-    },
-    downloadUrl: "/documents/B_Pharm_Old_Syllabus_SY_TY_Final.pdf",
-    fileSize: "1.6 MB",
-    years: [
-      {
-        yearName: "Second Year",
-        semesters: [
-          {
-            semesterName: "Semester III",
-            subjects: [
-              {
-                code: "BP301T",
-                name: "Pharmaceutical Organic Chemistry II",
-                type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Benzene & its derivatives", "Phenols & Aromatic Amines", "Fats and Oils Characterization", "Polynuclear Hydrocarbons & Cycloalkanes"],
-                careerRelevance: "Used in active pharmaceutical ingredient chemical synthesis and structural properties studies."
-              },
-              {
-                code: "BP302T",
-                name: "Physical Pharmaceutics I",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Solubility of Drugs & Distribution Law", "States of Matter & Physicochemical Properties", "Surface & Interfacial Tension", "Complexation & Protein Binding"],
-                careerRelevance: "Explains how physical attributes (solubility, stability) dictate a drug molecule's biological action."
-              },
-              {
-                code: "BP303T",
-                name: "Pharmaceutical Microbiology",
-                type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Structure and Staining of Bacteria/Fungi", "Sterilization Methods & Validation", "Disinfectants Screening & Aseptic Area Rules", "Microbiological Assays of Antibiotics & Vitamins"],
-                careerRelevance: "Essential for maintaining sterile manufacturing zones in injectables and biotech production lines."
-              },
-              {
-                code: "BP304T",
-                name: "Pharmaceutical Engineering",
-                type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Fluid Flow, Heat Transfer & Evaporation", "Drying, Mixing & Size Reduction", "Filtration & Centrifugation operations", "Materials of Plant Construction & Corrosion"],
-                careerRelevance: "Prerequisite for designing chemical plants, scaling formulations, and industrial manufacturing machinery."
-              }
-            ]
-          },
-          {
-            semesterName: "Semester IV",
-            subjects: [
-              {
-                code: "BP401T",
-                name: "Pharmaceutical Organic Chemistry III",
-                type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Stereoisomerism & Optical Activity", "Geometrical Isomerism & Conformational Analysis", "Heterocyclic Compounds chemistry", "Important Name Reactions & Reagents"],
-                careerRelevance: "Key in stereo-specific drug synthesis where stereochemistry alters therapeutic profiles."
-              },
-              {
-                code: "BP402T",
-                name: "Medicinal Chemistry I",
-                type: "Theory & Lab",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Physicochemical properties in relation to drug action", "Drug metabolism pathways", "Autonomic Nervous System agents", "Sedatives, Hypnotics & Anticonvulsants"],
-                careerRelevance: "Core drug discovery science bridging organic chemistry and pharmacological action."
-              },
-              {
-                code: "BP403T",
-                name: "Physical Pharmaceutics II",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Colloidal Dispersions & Micelles", "Rheology (Viscosity) & Thixotropy", "Coarse Dispersions (Suspensions & Emulsions)", "Micromeritics (Particle size & powder flow)"],
-                careerRelevance: "Vital for designing stable suspensions, emulsions, gels, and optimizing tablet-pressing flow."
-              },
-              {
-                code: "BP404T",
-                name: "Pharmacology I",
-                type: "Theory",
-                domain: "Pharmacology",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["General Pharmacology principles", "Pharmacokinetics (ADME)", "Pharmacodynamics (Receptor mechanisms)", "Drugs acting on Peripheral Nervous System"],
-                careerRelevance: "Explains how drugs travel in the body and target receptors; fundamental for clinical pharmacy careers."
-              }
-            ]
-          }
-        ]
-      },
-      {
-        yearName: "Third Year",
-        semesters: [
-          {
-            semesterName: "Semester V",
-            subjects: [
-              {
-                code: "BP501T",
-                name: "Medicinal Chemistry II",
-                type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Antihistaminic & Antineoplastic agents", "Cardiovascular agents (Anti-anginals, Anti-hypertensives)", "Diuretics & Oral Hypoglycemic agents", "Thyroid hormones & Steroidal hormones"],
-                careerRelevance: "Underpins research in designing cardiovascular and oncology drugs."
-              },
-              {
-                code: "BP502T",
-                name: "Industrial Pharmacy I",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Preformulation studies & solubility profiles", "Tablets formulation and coating technologies", "Liquid orals, Capsules & Parenterals (Injectables)", "Cosmetics & Pharmaceutical Packaging materials"],
-                careerRelevance: "Translates lab formulations to mass industrial dosage form manufacturing processes."
-              },
-              {
-                code: "BP503T",
-                name: "Pharmacology II",
-                type: "Theory",
-                domain: "Pharmacology",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Cardiovascular Pharmacology (CHF, Arrhythmia)", "Hematinics, Anticoagulants & Plasma Expanders", "Autacoids, Inflammation & Anti-gout drugs", "Hormones, Steroids & Thyroid pharmacology"],
-                careerRelevance: "Necessary for clinical trial operations and understanding patient medication therapies."
-              },
-              {
-                code: "BP504T",
-                name: "Pharmacognosy and Phytochemistry II",
-                type: "Theory",
-                domain: "Pharmacognosy",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Metabolic Pathways in Plants (Shikimic, Acetate)", "Chemistry & extraction of Glycosides/Alkaloids", "Isolation & chromatography of phytoconstituents", "Industrial production of natural molecules"],
-                careerRelevance: "Prepares students for natural medicines formulation, herbal QA, and nutraceutical industries."
-              }
-            ]
-          },
-          {
-            semesterName: "Semester VI",
-            subjects: [
-              {
-                code: "BP601T",
-                name: "Medicinal Chemistry III",
-                type: "Theory",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Antibiotics & Chemotherapeutic agents", "Antiviral, Antimalarial & Anti-TB drugs", "Antiseptics, Disinfectants & Antifungals", "Combinatorial Chemistry & QSAR studies"],
-                careerRelevance: "Focuses on antimicrobial drug discovery, computer-aided structural optimizations."
-              },
-              {
-                code: "BP602T",
-                name: "Pharmacology III",
-                type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["Respiratory, Gastrointestinal & Renal drugs", "Chemotherapy & Immunopharmacology", "Toxicology & Chronic toxicity testing rules", "Chronopharmacology mechanisms"],
-                careerRelevance: "Critical for safety profiling in pre-clinical studies and toxicity assays."
-              },
-              {
-                code: "BP603T",
-                name: "Herbal Drug Technology",
-                type: "Theory",
-                domain: "Pharmacognosy",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Herbal raw materials standardization & GMP", "Herbal cosmetics and nutraceutical regulations", "Patent laws & traditional knowledge database", "WHO guidelines for herbal assessments"],
-                careerRelevance: "Key for Quality Control roles in herbal cosmetics and dietary supplement sectors."
-              },
-              {
-                code: "BP604T",
-                name: "Biopharmaceutics and Pharmacokinetics",
-                type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Drug absorption, distribution & elimination mechanisms", "Bioavailability and Bioequivalence (BA/BE) studies", "One & Two Compartment Pharmacokinetic models", "Nonlinear Pharmacokinetics & clearance calculations"],
-                careerRelevance: "Essential for Clinical Research Organizations (CRO) carrying out human bioequivalence trials."
-              }
-            ]
-          }
-        ]
-      },
-      {
-        yearName: "Fourth Year",
-        semesters: [
-          {
-            semesterName: "Semester VII",
-            subjects: [
-              {
-                code: "BP701T",
-                name: "Instrumental Methods of Analysis",
-                type: "Theory & Lab",
-                domain: "Chemistry",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 4 Hours Lab",
-                keyUnits: ["UV-Visible & Fluorimetry Spectroscopy", "Infrared & Flame Photometry Analysis", "Gas Chromatography & HPLC separations", "Paper & Thin Layer Chromatography techniques"],
-                careerRelevance: "The definitive analytical expertise required for QA/QC chemical analysis in drug manufacturing."
-              },
-              {
-                code: "BP702T",
-                name: "Industrial Pharmacy II",
-                type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Pilot plant scale-up techniques", "Technology Transfer methodologies", "Regulatory requirements & CDSCO/USFDA filing rules", "Quality Management Systems (QMS, ISO, NABL)"],
-                careerRelevance: "Vital for Technology Transfer and Regulatory Affairs positions scaling drugs from lab to factory."
-              },
-              {
-                code: "BP703T",
-                name: "Pharmacy Practice",
-                type: "Theory",
-                domain: "Practice & Laws",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Hospital Pharmacy & drug distribution systems", "Community Pharmacy & Patient counseling rules", "Therapeutic Drug Monitoring (TDM) & ADR reporting", "Inventory control and budget tracking in pharmacies"],
-                careerRelevance: "Prepares students to operate clinical hospital pharmacies and work in community health consulting."
-              },
-              {
-                code: "BP704T",
-                name: "Novel Drug Delivery Systems (NDDS)",
-                type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Controlled & Sustained release mechanisms", "Microencapsulation & mucosal deliveries", "Targeted nanoparticles, liposomes & monoclonal antibodies", "Transdermal & ocular delivery developments"],
-                careerRelevance: "Excellent for cutting-edge Formulation R&D careers focused on smart therapeutics."
-              }
-            ]
-          },
-          {
-            semesterName: "Semester VIII",
-            subjects: [
-              {
-                code: "BP801T",
-                name: "Biostatistics and Research Methodology",
-                type: "Theory",
-                domain: "Quality Assurance",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Statistical measures & frequency distributions", "Parametric & Non-Parametric tests (t-test, ANOVA)", "Design of Experiments (DoE) in formulation", "Research design and scientific thesis structures"],
-                careerRelevance: "Critical for clinical trial data analysis, research designs, and PhD preparations."
-              },
-              {
-                code: "BP802T",
-                name: "Social and Preventive Pharmacy",
-                type: "Theory",
-                domain: "Practice & Laws",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Concept of Health & Prevention measures", "National Health Programs (HIV, TB, Malaria controls)", "Nutritional health and hygiene principles", "Sociology and drug abuse prevention schemes"],
-                careerRelevance: "Required for public health careers, WHO postings, and health NGO leadership."
-              },
-              {
-                code: "BP803ET",
-                name: "Pharma Marketing Management",
-                type: "Theory",
-                domain: "Practice & Laws",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Pharmaceutical market dynamics", "Product promotion & medical representative alignments", "Pricing policies & DPCO structures", "Sales forecasting & distribution networks"],
-                careerRelevance: "Excellent preparation for sales management, product management (PMT), and marketing careers."
-              },
-              {
-                code: "BP804ET",
-                name: "Quality Control and Standardization",
-                type: "Theory",
-                domain: "Quality Assurance",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Quality control of herbal raw materials", "ICH guidelines for stability testing of drugs", "Validation of manufacturing processes", "GLP (Good Laboratory Practices) regulations"],
-                careerRelevance: "Qualifies students for Quality Assurance (QA) executive roles in pharmaceutical plants."
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  dpharm: {
-    title: "Diploma in Pharmacy",
-    subtitle: "D. Pharmacy (2-Year Annual Program)",
-    description: "The D.Pharm curriculum is designed under Education Regulations 2020 (ER-20) of PCI. It delivers direct technical knowledge and practical training for community pharmacists, hospital store management, and drug dispensing operations.",
-    accent: "text-emerald-500",
+  junior_commerce: {
+    title: "Junior College — Commerce (XI & XII)",
+    subtitle: "Maharashtra State Board (MSBSHSE) Curriculum",
+    description: "The Commerce program bridges the fundamentals of accounting, corporate organization, mercantile law, and economic markets. Tailored for future Chartered Accountants, Company Secretaries, bankers, and fintech entrepreneurs.",
+    accent: "text-emerald-600",
     bgAccent: "bg-emerald-600 hover:bg-emerald-700",
-    iconColor: "text-emerald-400",
-    downloadUrl: "/documents/D_Pharm_New_Syllabus.pdf",
-    fileSize: "985 KB",
+    iconColor: "text-emerald-500",
     bannerGradient: "from-emerald-600/20 via-primary to-[#011a2a]",
     stats: {
-      totalCredits: "Yearly Scheme",
-      schema: "PCI ER-20 Regulations",
-      theoryCount: "11 Core Theory Subjects",
-      labCount: "10 Practical Laboratories",
-      internship: "500 Hours Hospital Pharmacy Training"
+      totalCredits: "600 Marks / Year",
+      schema: "Maharashtra State Board HSC Scheme",
+      theoryCount: "6 Core Subjects",
+      labCount: "Tally & Accounting Practical Projects",
+      affiliation: "MSBSHSE, Pune Board"
     },
+    downloadUrl: "/documents/Indrayani_Junior_Commerce_Syllabus.pdf",
+    fileSize: "1.5 MB",
     years: [
       {
-        yearName: "First Year",
+        yearName: "Class 11 (FYJC)",
         semesters: [
           {
-            semesterName: "Annual Subjects",
+            semesterName: "Annual Curriculum",
             subjects: [
               {
-                code: "ER20-11T",
-                name: "Pharmaceutics",
+                code: "COM-101",
+                name: "Book-Keeping & Accountancy",
                 type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Packaging Materials & Preservatives", "Formulation of Tablets, Capsules, Liquids & Ointments", "Immunological Products & Sterilization methods", "Basic pharmaceutical calculations"],
-                careerRelevance: "Teaches core compounding skills required to stock and dispense medications safely."
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["Meaning & Fundamentals of Double Entry Book Keeping", "Source Documents & Journalizing", "Ledger Accounts & Subsidiary Books", "Bank Reconciliation Statement (BRS)", "Depreciation & Final Accounts of Sole Trader"],
+                careerRelevance: "Fundamental foundation for CA Foundation, CMA, accounting auditing, and commercial finance."
               },
               {
-                code: "ER20-12T",
-                name: "Pharmaceutical Chemistry",
-                type: "Theory & Lab",
-                domain: "Chemistry",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Chemical classification of therapeutic agents", "Purity limits & chemical assays", "Structure-Activity relationship guidelines", "Important diagnostic compounds"],
-                careerRelevance: "Ensures safety and understanding of medicinal compound structures in dispensing."
+                code: "COM-102",
+                name: "Organization of Commerce & Management (OCM)",
+                type: "Theory",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Introduction to Commerce & Business", "Forms of Business Organization: Sole Trader, Partnership, Joint Hindu Family", "Joint Stock Company & Co-operative Society", "Business Services: Banking, Insurance, Warehousing, Transport"],
+                careerRelevance: "Corporate management principles, startup establishment, operational logistics, and trade administration."
               },
               {
-                code: "ER20-13T",
-                name: "Pharmacognosy",
-                type: "Theory & Lab",
-                domain: "Pharmacognosy",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Identification of crude natural drugs", "Aromatic oils, resins & plant alkaloids", "Ayurvedic formulation basics", "Natural fibers & surgical dressings"],
-                careerRelevance: "Vital for identifying plant-based pharmaceutical materials and herbal supplements."
+                code: "COM-103",
+                name: "Secretarial Practice (SP) / Mathematics",
+                type: "Theory",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Secretary: Concept, Types & Qualities", "Joint Stock Company: Formation & Capital Structure", "Documents Related to Company: MOA, AOA & Prospectus", "Commercial Mathematics / Statistics for Business"],
+                careerRelevance: "Direct stepping stone to Company Secretary (CS) licensure, corporate governance, and quantitative risk."
               },
               {
-                code: "ER20-14T",
-                name: "Human Anatomy & Physiology",
-                type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Cardiorespiratory system mechanics", "Digestive and nervous system operations", "Skeletal joints and muscular models", "Sensory organs and skin functions"],
-                careerRelevance: "Ensures understanding of normal human anatomy during patient counseling."
+                code: "COM-104",
+                name: "Economics",
+                type: "Theory",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Basic Economic Problems of India", "Poverty, Unemployment & Population Explosion", "Economic Reforms of 1991 (LPG Policies)", "Financial Institutions & Capital Markets"],
+                careerRelevance: "Corporate planning, commercial banking exams (IBPS/SBI), financial consultancy, and wealth advisory."
               },
               {
-                code: "ER20-15T",
-                name: "Social Pharmacy",
+                code: "COM-105",
+                name: "Compulsory English",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Corporate Vocabulary & Business Writing", "Email Drafting, Notice & Resolution Framing", "Comprehension & Critical Reading", "Speech Writing & Group Discussion"],
+                careerRelevance: "Executive business correspondence, boardroom presentations, and international commerce communications."
+              },
+              {
+                code: "COM-106",
+                name: "Second Language: Marathi / Hindi / Information Technology",
                 type: "Theory & Lab",
-                domain: "Practice & Laws",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Epidemiology, health indicators & disease controls", "Nutrition, demographics & family planning", "First-aid measures and emergency responses", "Psychosocial drug use dynamics"],
-                careerRelevance: "Prepares students to act as public health educators in communities."
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Commercial Translation & Banking Terminology", "MS Office / Advanced Excel for Accounts (for IT)", "Web Development Basics (for IT)", "Literary Appreciation & Official Drafting"],
+                careerRelevance: "Digital bookkeeping, state commerce compliance, localized advertising, and office automation."
               }
             ]
           }
         ]
       },
       {
-        yearName: "Second Year",
+        yearName: "Class 12 (SYJC - HSC)",
         semesters: [
           {
-            semesterName: "Annual Subjects",
+            semesterName: "HSC Board Curriculum",
             subjects: [
               {
-                code: "ER20-21T",
-                name: "Pharmacology",
+                code: "COM-201",
+                name: "Book-Keeping & Accountancy (HSC Board)",
                 type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Drug classifications & receptor targets", "Adverse drug reactions and toxicity limits", "Autonomic & Cardiovascular pharmacologies", "Chemotherapeutic agents action"],
-                careerRelevance: "Vital for understanding side-effects and counseling patients on prescriptions."
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["Partnership Final Accounts & Reconstitution (Admission, Retirement, Death)", "Dissolution of Partnership Firm", "Accounts of 'Not for Profit' Concerns", "Bills of Exchange & Accounting for Shares & Debentures", "Computer in Accounting (Tally ERP/Prime)"],
+                careerRelevance: "Core benchmark for CA Foundation / CS Executive exams, corporate tax compliance, and ledger audits."
               },
               {
-                code: "ER20-22T",
-                name: "Community Pharmacy & Management",
-                type: "Theory & Lab",
-                domain: "Practice & Laws",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Prescription validation & dispensing steps", "Patient counseling and medication adherence", "Retail drug store setups and records", "Digital health platforms in pharmacy"],
-                careerRelevance: "Provides direct business and operations training for pharmacy owners."
-              },
-              {
-                code: "ER20-23T",
-                name: "Biochemistry & Clinical Pathology",
-                type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Pathological components in urine/blood", "Enzymatic diagnostics & enzyme panels", "Lipid & Protein deficiency indicators", "Electrolyte testing & homeostasis"],
-                careerRelevance: "Essential for laboratory testing technicians and hospital pharmacists."
-              },
-              {
-                code: "ER20-24T",
-                name: "Pharmacotherapeutics",
-                type: "Theory & Lab",
-                domain: "Pharmacology",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Etiology & drug selection for Hypertension/Diabetes", "Respiratory & Infectious diseases treatments", "Psychiatric medications & skin therapies", "Clinical case reviews and algorithms"],
-                careerRelevance: "Focuses on evidence-based drug selection for common diseases."
-              },
-              {
-                code: "ER20-25T",
-                name: "Hospital & Clinical Pharmacy",
-                type: "Theory & Lab",
-                domain: "Practice & Laws",
-                credits: 5,
-                hoursPerWeek: "3 Hours Theory / 3 Hours Lab",
-                keyUnits: ["Inpatient and outpatient distribution", "Clinical workflows and medical records", "Drug information centers & poison reporting", "Radiopharmaceuticals safety controls"],
-                careerRelevance: "Direct training for Government & Private hospital pharmacist positions."
-              },
-              {
-                code: "ER20-26T",
-                name: "Pharmacy Law & Ethics",
+                code: "COM-202",
+                name: "Organization of Commerce & Management (OCM)",
                 type: "Theory",
-                domain: "Practice & Laws",
-                credits: 4,
-                hoursPerWeek: "3 Hours",
-                keyUnits: ["Drugs & Cosmetics Act 1940 & Rules 1945", "Pharmacy Act 1948 & regulatory councils", "Narcotic Drugs & Psychotropic Substances (NDPS)", "Code of Pharmaceutical Ethics"],
-                careerRelevance: "Teaches compliance, avoiding legal issues, and ethical dispensing."
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Principles of Management (Henri Fayol & Taylor)", "Functions of Management: Planning, Organizing, Staffing, Directing, Controlling", "Entrepreneurship Development", "Emerging Modes of Business (E-Commerce)", "Consumer Protection Act 2019 & Marketing Mix"],
+                careerRelevance: "BBA/BMS entrance exams, managerial decision making, product brand strategies, and enterprise compliance."
+              },
+              {
+                code: "COM-203",
+                name: "Secretarial Practice (SP) / Mathematics",
+                type: "Theory",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Corporate Finance: Sources of Owned & Borrowed Capital", "Capital Raising: Issue of Shares & Debentures", "Deposits, Dividend & Interest Payouts", "Depository System (NSDL & CDSL), Stock Exchange Trading Mechanisms"],
+                careerRelevance: "Stock market trading, SEBI compliance, corporate registrar protocols, and mutual fund management."
+              },
+              {
+                code: "COM-204",
+                name: "Economics (Micro & Macroeconomics)",
+                type: "Theory",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Theory of Consumer Behavior & Price Elasticity", "Supply Analysis & Forms of Market Structure", "National Income & Money Market in India", "Foreign Trade of India & Central Budget Allocation"],
+                careerRelevance: "Treasury management, banking operations, economic forecasting, and commercial real estate modeling."
+              },
+              {
+                code: "COM-205",
+                name: "English (Commercial & Literary Communication)",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Formal Business Reports & Press Releases", "Executive Summaries & Resume Writing", "Literature, Drama & Fiction Critical Evaluation", "Applied Grammar & Syntax Precision"],
+                careerRelevance: "Campus recruitment interviews, global business negotiations, and corporate communication officer tracks."
+              },
+              {
+                code: "COM-206",
+                name: "Second Language / Information Technology",
+                type: "Theory & Lab",
+                domain: "Commerce & Accounts",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Advanced E-Commerce & E-Governance", "Database Management with RDBMS / Access", "Cyber Security Laws & Digital Signatures", "Practical Application of Accounting Packages"],
+                careerRelevance: "Fintech analyst, billing system operator, electronic clearing services, and IT-enabled commerce services."
               }
             ]
           }
@@ -632,69 +361,227 @@ const SYLLABUS_DATABASE: Record<string, ProgramData> = {
       }
     ]
   },
-  mpharm: {
-    title: "Master of Pharmacy",
-    subtitle: "M. Pharmacy in Pharmaceutics (2-Year PG Program)",
-    description: "The M.Pharm program delivers advanced training in research methodologies, product formulations development, and regulatory documentation. It bridges the gap between academic theory and high-tech industrial research & development (R&D).",
-    accent: "text-[#F4B609]",
-    bgAccent: "bg-[#F4B609] hover:bg-[#db9d00] text-black font-semibold",
-    iconColor: "text-[#F4B609]",
-    downloadUrl: "/documents/M_Pharm_Syllabus.pdf",
-    fileSize: "3.8 MB",
-    bannerGradient: "from-[#F4B609]/20 via-primary to-[#011a2a]",
+  junior_science: {
+    title: "Junior College — Science (XI & XII)",
+    subtitle: "Maharashtra State Board (MSBSHSE) Curriculum",
+    description: "Rigorous scientific training integrating deep theoretical concepts with extensive hands-on experimentation in fully equipped physics, chemistry, biology, and computer labs. Pathway to engineering, medical, and pure science careers.",
+    accent: "text-cyan-600",
+    bgAccent: "bg-cyan-600 hover:bg-cyan-700",
+    iconColor: "text-cyan-500",
+    bannerGradient: "from-cyan-600/20 via-primary to-[#011a2a]",
     stats: {
-      totalCredits: "95 Credits",
-      schema: "PCI PG Curriculum",
-      theoryCount: "8 Specialized Theory Modules",
-      labCount: "2 Advanced Research Labs",
-      internship: "1 Year Dedicated Research Projects"
+      totalCredits: "600 Marks / Year",
+      schema: "Maharashtra State Board HSC Scheme",
+      theoryCount: "4 Science Modules + Languages",
+      labCount: "Weekly 3-Hour Labs per Discipline",
+      affiliation: "MSBSHSE, Pune Board"
     },
+    downloadUrl: "/documents/Indrayani_Junior_Science_Syllabus.pdf",
+    fileSize: "1.8 MB",
     years: [
       {
-        yearName: "First Year",
+        yearName: "Class 11 (FYJC)",
+        semesters: [
+          {
+            semesterName: "Annual Curriculum",
+            subjects: [
+              {
+                code: "SCI-101",
+                name: "Physics (Theory & Practical)",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Units and Measurements", "Mathematical Methods (Vectors & Calculus)", "Motion in a Plane & Laws of Motion", "Gravitation, Mechanical Properties of Solids", "Sound, Optics, Electrostatics & Semiconductor Basics"],
+                careerRelevance: "Essential foundation for MHT-CET, JEE Main, NEET, NDA, and aerospace/mechanical engineering."
+              },
+              {
+                code: "SCI-102",
+                name: "Chemistry (Theory & Practical)",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Some Basic Concepts of Chemistry (Mole Concept)", "Structure of Atom & Modern Periodic Table", "Chemical Bonding & Molecular Structure", "Redox Reactions, Hydrogen, s-Block & p-Block Elements", "Basic Principles and Techniques of Organic Chemistry"],
+                careerRelevance: "Core prerequisite for chemical engineering, pharmacy, material sciences, and forensic sciences."
+              },
+              {
+                code: "SCI-103",
+                name: "Mathematics & Statistics",
+                type: "Theory",
+                domain: "Mathematics",
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["Angle and Its Measurement & Trigonometry I & II", "Determinants and Matrices", "Complex Numbers, Permutations and Combinations", "Functions, Limits, Continuity & Differentiation", "Measures of Dispersion & Probability"],
+                careerRelevance: "Critical core for JEE, computer science data algorithms, actuarial science, and quantitative finance."
+              },
+              {
+                code: "SCI-104",
+                name: "Biology (Theory & Practical) / Computer Science",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Living World & Systematics of Living Organisms", "Kingdom Plantae, Kingdom Animalia", "Cell Structure and Organization, Biomolecules", "Plant Water Relations, Animal Tissues & Human Respiration"],
+                careerRelevance: "Mandatory qualification for NEET, MBBS, BDS, B.Pharm, biotechnology, and agricultural sciences."
+              },
+              {
+                code: "SCI-105",
+                name: "Compulsory English",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Scientific Reportage & Technical Summaries", "Listening Comprehension & Elocution", "Prose and Poetry Modules", "Mind Mapping & Analytical Drafting"],
+                careerRelevance: "Technical communication, competitive exam comprehension, and academic paper presentation."
+              },
+              {
+                code: "SCI-106",
+                name: "Marathi / Hindi / Environmental Education",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Environmental Projects & Sustainable Development", "Regional Literature & Value Education", "Applied Grammar & Functional Writing"],
+                careerRelevance: "Mandatory state board environmental certification and holistic cultural balance."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        yearName: "Class 12 (SYJC - HSC)",
+        semesters: [
+          {
+            semesterName: "HSC Board Curriculum",
+            subjects: [
+              {
+                code: "SCI-201",
+                name: "Physics (Theory & Practical - HSC)",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Rotational Dynamics & Mechanical Properties of Fluids", "Kinetic Theory of Gases and Radiation", "Thermodynamics & Oscillations", "Wave Optics & Electrostatics", "Current Electricity, Magnetic Fields, AC Circuits & Dual Nature of Radiation"],
+                careerRelevance: "Major weighting for MHT-CET, JEE Advanced, robotics, electronics, and quantum engineering."
+              },
+              {
+                code: "SCI-202",
+                name: "Chemistry (Theory & Practical - HSC)",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Solid State, Solutions & Ionic Equilibria", "Chemical Thermodynamics & Electrochemistry", "Chemical Kinetics, Elements of Groups 16, 17 and 18", "Coordination Compounds, Halogen Derivatives, Alcohols & Phenols", "Aldehydes, Ketones, Carboxylic Acids, Amines & Biomolecules"],
+                careerRelevance: "Petrochemicals, pharmaceutical synthesis, nanotechnology, polymer engineering, and research laboratories."
+              },
+              {
+                code: "SCI-203",
+                name: "Mathematics & Statistics (HSC)",
+                type: "Theory",
+                domain: "Mathematics",
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["Mathematical Logic, Matrices & Trigonometric Functions", "Pair of Straight Lines, Vectors & 3D Geometry", "Linear Programming Problems (LPP)", "Differentiation, Applications of Derivatives, Indefinite & Definite Integrals", "Differential Equations, Probability Distribution & Binomial Distribution"],
+                careerRelevance: "Core mathematical backbone for all engineering specializations, AI/ML, and computational modeling."
+              },
+              {
+                code: "SCI-204",
+                name: "Biology (Botany & Zoology) / Computer Science",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Reproduction in Lower and Higher Plants / Animals", "Inheritance and Variation & Molecular Basis of Inheritance", "Origin and Evolution of Life, Plant Growth and Mineral Nutrition", "Respiration and Circulation, Control and Coordination", "Biotechnology: Principles and Processes, Organisms and Populations"],
+                careerRelevance: "Medical (NEET), clinical diagnostics, molecular genetics, bioinformatics, and environmental biology."
+              },
+              {
+                code: "SCI-205",
+                name: "English (HSC Board Standard)",
+                type: "Theory",
+                domain: "Language",
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Technical Comprehension, Novel Study", "Virtual Communication, Interview Scripts", "Writing Skills & Expansion of Scientific Concepts", "Board Grammar Drills & Fluency"],
+                careerRelevance: "Standardized qualification for national entrance eligibility, TOEFL/IELTS baseline, and technical writing."
+              },
+              {
+                code: "SCI-206",
+                name: "Environmental Education & Water Security (EVS)",
+                type: "Theory & Lab",
+                domain: "Physical Sciences",
+                hoursPerWeek: "2 Hours",
+                keyUnits: ["Water Conservation Techniques & Watershed Management", "Ecosystem Conservation & Biodiversity Hotspots", "Carbon Footprint & Renewable Energy Projects", "Field Project & Viva Voce"],
+                careerRelevance: "State mandated environmental certification, green technology awareness, and sustainability ethics."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  senior_bsc: {
+    title: "Senior College — B.Sc. (Bachelor of Science)",
+    subtitle: "3-Year Degree Program Affiliated with Savitribai Phule Pune University (SPPU)",
+    description: "A comprehensive undergraduate program emphasizing empirical scientific inquiry, modern laboratory instrumentation, statistical modeling, and experimental research. Designed to prepare candidates for M.Sc., CSIR-NET, and scientific R&D.",
+    accent: "text-blue-600",
+    bgAccent: "bg-blue-600 hover:bg-blue-700",
+    iconColor: "text-blue-500",
+    bannerGradient: "from-blue-600/20 via-primary to-[#011a2a]",
+    stats: {
+      totalCredits: "132 Credits (CBCS)",
+      schema: "SPPU Choice Based Credit System (CBCS)",
+      theoryCount: "6 Semesters of Core & Discipline Specific",
+      labCount: "Hands-on Analytical & Wet Labs Every Semester",
+      affiliation: "Savitribai Phule Pune University"
+    },
+    downloadUrl: "/documents/Indrayani_SPPU_BSc_Curriculum.pdf",
+    fileSize: "2.1 MB",
+    years: [
+      {
+        yearName: "First Year B.Sc. (Semesters I & II)",
         semesters: [
           {
             semesterName: "Semester I",
             subjects: [
               {
-                code: "MPH101T",
-                name: "Modern Pharmaceutical Analytical Techniques",
-                type: "Theory & Lab",
-                domain: "Quality Assurance",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 6 Hours Lab",
-                keyUnits: ["UV, IR, NMR & Mass Spectrometry principles", "HPLC & Ultra Gas Chromatography methods", "Thermal Analysis (DSC, TGA, DTA)", "X-ray Crystallography structure analysis"],
-                careerRelevance: "Equips research scholars to fully characterize and identify newly synthesized compounds."
-              },
-              {
-                code: "MPH102T",
-                name: "Drug Delivery System",
+                code: "PHY-111",
+                name: "Mechanics and Properties of Matter",
                 type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Sustained & Controlled Release matrices", "Targeted nanoparticles, liposomes & dendrimers", "Transdermal patch kinetics & design", "Occular and pulmonary drug distributions"],
-                careerRelevance: "Core R&D training for developing advanced patentable drug formulations."
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Newton's Laws of Motion & Applications", "Rotational Motion & Moment of Inertia", "Elasticity: Modulus of Elasticity, Poisson's Ratio", "Surface Tension & Viscosity: Poiseuille's Equation"],
+                careerRelevance: "Fundamental physics foundation for materials testing, mechanical characterization, and applied instrumentation."
               },
               {
-                code: "MPH103T",
-                name: "Modern Pharmaceutics",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 6 Hours Lab",
-                keyUnits: ["Preformulation science & drug-excipient compatibility", "Industrial scaling, validation & pilot plans", "Optimization techniques via Design of Experiments (DoE)", "Physics of tablet compressions & kinetics"],
-                careerRelevance: "Necessary for production scientists managing large manufacturing plants."
-              },
-              {
-                code: "MPH104T",
-                name: "Regulatory Affairs",
+                code: "CH-101",
+                name: "Physical and Inorganic Chemistry",
                 type: "Theory",
-                domain: "Practice & Laws",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["IND, NDA, and ANDA approval pathways", "ICH stability test requirements", "CTD/eCTD dossier submissions guidelines", "Intellectual Property Rights (IPR) & patents"],
-                careerRelevance: "Key for Regulatory Affairs positions managing international global drug exports."
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Chemical Energetics & First Law of Thermodynamics", "Chemical Equilibrium & Le Chatelier's Principle", "Atomic Structure & Periodic Properties", "Chemical Bonding & VSEPR Theory"],
+                careerRelevance: "Essential for chemical processing plants, analytical labs, pharmaceutical quality control, and metallurgical analysis."
+              },
+              {
+                code: "MT-111",
+                name: "Algebra and Calculus - I",
+                type: "Theory",
+                domain: "Mathematics",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Real Numbers & Completeness Axiom", "Sequences, Series & Tests of Convergence", "Differential Calculus: Successive Differentiation, Leibnitz Rule", "Mean Value Theorems & Taylor's Theorem"],
+                careerRelevance: "Mathematical modeling, quantitative research, data analytics, and computational science."
+              },
+              {
+                code: "BOT-111 / ZOO-111",
+                name: "Plant Diversity / Animal Systematics",
+                type: "Theory",
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Morphology and Anatomy of Cryptogams", "Taxonomy of Angiosperms", "Invertebrate Diversity & Evolutionary Trends", "Cytology & Cell Division"],
+                careerRelevance: "Bio-pharmaceutical research, agro-chemicals, environmental consulting, and ecological conservation."
+              },
+              {
+                code: "PHY-113 & CH-103",
+                name: "Physics & Chemistry Practical Laboratory I",
+                type: "Practical",
+                domain: "Physical Sciences",
+                credits: 3,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Measurement of Surface Tension by Jaeger's Method", "Young's Modulus by Cantilever", "Volumetric Titrations (Acid-Base, Redox)", "Qualitative Inorganic Salt Analysis"],
+                careerRelevance: "Hands-on mastery of laboratory measurement equipment, precision balances, and chemical reagents."
               }
             ]
           },
@@ -702,84 +589,349 @@ const SYLLABUS_DATABASE: Record<string, ProgramData> = {
             semesterName: "Semester II",
             subjects: [
               {
-                code: "MPH201T",
-                name: "Molecular Pharmaceutics (Nano & Targeted DDS)",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 6 Hours Lab",
-                keyUnits: ["Targeted drug deliveries & ligand-receptor binding", "Nanotechnology applications & solid lipid nanoparticles", "Gene therapy vectors and antisense technology", "Biodegradable polymers for implants"],
-                careerRelevance: "Prerequisite for biotech research positions and oncology formulation setups."
-              },
-              {
-                code: "MPH202T",
-                name: "Advanced Biopharmaceutics & Pharmacokinetics",
+                code: "PHY-121",
+                name: "Heat and Thermodynamics",
                 type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Mechanisms of drug absorption & transport", "PK/PD modeling & in-vitro in-vivo correlation (IVIVC)", "Bioavailability (BA) and Bioequivalence (BE) assays", "Compartmental & Non-compartmental analysis"],
-                careerRelevance: "Prepares scholars to manage clinical PK databases in pharma CRO research."
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Carnot Engine & Second Law of Thermodynamics", "Entropy, Maxwell's Thermodynamic Relations", "Black Body Radiation, Planck's Law", "Liquefaction of Gases"],
+                careerRelevance: "Thermal power management, energy auditing, cryogenics, and aerospace heating systems."
               },
               {
-                code: "MPH203T",
-                name: "Computer Aided Drug Development",
+                code: "CH-102",
+                name: "Organic and Inorganic Chemistry",
                 type: "Theory",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours",
-                keyUnits: ["Computers in formulation development & robotics", "Active targets modeling & molecular dockings", "Computational pharmacokinetic predictions (ADMET)", "Virtual trials & optimization modeling"],
-                careerRelevance: "Highly relevant for modern dry labs, digital chemistry, and computational R&D."
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Fundamentals of Organic Reaction Mechanisms", "Alkanes, Alkenes, Alkynes & Aromaticity", "Comparative Chemistry of s & p Block Elements", "Principles of Metallurgy"],
+                careerRelevance: "Organic synthesis, API manufacturing, plastics, petrochemicals, and agrochemical formulations."
               },
               {
-                code: "MPH204T",
-                name: "Cosmetic and Cosmeceuticals",
-                type: "Theory & Lab",
-                domain: "Pharmaceutics",
-                credits: 4,
-                hoursPerWeek: "4 Hours Theory / 6 Hours Lab",
-                keyUnits: ["Cosmetic raw materials & skin structure biology", "Formulation of skin, hair & oral care cosmetics", "Regulatory control and safety testing of cosmetics", "Herbal and organic cosmeceuticals guidelines"],
-                careerRelevance: "Prepares research scientists for careers in large cosmetic manufacturing companies."
+                code: "MT-121",
+                name: "Analytical Geometry and Matrices",
+                type: "Theory",
+                domain: "Mathematics",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Two-Dimensional Coordinate Systems & Conics", "Three-Dimensional Planes, Straight Lines, Spheres", "Matrices, Rank, Eigenvalues and Eigenvectors", "System of Linear Equations"],
+                careerRelevance: "Computer graphics algorithms, cryptographic ciphers, and orbital trajectory analysis."
+              },
+              {
+                code: "LAB-123",
+                name: "Practical Laboratory Course II",
+                type: "Practical",
+                domain: "Physical Sciences",
+                credits: 3,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Spectrometer Experiments: Angle of Prism & Refractive Index", "Thermal Conductivity by Lee's Disc", "Organic Compound Functional Group Identification", "Standard Buffer Solutions & pH Metry"],
+                careerRelevance: "Direct industrial readiness for wet chemical labs and quality inspection centers."
               }
             ]
           }
         ]
       },
       {
-        yearName: "Second Year",
+        yearName: "Second Year B.Sc. (Semesters III & IV)",
         semesters: [
           {
             semesterName: "Semester III & IV",
             subjects: [
               {
-                code: "MRM301T",
-                name: "Research Methodology and Biostatistics",
+                code: "PHY-231",
+                name: "Mathematical Methods in Physics & Electromagnetics",
                 type: "Theory",
-                domain: "Quality Assurance",
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Vector Calculus: Divergence, Curl, Gauss's & Stokes' Theorems", "Electrostatic Potential & Dielectrics", "Biot-Savart Law, Ampere's Law & Faraday's Law", "Maxwell's Equations & Electromagnetic Waves"],
+                careerRelevance: "Telecommunications, antenna design, radar operations, and electromagnetic shielding."
+              },
+              {
+                code: "CH-231",
+                name: "Physical and Analytical Chemistry",
+                type: "Theory",
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Chemical Kinetics: Rate Laws & Arrhenius Equation", "Photochemistry & Beer-Lambert Law", "Spectrophotometry, Flame Photometry", "Chromatography: TLC, Column, Paper"],
+                careerRelevance: "Instrumental chemical testing, environmental effluent monitoring, and forensic toxicology."
+              },
+              {
+                code: "CH-232",
+                name: "Organic and Inorganic Chemistry",
+                type: "Theory",
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Alcohols, Phenols, Ethers & Carbonyl Compounds", "Carboxylic Acids and Derivatives", "Transition Metal Chemistry & Crystal Field Theory", "Bioinorganic Chemistry Basics"],
+                careerRelevance: "Dye industries, pharmaceutical formulation, paint technologies, and catalyst production."
+              },
+              {
+                code: "EVS-201",
+                name: "Environmental Science & Sustainable Ecology",
+                type: "Theory",
+                domain: "Physical Sciences",
+                credits: 2,
+                hoursPerWeek: "2 Hours",
+                keyUnits: ["Natural Resources Management & Conservation", "Pollution Control: Air, Water, Noise, Solid Waste", "Environmental Impact Assessment (EIA) Regulations", "Field Visit to Sahyadri Western Ghats Ecosystem"],
+                careerRelevance: "Environmental governance, CSR officer, pollution control board compliance."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        yearName: "Third Year B.Sc. (Semesters V & VI)",
+        semesters: [
+          {
+            semesterName: "Semester V & VI (Specialization & Research)",
+            subjects: [
+              {
+                code: "SPEC-351",
+                name: "Advanced Core Physics / Chemistry / Mathematics",
+                type: "Theory",
+                domain: "Physical Sciences",
                 credits: 4,
                 hoursPerWeek: "4 Hours",
-                keyUnits: ["Literature reviews & identifying research gaps", "CPCSEA animal ethics & CPCSEA guidelines", "Clinical trial designs & sample sizing", "Declaration of Helsinki guidelines"],
-                careerRelevance: "Enables structural research thinking, preparation for dissertation, and thesis publications."
+                keyUnits: ["Quantum Mechanics & Atomic Spectra", "Nuclear Physics & Particle Detectors", "Advanced Coordination Chemistry & Organometallics", "Spectroscopic Identification of Organic Compounds (NMR, IR, UV, MS)"],
+                careerRelevance: "National laboratory research (BARC, ISRO, CSIR, TIFR) and higher postgraduate university admissions."
               },
               {
-                code: "MJS401",
-                name: "Journal Club & Seminar Presentation",
-                type: "Practical",
-                domain: "Practice & Laws",
+                code: "SPEC-352",
+                name: "Instrumentation, Industrial Chemistry & Spectroscopy",
+                type: "Theory",
+                domain: "Physical Sciences",
                 credits: 4,
-                hoursPerWeek: "Weekly Reviews",
-                keyUnits: ["Critical review of high-impact journal papers", "Presentation skills and research slides formulation", "Scientific argumentation & defense answers"],
-                careerRelevance: "Crucial for academic careers and presenting technical details at conferences."
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["Gas Chromatography (GC) & High-Performance Liquid Chromatography (HPLC)", "X-ray Diffraction (XRD) & Electron Microscopy", "Industrial Safety, Green Chemistry & Waste Treatment", "Computational Chemistry & Molecular Docking"],
+                careerRelevance: "Immediate job placement in QA/QC analytical labs, API manufacturing, and materials science testing."
               },
               {
-                code: "MRW402",
-                name: "Research Work & Dissertation",
+                code: "PROJ-360",
+                name: "Undergraduate Dissertation & Experimental Project",
                 type: "Practical",
-                domain: "Pharmaceutics",
-                credits: 28,
-                hoursPerWeek: "Full-Time Research Lab",
-                keyUnits: ["Execution of laboratory research protocols", "Data analysis, figures generation & writing", "Preparation of dissertation thesis and defense viva"],
-                careerRelevance: "Provides core training for PhD study, pharmaceutical patents, or industrial formulation research."
+                domain: "Physical Sciences",
+                credits: 4,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Literature Review & Problem Formulation", "Design of Experiments (DoE) & Data Acquisition", "Statistical Analysis & Error Propagation", "Dissertation Writing, Viva Voce & Poster Presentation"],
+                careerRelevance: "Essential publication portfolio for M.Sc. scholarship applications and corporate R&D recruitments."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  senior_bcs: {
+    title: "Senior College — BCS (Bachelor of Computer Science)",
+    subtitle: "3-Year Degree Program Affiliated with Savitribai Phule Pune University (SPPU)",
+    description: "An intensive software engineering and computer science curriculum covering modern programming languages, data structures, cloud systems, relational databases, AI fundamentals, and full-stack software development.",
+    accent: "text-indigo-600",
+    bgAccent: "bg-indigo-600 hover:bg-indigo-700",
+    iconColor: "text-indigo-500",
+    bannerGradient: "from-indigo-600/20 via-primary to-[#011a2a]",
+    stats: {
+      totalCredits: "132 Credits (CBCS)",
+      schema: "SPPU Choice Based Credit System (CBCS)",
+      theoryCount: "6 Semesters of Core Computing & Applied Math",
+      labCount: "Hands-on High-Performance Terminal & Web Labs",
+      affiliation: "Savitribai Phule Pune University"
+    },
+    downloadUrl: "/documents/Indrayani_SPPU_BCS_Curriculum.pdf",
+    fileSize: "2.3 MB",
+    years: [
+      {
+        yearName: "First Year BCS (Semesters I & II)",
+        semesters: [
+          {
+            semesterName: "Semester I",
+            subjects: [
+              {
+                code: "CS-101",
+                name: "Problem Solving Using Computer and 'C' Programming",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Problem Solving & Algorithm Design, Flowcharts", "Basics of 'C': Data Types, Operators, Control Structures", "Functions, Recursion, Storage Classes", "Arrays, Strings, Pointers and Dynamic Memory Allocation (DMA)", "Structures, Unions and File Handling"],
+                careerRelevance: "Core algorithmic thinking, systems programming, and prerequisite for all modern programming stacks."
+              },
+              {
+                code: "CS-102",
+                name: "Database Management Systems (DBMS)",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["File Systems vs DBMS Architecture", "Entity-Relationship (ER) Modeling & Relational Model", "Relational Algebra & Structured Query Language (SQL)", "Integrity Constraints, Views, Triggers, Stored Procedures", "Normalization (1NF, 2NF, 3NF, BCNF)"],
+                careerRelevance: "Backend database engineering, data administration, SQL developer roles, and cloud data stores."
+              },
+              {
+                code: "EL-101",
+                name: "Basic Electronics & Digital Electronics",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Number Systems, Boolean Algebra & Logic Gates", "Combinational Circuits: Adders, MUX, DEMUX, Encoders", "Sequential Circuits: Flip-Flops, Counters, Shift Registers", "Microprocessor 8085 Architecture Overview"],
+                careerRelevance: "Hardware-software interfacing, embedded computing, IoT firmware development, and computer architecture."
+              },
+              {
+                code: "MT-101",
+                name: "Discrete Mathematics & Graph Theory",
+                type: "Theory",
+                domain: "Mathematics",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Set Theory, Relations & Equivalence Classes", "Mathematical Induction & Recurrence Relations", "Graph Theory: Paths, Circuits, Trees & Spanning Trees", "Boolean Algebras & Switching Circuits"],
+                careerRelevance: "Algorithm complexity analysis, networking topology design, compiler construction, and AI logic."
+              },
+              {
+                code: "CS-103",
+                name: "Computer Science Practical Lab I ('C' & SQL)",
+                type: "Practical",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Implementation of 25+ Algorithmic 'C' Programs", "Pointer Arithmetic and Linked Memory Management", "DDL, DML, DCL Query Execution in MySQL/PostgreSQL", "Complex Joins, Subqueries & Trigger Implementation"],
+                careerRelevance: "Practical coding fluency tested during initial rounds of campus technical placement tests."
+              }
+            ]
+          },
+          {
+            semesterName: "Semester II",
+            subjects: [
+              {
+                code: "CS-104",
+                name: "Advanced 'C' & Data Structures Basics",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Abstract Data Types (ADT) & Complexity (Big-O)", "Linear Data Structures: Stacks, Queues (Circular, Priority)", "Linked Lists: Singly, Doubly, Circular Implementations", "Searching (Linear, Binary) & Sorting (Bubble, Insertion, Quick, Merge)"],
+                careerRelevance: "Technical interview preparation for product and service MNCs like TCS, Infosys, Wipro, and Cognizant."
+              },
+              {
+                code: "CS-105",
+                name: "Relational Database Management Systems (RDBMS)",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Transaction Processing & ACID Properties", "Concurrency Control Techniques (Locks, Timestamps)", "Crash Recovery: Log-Based, Checkpointing", "PL/pgSQL Programming: Cursors, Exceptions, Packages"],
+                careerRelevance: "High-concurrency banking database support, fintech backend engineering, and cloud DB deployment."
+              },
+              {
+                code: "CS-106",
+                name: "Computer Science Practical Lab II (Data Structures)",
+                type: "Practical",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Stack Applications: Infix to Postfix Conversion & Evaluation", "Queue Implementations in System Scheduling", "Linked List Manipulation & Polynomial Addition", "Benchmarking Sorting Algorithms Against Execution Time"],
+                careerRelevance: "Applied algorithmic mastery and competitive programming skills."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        yearName: "Second Year BCS (Semesters III & IV)",
+        semesters: [
+          {
+            semesterName: "Semester III & IV",
+            subjects: [
+              {
+                code: "CS-231",
+                name: "Data Structures and Algorithms - II (Advanced)",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Non-Linear Data Structures: Trees, Binary Search Trees (BST), AVL Trees", "B-Trees & B+ Trees in Databases", "Graph Algorithms: BFS, DFS, Dijkstra's Shortest Path, Prim's & Kruskal's", "Hashing Techniques: Hash Functions, Collision Resolution"],
+                careerRelevance: "Advanced algorithmic problem-solving for top-tier software engineering roles."
+              },
+              {
+                code: "CS-232",
+                name: "Software Engineering & Agile Methodologies",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 2,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["Software Development Life Cycle (SDLC) Models (Waterfall, Spiral, Agile/Scrum)", "Requirements Engineering & SRS Document Creation", "System Modeling using UML: Use Case, Class, Sequence, Activity Diagrams", "Software Testing: Black Box, White Box, Unit & Integration Testing"],
+                careerRelevance: "Quality assurance engineering, Scrum Master foundations, systems analysis, and enterprise architecture."
+              },
+              {
+                code: "CS-241",
+                name: "Object-Oriented Concepts Using C++ & Java",
+                type: "Theory & Lab",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["OOP Principles: Encapsulation, Inheritance, Polymorphism, Abstraction", "Constructors, Destructors, Operator Overloading, Templates & STL", "Java Fundamentals: JVM Architecture, Packages, Interfaces", "Exception Handling, Multithreading & Event-Driven GUI Programming"],
+                careerRelevance: "Enterprise application engineering, Android development, and enterprise Java/Spring development."
+              },
+              {
+                code: "CS-242",
+                name: "Operating Systems & Linux Shell Scripting",
+                type: "Theory & Lab",
+                domain: "Computer Science",
+                credits: 3,
+                hoursPerWeek: "4 Hours",
+                keyUnits: ["OS Concepts: Process Management, CPU Scheduling Algorithms", "Deadlocks: Prevention, Avoidance (Banker's Algorithm), Detection", "Memory Management: Paging, Segmentation, Virtual Memory", "Unix/Linux Architecture, Bash Shell Scripting & System Calls"],
+                careerRelevance: "DevOps engineering, Linux system administration, cloud infrastructure, and site reliability engineering."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        yearName: "Third Year BCS (Semesters V & VI)",
+        semesters: [
+          {
+            semesterName: "Semester V & VI",
+            subjects: [
+              {
+                code: "CS-351",
+                name: "Web Technologies (Full-Stack Architecture)",
+                type: "Theory & Lab",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["HTML5, CSS3, Responsive Design & CSS Frameworks", "JavaScript (ES6+), DOM Manipulation, Fetch API & Async/Await", "Server-Side Scripting: Node.js & Express / PHP", "RESTful API Design, JSON Data Exchange & React.js Overview"],
+                careerRelevance: "Full-stack web developer, frontend engineer, API architect, and freelance digital developer."
+              },
+              {
+                code: "CS-352",
+                name: "Python Programming & Data Analytics",
+                type: "Theory & Lab",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "5 Hours",
+                keyUnits: ["Python Syntax, Data Structures (Lists, Tuples, Dictionaries, Sets)", "Functional Programming, OOP in Python, File & Exception Handling", "Scientific Computing: NumPy (Arrays), Pandas (DataFrames), Matplotlib/Seaborn", "Machine Learning Basics: Scikit-Learn Regression & Classification"],
+                careerRelevance: "Data analyst, machine learning engineer, automation specialist, and computational scientist."
+              },
+              {
+                code: "CS-353",
+                name: "Computer Networks & Cloud Computing",
+                type: "Theory",
+                domain: "Computer Science",
+                credits: 3,
+                hoursPerWeek: "3 Hours",
+                keyUnits: ["OSI & TCP/IP Reference Models, IP Addressing & Subnetting", "Routing Protocols, Transport Layer (TCP, UDP), DNS, HTTP/HTTPS", "Cloud Models: IaaS, PaaS, SaaS & Virtualization Technologies", "Public Cloud Platforms: AWS EC2/S3 basics, Cloud Security & Containers (Docker)"],
+                careerRelevance: "Network administration, cloud solutions associate, cyber defense, and cloud operations."
+              },
+              {
+                code: "CS-360",
+                name: "Capstone Industry Project & Technical Viva",
+                type: "Practical",
+                domain: "Computer Science",
+                credits: 4,
+                hoursPerWeek: "6 Hours",
+                keyUnits: ["Project Inception, Problem Identification & SRS Documentation", "Architecture Design, Database Schema & UI Mockups", "Agile Sprint Development & Git Version Control Integration", "Live Deployment, Automated Testing & Final Defense before SPPU Board"],
+                careerRelevance: "Primary showcase portfolio piece for hiring managers and campus technical recruitments."
               }
             ]
           }
@@ -787,381 +939,306 @@ const SYLLABUS_DATABASE: Record<string, ProgramData> = {
       }
     ]
   }
-};;
+};
 
 export default function Syllabus() {
-  const params = useParams();
-  const [, setLocation] = useLocation();
   const { toast } = useToast();
-  
-  const course = params.course || "bpharm";
-  const data = useMemo(() => {
-    return SYLLABUS_DATABASE[course as keyof typeof SYLLABUS_DATABASE] || SYLLABUS_DATABASE.bpharm_fy;
-  }, [course]);
+  const [activeCourseKey, setActiveCourseKey] = useState<string>("junior_arts");
+  const [activeYearIndex, setActiveYearIndex] = useState<number>(0);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedDomain, setSelectedDomain] = useState<string>("all");
 
-  const [activeYearIdx, setActiveYearIdx] = useState(0);
-  const [activeSemIdx, setActiveSemIdx] = useState(0);
-  const [expandedSubjectCode, setExpandedSubjectCode] = useState<string | null>(null);
+  const activeProgram = SYLLABUS_DATABASE[activeCourseKey] || SYLLABUS_DATABASE.junior_arts;
+  const currentYear = activeProgram.years[activeYearIndex] || activeProgram.years[0];
 
-  // When course changes, reset selections
-  useEffect(() => {
-    setActiveYearIdx(0);
-    setActiveSemIdx(0);
-    setExpandedSubjectCode(null);
-  }, [course]);
-
-  // When year changes, reset semester to index 0
-  useEffect(() => {
-    setActiveSemIdx(0);
-    setExpandedSubjectCode(null);
-  }, [activeYearIdx]);
-
-  const activeYear = data.years[activeYearIdx] || data.years[0];
-  const activeSemester = activeYear.semesters[activeSemIdx] || activeYear.semesters[0];
-
-  const handleDownload = (programName: string, filePath: string) => {
+  const handleDownload = (prog: ProgramData) => {
     toast({
       title: "Downloading Syllabus",
-      description: `Downloading the official curriculum PDF for ${programName}...`,
+      description: `Downloading ${prog.title} syllabus document (${prog.fileSize})...`,
     });
-    
     const link = document.createElement("a");
-    link.href = filePath;
-    link.download = filePath.split("/").pop() || "syllabus.pdf";
+    link.href = prog.downloadUrl;
+    link.download = prog.downloadUrl.split("/").pop() || "Syllabus.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const getDomainIcon = (domain: Subject["domain"]) => {
-    switch (domain) {
-      case "Pharmaceutics":
-        return <Pill className="w-4 h-4" />;
-      case "Chemistry":
-        return <FlaskConical className="w-4 h-4" />;
-      case "Pharmacology":
-        return <Microscope className="w-4 h-4" />;
-      case "Pharmacognosy":
-        return <Leaf className="w-4 h-4" />;
-      case "Quality Assurance":
-        return <Award className="w-4 h-4" />;
-      case "Practice & Laws":
-        return <FileCheck className="w-4 h-4" />;
-      default:
-        return <BookOpen className="w-4 h-4" />;
-    }
-  };
+  const filteredSemesters = useMemo(() => {
+    return currentYear.semesters.map(sem => {
+      const filteredSubs = sem.subjects.filter(sub => {
+        const matchesSearch = 
+          sub.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          sub.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          sub.keyUnits.some(unit => unit.toLowerCase().includes(searchQuery.toLowerCase()));
+        
+        const matchesDomain = selectedDomain === "all" || sub.domain === selectedDomain;
 
-  const getDomainColors = (domain: Subject["domain"]) => {
-    switch (domain) {
-      case "Pharmaceutics":
-        return "bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/10 dark:text-blue-400 dark:border-blue-800/30";
-      case "Chemistry":
-        return "bg-purple-50 text-purple-700 border-purple-100 dark:bg-purple-900/10 dark:text-purple-400 dark:border-purple-800/30";
-      case "Pharmacology":
-        return "bg-red-50 text-red-700 border-red-100 dark:bg-red-900/10 dark:text-red-400 dark:border-red-800/30";
-      case "Pharmacognosy":
-        return "bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/10 dark:text-emerald-400 dark:border-emerald-800/30";
-      case "Quality Assurance":
-        return "bg-amber-50 text-amber-700 border-amber-100 dark:bg-amber-900/10 dark:text-amber-400 dark:border-amber-800/30";
-      case "Practice & Laws":
-        return "bg-sky-50 text-sky-700 border-sky-100 dark:bg-sky-900/10 dark:text-sky-400 dark:border-sky-800/30";
-      default:
-        return "bg-gray-50 text-gray-700 border-gray-100 dark:bg-gray-900/10 dark:text-gray-400 dark:border-gray-800/30";
-    }
-  };
+        return matchesSearch && matchesDomain;
+      });
+      return {
+        ...sem,
+        subjects: filteredSubs
+      };
+    });
+  }, [currentYear, searchQuery, selectedDomain]);
 
   return (
     <AppLayout>
-      {/* Hero / Header Section */}
-      <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 bg-primary text-white overflow-hidden">
-        {/* Dynamic deep gradient background based on program type */}
-        <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] ${data.bannerGradient}`} />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        
-        <div className="container mx-auto px-4 relative z-10 max-w-6xl">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
-            
-            {/* Left: Text Details */}
-            <div className="lg:w-7/12 text-left">
-              <motion.div 
-                initial={{ opacity: 0, y: -10 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="inline-flex items-center gap-2 px-4.5 py-2 bg-white/10 text-accent rounded-full text-xs font-bold tracking-widest uppercase mb-6 border border-white/10 backdrop-blur-sm"
-              >
-                <GraduationCap className="w-4 h-4" /> Academic Syllabus
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, x: -30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none mb-4"
-              >
-                {data.title.split(' ')[0]} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#e6d080] to-accent drop-shadow-md">
-                  {data.title.split(' ').slice(1).join(' ')}
-                </span>
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, x: -30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="text-sm md:text-base text-white/70 font-light max-w-xl leading-relaxed"
-              >
-                {data.description}
-              </motion.p>
-            </div>
-            
-            {/* Right: Program Quick Stats Dashboard Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:w-5/12 w-full"
-            >
-              <div className="relative bg-white/5 border border-white/10 p-6.5 rounded-3xl backdrop-blur-md shadow-2xl overflow-hidden group">
-                {/* Background icon blur glow */}
-                <div className="absolute -bottom-6 -right-6 opacity-10 group-hover:opacity-20 transform group-hover:scale-105 transition-all duration-500 pointer-events-none">
-                  <BookOpen className="w-44 h-44 text-white" strokeWidth={0.5} />
-                </div>
-                
-                <h3 className="text-sm font-extrabold uppercase tracking-widest text-accent mb-4 flex items-center gap-2">
-                  <Layers className="w-4.5 h-4.5" /> Program Overview
-                </h3>
-                
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center text-sm border-b border-white/5 pb-2.5">
-                    <span className="text-white/60 font-medium">Regulation Schema</span>
-                    <span className="text-white font-bold">{data.stats.schema}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-white/5 pb-2.5">
-                    <span className="text-white/60 font-medium">Credits / Scope</span>
-                    <span className="text-white font-bold">{data.stats.totalCredits}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-white/5 pb-2.5">
-                    <span className="text-white/60 font-medium">Theory Subjects</span>
-                    <span className="text-white font-bold">{data.stats.theoryCount}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-white/5 pb-2.5">
-                    <span className="text-white/60 font-medium">Lab Modules</span>
-                    <span className="text-white font-bold">{data.stats.labCount}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm pt-1">
-                    <span className="text-white/60 font-medium">Practical Experience</span>
-                    <span className="text-white font-bold text-xs text-accent max-w-[200px] text-right truncate">{data.stats.internship}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+      {/* Hero Banner */}
+      <section className="bg-primary text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-700/20 via-primary to-[#011a2a]" />
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
 
+        <div className="container mx-auto px-4 text-center relative z-10 max-w-4xl">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/15 border border-accent/25 text-accent text-xs font-bold uppercase tracking-wider mb-4">
+              <BookOpen className="w-4 h-4" /> Academic Curricula & Syllabi
+            </div>
+            <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight leading-tight">
+              Curriculum & <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-amber-200">Course Schemes</span>
+            </h1>
+            <p className="text-sm md:text-base text-white/80 font-normal max-w-2xl mx-auto leading-relaxed">
+              Explore subject syllabi, module outlines, credit structures, and laboratory practical guidelines for Junior College (Arts, Commerce, Science) and Senior College (B.Sc., BCS) at Indrayani Mahavidyalaya.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Program Selector Tabs */}
+      <section className="py-6 bg-muted/40 border-b border-border/50 sticky top-16 z-30 backdrop-blur-md">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            {[
+              { id: "junior_arts", label: "XI & XII Arts", icon: Palette, tag: "Junior" },
+              { id: "junior_commerce", label: "XI & XII Commerce", icon: TrendingUp, tag: "Junior" },
+              { id: "junior_science", label: "XI & XII Science", icon: Atom, tag: "Junior" },
+              { id: "senior_bsc", label: "B.Sc. (Degree)", icon: Microscope, tag: "SPPU Degree" },
+              { id: "senior_bcs", label: "BCS (Comp. Sci)", icon: Code, tag: "SPPU Degree" },
+            ].map(tab => {
+              const Icon = tab.icon;
+              const isActive = activeCourseKey === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveCourseKey(tab.id);
+                    setActiveYearIndex(0);
+                    setSearchQuery("");
+                    setSelectedDomain("all");
+                  }}
+                  className={`cursor-pointer shrink-0 flex items-center gap-2.5 px-4.5 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 border ${
+                    isActive 
+                      ? "bg-primary text-white border-primary shadow-md shadow-primary/20 scale-[1.02]" 
+                      : "bg-white/80 text-foreground hover:bg-white border-border/60 hover:border-primary/40"
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? "text-accent" : "text-muted-foreground"}`} />
+                  <span>{tab.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${
+                    isActive ? "bg-white/20 text-white" : "bg-muted text-muted-foreground"
+                  }`}>
+                    {tab.tag}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Syllabus Navigator Area */}
-      <section className="py-12 md:py-20 bg-background min-h-[60vh]">
+      {/* Main Content Area */}
+      <section className="py-10 md:py-16 bg-background">
         <div className="container mx-auto px-4 max-w-6xl">
           
-          {/* Degree Tabs Switches */}
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex p-1.5 bg-muted/80 backdrop-blur rounded-2xl border border-muted/50 shadow-sm gap-1.5 overflow-x-auto no-scrollbar max-w-full">
-              {([
-                { id: "dpharm", label: "D. Pharmacy" },
-                { id: "bpharm_fy", label: "B. Pharmacy (FY)" },
-                { id: "bpharm_sy_ty_final", label: "B. Pharmacy (SY, TY & Final)" },
-                { id: "mpharm", label: "M. Pharmacy" }
-              ] as const).map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setLocation(`/syllabus/${tab.id}`)}
-                  className={`cursor-pointer px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-300 whitespace-nowrap ${course === tab.id ? "bg-primary text-white shadow-md" : "text-muted-foreground hover:text-primary"}`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Download Card Section */}
-          <div className="mb-10 bg-white border border-muted p-6 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.01)] flex flex-col md:flex-row items-center justify-between gap-6 hover:border-accent/40 transition-colors">
-            <div className="flex items-center gap-4.5">
-              <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center border border-primary/10 text-primary shrink-0">
-                <FileCheck className="w-7 h-7 text-accent animate-pulse" />
-              </div>
-              <div>
-                <span className="text-[10px] uppercase font-bold text-accent tracking-widest block mb-1">Official PCI Syllabus</span>
-                <h2 className="text-lg font-extrabold text-primary leading-tight">{data.title}</h2>
-                <p className="text-xs text-muted-foreground mt-0.5 max-w-lg leading-relaxed">{data.subtitle} - Complete curriculum framework details, credits, and rules.</p>
-              </div>
-            </div>
-            <button 
-              onClick={() => handleDownload(data.title, data.downloadUrl)}
-              className="cursor-pointer w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary/95 text-white text-xs font-bold rounded-xl shadow-md transition-all duration-300 hover:scale-[1.01] shrink-0"
-            >
-              <FileDown className="w-4.5 h-4.5 text-accent" /> Download Curriculum PDF ({data.fileSize})
-            </button>
-          </div>
-
-          {/* Double Nav (Year Tab select + Sem select) */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-muted pb-6 mb-10">
+          {/* Program Overview Banner */}
+          <div className="bg-white border border-border rounded-3xl p-6 md:p-8 shadow-sm mb-10 relative overflow-hidden">
+            <div className={`absolute -right-20 -bottom-20 w-80 h-80 rounded-full opacity-10 bg-current ${activeProgram.iconColor}`} />
             
-            {/* Year selections */}
-            <div className="flex gap-2 bg-muted/30 p-1 rounded-xl border border-muted/50 w-full md:w-auto">
-              {data.years.map((year, idx) => (
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+              <div className="space-y-2 max-w-3xl">
+                <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
+                  {activeProgram.subtitle}
+                </span>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
+                  {activeProgram.title}
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {activeProgram.description}
+                </p>
+
+                {/* Quick Meta Stats */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                  <div className="p-3 rounded-xl bg-muted/40 border border-border/50">
+                    <span className="text-[10px] font-semibold text-muted-foreground block uppercase">Evaluation Scheme</span>
+                    <span className="text-xs font-bold text-foreground">{activeProgram.stats.schema}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-muted/40 border border-border/50">
+                    <span className="text-[10px] font-semibold text-muted-foreground block uppercase">Structure</span>
+                    <span className="text-xs font-bold text-foreground">{activeProgram.stats.totalCredits}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-muted/40 border border-border/50">
+                    <span className="text-[10px] font-semibold text-muted-foreground block uppercase">Practicals</span>
+                    <span className="text-xs font-bold text-foreground">{activeProgram.stats.labCount}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-muted/40 border border-border/50">
+                    <span className="text-[10px] font-semibold text-muted-foreground block uppercase">Affiliation</span>
+                    <span className="text-xs font-bold text-foreground">{activeProgram.stats.affiliation}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Download Syllabus PDF CTA */}
+              <div className="shrink-0 flex flex-col gap-2">
                 <button
-                  key={year.yearName}
-                  onClick={() => setActiveYearIdx(idx)}
-                  className={`cursor-pointer flex-1 md:flex-none px-4 py-2 rounded-lg text-xs md:text-sm font-bold transition-all duration-200 ${
-                    activeYearIdx === idx 
-                      ? "bg-white text-primary shadow-sm" 
-                      : "text-muted-foreground hover:text-primary"
+                  onClick={() => handleDownload(activeProgram)}
+                  className={`cursor-pointer inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-white text-xs md:text-sm font-bold shadow-md transition-all hover:scale-[1.02] ${activeProgram.bgAccent}`}
+                >
+                  <FileDown className="w-4 h-4" /> Download Official Syllabus PDF
+                </button>
+                <span className="text-[11px] text-muted-foreground text-center">
+                  Official Syllabus Document ({activeProgram.fileSize})
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Year / Level Selector & Filters */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+            {/* Year Switcher */}
+            <div className="inline-flex p-1 bg-muted rounded-2xl border border-border w-full md:w-auto">
+              {activeProgram.years.map((yr, idx) => (
+                <button
+                  key={yr.yearName}
+                  onClick={() => setActiveYearIndex(idx)}
+                  className={`cursor-pointer flex-1 md:flex-initial px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+                    activeYearIndex === idx
+                      ? "bg-white text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {year.yearName}
+                  {yr.yearName}
                 </button>
               ))}
             </div>
 
-            {/* Semester selections */}
-            <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-              {activeYear.semesters.length > 1 && (
-                <div className="flex gap-1.5 bg-muted/20 p-0.5 rounded-lg border border-muted/40">
-                  {activeYear.semesters.map((sem, idx) => (
-                    <button
-                      key={sem.semesterName}
-                      onClick={() => setActiveSemIdx(idx)}
-                      className={`cursor-pointer px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 ${
-                        activeSemIdx === idx 
-                          ? "bg-primary text-white" 
-                          : "text-muted-foreground hover:text-primary"
-                      }`}
-                    >
-                      {sem.semesterName}
-                    </button>
-                  ))}
-                </div>
-              )}
+            {/* Search Input */}
+            <div className="relative w-full md:w-80">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search subject or topic units..."
+                className="w-full pl-9 pr-4 py-2 bg-white border border-border rounded-xl text-xs placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
             </div>
           </div>
 
-          {/* Curriculum Listing Container */}
-          <div className="space-y-6">
-            <h3 className="text-xl font-extrabold text-primary mb-6 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-accent" /> Subjects of study in {activeYear.yearName} ({activeSemester.semesterName})
-            </h3>
-            
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${course}-${activeYearIdx}-${activeSemIdx}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.35 }}
-                className="grid grid-cols-1 gap-5"
-              >
-                {activeSemester.subjects.map((sub, idx) => {
-                  const isExpanded = expandedSubjectCode === sub.code;
-                  return (
-                    <motion.div
-                      layout="position"
-                      key={sub.code}
-                      className={`group border rounded-3xl overflow-hidden transition-all duration-300 bg-white ${
-                        isExpanded 
-                          ? "border-accent/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)]" 
-                          : "border-muted hover:border-accent/30 hover:shadow-sm"
-                      }`}
-                    >
-                      {/* Interactive Header Block */}
-                      <div 
-                        onClick={() => setExpandedSubjectCode(isExpanded ? null : sub.code)}
-                        className="cursor-pointer p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 select-none"
+          {/* Subject Cards by Semester/Term */}
+          <div className="space-y-10">
+            {filteredSemesters.map((sem, sIdx) => (
+              <div key={sIdx} className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-4 w-1.5 rounded-full bg-accent" />
+                  <h3 className="text-lg md:text-xl font-bold text-foreground">
+                    {sem.semesterName}
+                  </h3>
+                  <span className="text-xs text-muted-foreground font-medium">
+                    ({sem.subjects.length} Subjects)
+                  </span>
+                </div>
+
+                {sem.subjects.length === 0 ? (
+                  <div className="text-center py-10 bg-white border border-dashed border-border rounded-2xl">
+                    <p className="text-xs text-muted-foreground">No subjects found matching "{searchQuery}".</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {sem.subjects.map((sub, subIdx) => (
+                      <motion.div
+                        key={sub.code}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: subIdx * 0.04 }}
+                        className="bg-white border border-border rounded-2xl p-5 shadow-xs hover:border-primary/40 hover:shadow-md transition-all flex flex-col justify-between"
                       >
-                        <div className="flex items-start md:items-center gap-4.5">
-                          {/* Subject Code block */}
-                          <span className="inline-flex items-center justify-center bg-muted text-primary text-xs font-black tracking-wider uppercase px-3 py-1.5 rounded-xl border border-muted-border">
-                            {sub.code}
-                          </span>
-                          <div>
-                            <h4 className="font-bold text-primary text-base md:text-lg group-hover:text-accent transition-colors leading-tight">
-                              {sub.name}
-                            </h4>
-                            <div className="flex flex-wrap items-center gap-2 mt-1.5 text-xs text-muted-foreground font-semibold">
-                              <span>{sub.type}</span>
-                              <span>•</span>
-                              <span>{sub.credits} Credits</span>
-                              <span>•</span>
-                              <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {sub.hoursPerWeek}</span>
+                        <div>
+                          <div className="flex items-start justify-between gap-3 mb-2.5">
+                            <div>
+                              <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-md">
+                                {sub.code}
+                              </span>
+                              <span className="ml-2 text-[10px] text-muted-foreground font-medium">
+                                {sub.type} {sub.credits ? `• ${sub.credits} Credits` : ""}
+                              </span>
                             </div>
+                            <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded-md">
+                              {sub.hoursPerWeek}
+                            </span>
+                          </div>
+
+                          <h4 className="text-base font-extrabold text-foreground leading-snug mb-3">
+                            {sub.name}
+                          </h4>
+
+                          {/* Key Syllabus Modules */}
+                          <div className="mb-4">
+                            <span className="text-[11px] font-bold text-foreground/80 block mb-1.5 uppercase tracking-wide">
+                              Core Curriculum Modules:
+                            </span>
+                            <ul className="space-y-1.5">
+                              {sub.keyUnits.map((unit, uIdx) => (
+                                <li key={uIdx} className="text-xs text-muted-foreground flex items-start gap-2">
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                                  <span className="leading-tight">{unit}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
 
-                        {/* Right: Domain tag + toggle arrow */}
-                        <div className="flex items-center justify-between md:justify-end gap-3 mt-2 md:mt-0 border-t border-muted/50 pt-3.5 md:pt-0 md:border-t-0">
-                          <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border ${getDomainColors(sub.domain)}`}>
-                            {getDomainIcon(sub.domain)} {sub.domain}
+                        {/* Career Relevance */}
+                        <div className="pt-3 border-t border-border/60 mt-2 bg-muted/20 -mx-5 -mb-5 p-4 rounded-b-2xl">
+                          <span className="text-[10px] font-bold text-accent uppercase tracking-wider block mb-0.5">
+                            Practical & Career Significance:
                           </span>
-                          <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${isExpanded ? "rotate-180 text-accent" : ""}`} />
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {sub.careerRelevance}
+                          </p>
                         </div>
-                      </div>
-
-                      {/* Expandable Details Container */}
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden border-t border-muted bg-muted/10"
-                          >
-                            <div className="p-6 md:p-8 space-y-6 text-sm">
-                              {/* Key Syllabus Chapters */}
-                              <div className="space-y-3">
-                                <h5 className="text-xs font-extrabold uppercase tracking-wider text-accent flex items-center gap-1.5">
-                                  <Layers className="w-4 h-4" /> Core Curriculum Units
-                                </h5>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5 pl-2">
-                                  {sub.keyUnits.map((unit, index) => (
-                                    <div key={index} className="flex gap-3 items-start">
-                                      <div className="w-5 h-5 rounded-full bg-primary/10 text-primary font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
-                                        {index + 1}
-                                      </div>
-                                      <span className="text-primary font-medium">{unit}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              <hr className="border-muted" />
-
-                              {/* Career / Industry relevance description */}
-                              <div className="space-y-2">
-                                <h5 className="text-xs font-extrabold uppercase tracking-wider text-accent flex items-center gap-1.5">
-                                  <Briefcase className="w-4 h-4" /> Industry Application & Career Value
-                                </h5>
-                                <p className="text-muted-foreground leading-relaxed pl-2 italic">
-                                  {sub.careerRelevance}
-                                </p>
-                              </div>
-                              
-                              {/* Extra help notice */}
-                              <div className="flex gap-2 px-4 py-3 bg-white/60 border border-muted-border rounded-2xl text-xs text-muted-foreground mt-2">
-                                <HelpCircle className="w-4 h-4 text-primary shrink-0" />
-                                <span>Note: Detailed laboratory guides, experiments lists, and recommended textbooks are available in the downloadable curriculum PDF.</span>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-          
+
+          {/* Academic Governance & University Guidelines */}
+          <div className="mt-16 bg-muted/30 border border-border rounded-3xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <HelpCircle className="w-5 h-5 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-base font-extrabold text-foreground">Curriculum & Examination Governance</h3>
+                <p className="text-xs text-muted-foreground">Official regulatory framework governing Indrayani Mahavidyalaya</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-muted-foreground">
+              <div className="p-4 bg-white rounded-xl border border-border/60 space-y-1.5">
+                <span className="font-bold text-foreground block">Junior College (HSC Board Rules)</span>
+                <p>Curriculum design, internal evaluation (20 marks continuous assessment) and annual board theory exams (80 marks) follow the Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE), Pune Division regulations.</p>
+              </div>
+              <div className="p-4 bg-white rounded-xl border border-border/60 space-y-1.5">
+                <span className="font-bold text-foreground block">Senior College (SPPU University Rules)</span>
+                <p>Undergraduate B.Sc. and BCS follow the Choice Based Credit System (CBCS) prescribed by Savitribai Phule Pune University (SPPU). Includes Concurrent Evaluation (Continuous Internal Assessment) and End-Semester University Theory & Practical Examinations.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     </AppLayout>

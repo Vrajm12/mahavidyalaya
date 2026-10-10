@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChevronRight, ArrowLeft, CheckCircle2, XCircle, FileCheck, Send, User, GraduationCap, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 const STEPS = [
   { id: 'personal', title: "Personal Profile", icon: User },
@@ -13,12 +14,19 @@ const STEPS = [
 
 const DOCUMENTS_LIST = [
   "Aadhaar Card",
-  "10th Marksheet",
-  "12th Marksheet",
-  "MHT-CET / NEET Scorecard",
-  "Leaving Certificate (TC)",
+  "10th (SSC) Marksheet",
+  "12th (HSC) Marksheet (for Senior College)",
+  "School / College Leaving Certificate (LC / TC)",
   "Domicile Certificate",
   "Caste Certificate (If applicable)"
+];
+
+const PROGRAM_OPTIONS = [
+  { id: "11-arts", label: "Class 11 (FYJC) Arts", level: "junior" },
+  { id: "11-comm", label: "Class 11 (FYJC) Commerce", level: "junior" },
+  { id: "11-sci", label: "Class 11 (FYJC) Science", level: "junior" },
+  { id: "bsc", label: "B.Sc. — Bachelor of Science", level: "senior" },
+  { id: "bcs", label: "BCS — Bachelor of Computer Science", level: "senior" },
 ];
 
 export default function CheckEligibility() {
@@ -31,13 +39,18 @@ export default function CheckEligibility() {
     name: "",
     email: "",
     phone: "",
-    course: "B.Pharm",
+    course: "11-sci",
+    score10th: "",
     score12th: "",
-    entranceScore: "",
+    hasMaths: true,
     documents: [] as string[]
   });
 
-  const [eligibilityResult, setEligibilityResult] = useState<{isEligible: boolean, missing: string[]}>({ isEligible: false, missing: [] });
+  const [eligibilityResult, setEligibilityResult] = useState<{isEligible: boolean, reasons: string[], missing: string[]}>({
+    isEligible: false,
+    reasons: [],
+    missing: []
+  });
 
   const nextStep = () => {
     setDirection(1);
@@ -61,90 +74,91 @@ export default function CheckEligibility() {
   const calculateEligibility = () => {
     setIsProcessing(true);
     setDirection(1);
-    setStep(3); // Go to Result Step
+    setStep(3); // Result step
     
-    // Simulate server processing time
     setTimeout(() => {
-      const missing = [];
-      const score = parseFloat(formData.score12th);
+      const missing: string[] = [];
+      const reasons: string[] = [];
+      const score10 = parseFloat(formData.score10th);
+      const score12 = parseFloat(formData.score12th);
       
-      // Basic Eligibility Logic
-      if (isNaN(score) || score < 45) {
-        missing.push("Minimum 45% required in 12th Standard (PCB/PCM).");
-      }
+      const isJunior = formData.course.startsWith("11-");
       
-      if (!formData.documents.includes("12th Marksheet")) {
-        missing.push("12th Marksheet is mandatory.");
+      if (isJunior) {
+        if (isNaN(score10) || score10 < 35) {
+          missing.push("Minimum 35% passing marks required in 10th SSC.");
+        } else {
+          reasons.push(`10th SSC Score (${score10}%) meets the minimum state board passing criteria.`);
+        }
+        
+        if (formData.course === "11-sci" && score10 < 35) {
+          missing.push("Science stream requires passing marks in Science & Mathematics in 10th.");
+        }
+
+        if (!formData.documents.includes("10th (SSC) Marksheet")) {
+          missing.push("10th SSC Marksheet is mandatory.");
+        }
+      } else {
+        // Senior College (B.Sc. / BCS)
+        if (isNaN(score12) || score12 < 35) {
+          missing.push("Minimum passing score required in 12th HSC Science.");
+        } else {
+          reasons.push(`12th HSC Score (${score12}%) qualifies for SPPU Undergraduate Admission.`);
+        }
+
+        if (formData.course === "bcs" && !formData.hasMaths) {
+          missing.push("BCS degree requires Mathematics as a subject in 12th HSC or equivalent engineering diploma.");
+        }
+
+        if (!formData.documents.includes("12th (HSC) Marksheet (for Senior College)")) {
+          missing.push("12th HSC Marksheet is mandatory for undergraduate senior college admission.");
+        }
       }
-      if (!formData.documents.includes("MHT-CET / NEET Scorecard") && (formData.course === "B.Pharm" || formData.course === "M.Pharm")) {
-        missing.push("A valid Entrance Scorecard (CET/NEET/GPAT) is required for this course.");
-      }
-      if (!formData.documents.includes("Domicile Certificate")) {
-        missing.push("Domicile Certificate is required for Maharashtra State candidature.");
+
+      if (!formData.documents.includes("Aadhaar Card")) {
+        missing.push("Aadhaar Card copy is mandatory for enrollment verification.");
       }
 
       setEligibilityResult({
         isEligible: missing.length === 0,
+        reasons,
         missing
       });
       setIsProcessing(false);
-    }, 2500); // 2.5 seconds of fake loading for "Wow" factor
-  };
-
-  // Animation variants
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 50 : -50,
-      opacity: 0
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 50 : -50,
-      opacity: 0
-    })
+    }, 600);
   };
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-muted/20 py-20 relative overflow-hidden">
-        
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
-        
-        <div className="container mx-auto px-4 max-w-4xl relative z-10">
-          
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Check Your <span className="text-accent">Eligibility</span></h1>
-            <p className="text-muted-foreground text-lg">Use our interactive tool to instantly verify if you meet the criteria for your desired course.</p>
-          </div>
+      <section className="bg-primary text-white py-16">
+        <div className="container mx-auto px-4 max-w-4xl text-center space-y-3">
+          <span className="text-accent text-xs font-bold tracking-widest uppercase">Self-Assessment Tool</span>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">Check Your Admission Eligibility</h1>
+          <p className="text-sm md:text-base text-primary-foreground/80 max-w-xl mx-auto">
+            Evaluate your eligibility for Class 11 (FYJC) Arts, Commerce, Science or Undergraduate degrees in B.Sc. and BCS in minutes.
+          </p>
+        </div>
+      </section>
 
-          {/* Stepper Progress */}
-          <div className="flex items-center justify-between mb-12 relative px-4 md:px-12">
-            <div className="absolute left-8 right-8 md:left-16 md:right-16 top-1/2 -translate-y-1/2 h-1 bg-border z-0" />
-            <div 
-              className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 h-1 bg-accent z-0 transition-all duration-500 ease-out" 
-              style={{ width: `${(step / (STEPS.length - 1)) * 100}%`, maxWidth: 'calc(100% - 4rem)' }}
-            />
-            
-            {STEPS.map((s, i) => {
-              const StepIcon = s.icon;
-              const isActive = i === step;
-              const isPast = i < step;
+      <section className="py-12 bg-muted/20 min-h-[600px]">
+        <div className="container mx-auto px-4 max-w-3xl">
+          {/* Progress Indicators */}
+          <div className="flex justify-between items-center mb-8 relative">
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-border -translate-y-1/2 z-0" />
+            {STEPS.map((s, idx) => {
+              const Icon = s.icon;
+              const isPassed = step > idx;
+              const isCurrent = step === idx;
               return (
                 <div key={s.id} className="relative z-10 flex flex-col items-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 shadow-sm
-                    ${isActive ? 'bg-primary border-primary text-white scale-110' : 
-                      isPast ? 'bg-accent border-accent text-primary' : 'bg-white border-border text-muted-foreground'}`}
-                  >
-                    {isPast ? <CheckCircle2 className="w-6 h-6" /> : <StepIcon className="w-5 h-5" />}
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                    isPassed ? "bg-accent text-primary font-bold shadow-md" :
+                    isCurrent ? "bg-primary text-white ring-4 ring-primary/20 shadow-md" :
+                    "bg-card border border-border text-muted-foreground"
+                  }`}>
+                    <Icon className="w-4 h-4" />
                   </div>
-                  <span className={`absolute top-14 text-xs font-semibold whitespace-nowrap transition-colors duration-300 hidden md:block
-                    ${isActive ? 'text-primary' : isPast ? 'text-primary/80' : 'text-muted-foreground'}`}>
+                  <span className={`text-[11px] font-semibold mt-2 hidden sm:block ${isCurrent ? "text-primary" : "text-muted-foreground"}`}>
                     {s.title}
                   </span>
                 </div>
@@ -152,254 +166,248 @@ export default function CheckEligibility() {
             })}
           </div>
 
-          {/* Form Container */}
-          <div className="bg-white rounded-3xl shadow-xl border border-muted overflow-hidden min-h-[500px] relative">
-            <AnimatePresence custom={direction} mode="wait">
-              <motion.div
-                key={step}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="p-8 md:p-12 absolute inset-0 overflow-y-auto"
-              >
-                
-                {/* STEP 1: PERSONAL INFO */}
-                {step === 0 && (
-                  <div className="h-full flex flex-col justify-center max-w-lg mx-auto">
-                    <h2 className="text-2xl font-bold text-primary mb-6">Personal Details</h2>
-                    <div className="space-y-5">
-                      <div>
-                        <label className="text-sm font-semibold text-primary mb-1 block">Full Name</label>
-                        <input 
-                          type="text" 
-                          value={formData.name}
-                          onChange={e => setFormData({...formData, name: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
-                          placeholder="e.g. Rahul Sharma"
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div>
-                          <label className="text-sm font-semibold text-primary mb-1 block">Email Address</label>
-                          <input 
-                            type="email" 
-                            value={formData.email}
-                            onChange={e => setFormData({...formData, email: e.target.value})}
-                            className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
-                            placeholder="rahul@example.com"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-sm font-semibold text-primary mb-1 block">Phone Number</label>
-                          <input 
-                            type="tel" 
-                            value={formData.phone}
-                            onChange={e => setFormData({...formData, phone: e.target.value})}
-                            className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
-                            placeholder="+91"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="text-sm font-semibold text-primary mb-1 block">Course Interested In</label>
-                        <select 
-                          value={formData.course}
-                          onChange={e => setFormData({...formData, course: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
-                        >
-                          <option value="B.Pharm">B. Pharmacy (4 Years)</option>
-                          <option value="D.Pharm">D. Pharmacy (2 Years)</option>
-                          <option value="M.Pharm">M. Pharmacy (2 Years)</option>
-                        </select>
-                      </div>
+          {/* Form Card */}
+          <div className="bg-card border border-border/70 rounded-2xl p-6 sm:p-10 shadow-lg relative min-h-[380px] flex flex-col justify-between">
+            
+            {/* STEP 1: PERSONAL PROFILE */}
+            {step === 0 && (
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Step 1: Personal Details</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Please enter your contact details and desired program stream.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1">Target Program *</label>
+                    <select
+                      value={formData.course}
+                      onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs font-medium focus:ring-2 focus:ring-primary"
+                    >
+                      {PROGRAM_OPTIONS.map((opt) => (
+                        <option key={opt.id} value={opt.id}>{opt.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1">Student Full Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Rahul Patil"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Mobile Number *</label>
+                      <input
+                        type="tel"
+                        placeholder="e.g. 9876543210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-foreground block mb-1">Email Address</label>
+                      <input
+                        type="email"
+                        placeholder="e.g. rahul@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs focus:ring-2 focus:ring-primary"
+                      />
                     </div>
                   </div>
-                )}
+                </div>
+              </div>
+            )}
 
-                {/* STEP 2: ACADEMICS */}
-                {step === 1 && (
-                  <div className="h-full flex flex-col justify-center max-w-lg mx-auto">
-                    <h2 className="text-2xl font-bold text-primary mb-2">Academic Scores</h2>
-                    <p className="text-muted-foreground mb-6">Enter your latest academic results accurately for the evaluation engine.</p>
-                    <div className="space-y-6">
-                      <div className="bg-muted/30 p-6 rounded-2xl border border-muted">
-                        <label className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center">1</span>
-                          12th Standard (HSC) Score %
-                        </label>
-                        <p className="text-xs text-muted-foreground mb-3 pl-8">Aggregate percentage in PCB (Physics, Chemistry, Biology) or PCM.</p>
-                        <input 
-                          type="number" 
+            {/* STEP 2: ACADEMICS */}
+            {step === 1 && (
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Step 2: Academic Marks & Background</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Provide your percentage marks in qualifying examinations.</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1">Class 10 (SSC) Percentage (%) *</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder="e.g. 78.40"
+                      value={formData.score10th}
+                      onChange={(e) => setFormData({ ...formData, score10th: e.target.value })}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
+                  {!formData.course.startsWith("11-") && (
+                    <>
+                      <div>
+                        <label className="text-xs font-semibold text-foreground block mb-1">Class 12 (HSC Science) Percentage (%) *</label>
+                        <input
+                          type="number"
+                          step="0.01"
+                          placeholder="e.g. 68.50"
                           value={formData.score12th}
-                          onChange={e => setFormData({...formData, score12th: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-lg font-bold text-primary"
-                          placeholder="e.g. 65.5"
+                          onChange={(e) => setFormData({ ...formData, score12th: e.target.value })}
+                          className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs focus:ring-2 focus:ring-primary"
                         />
                       </div>
-                      
-                      <div className="bg-muted/30 p-6 rounded-2xl border border-muted">
-                        <label className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center">2</span>
-                          Entrance Exam Score (Optional)
-                        </label>
-                        <p className="text-xs text-muted-foreground mb-3 pl-8">MHT-CET percentile or NEET score.</p>
-                        <input 
-                          type="number" 
-                          value={formData.entranceScore}
-                          onChange={e => setFormData({...formData, entranceScore: e.target.value})}
-                          className="w-full px-4 py-3 rounded-xl border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-lg font-bold text-primary"
-                          placeholder="e.g. 82.4"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
 
-                {/* STEP 3: DOCUMENTS */}
-                {step === 2 && (
-                  <div className="h-full flex flex-col justify-start max-w-2xl mx-auto pt-4">
-                    <h2 className="text-2xl font-bold text-primary mb-2 text-center">Document Checklist</h2>
-                    <p className="text-muted-foreground mb-8 text-center">Select the documents you currently possess. Missing documents may affect eligibility.</p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {DOCUMENTS_LIST.map(doc => {
-                        const isSelected = formData.documents.includes(doc);
-                        return (
-                          <div 
-                            key={doc}
-                            onClick={() => handleDocumentToggle(doc)}
-                            className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 flex items-center gap-4 hover:shadow-md
-                              ${isSelected ? 'border-accent bg-accent/5' : 'border-border bg-white hover:border-muted-foreground/30'}`}
-                          >
-                            <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-colors
-                              ${isSelected ? 'bg-accent text-primary' : 'bg-muted border border-border text-transparent'}`}>
-                              <CheckCircle2 className="w-4 h-4" />
-                            </div>
-                            <span className={`font-medium ${isSelected ? 'text-primary' : 'text-muted-foreground'}`}>
-                              {doc}
-                            </span>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* STEP 4: RESULT */}
-                {step === 3 && (
-                  <div className="h-full flex flex-col items-center justify-center text-center">
-                    {isProcessing ? (
-                      <motion.div 
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                        className="flex flex-col items-center"
-                      >
-                        <div className="w-24 h-24 relative mb-6">
-                          <div className="absolute inset-0 border-4 border-muted rounded-full" />
-                          <div className="absolute inset-0 border-4 border-accent border-t-transparent rounded-full animate-spin" />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <ShieldAlert className="w-8 h-8 text-primary animate-pulse" />
-                          </div>
+                      {formData.course === "bcs" && (
+                        <div className="flex items-center gap-3 p-3 bg-muted/40 rounded-xl">
+                          <input
+                            type="checkbox"
+                            id="mathCheck"
+                            checked={formData.hasMaths}
+                            onChange={(e) => setFormData({ ...formData, hasMaths: e.target.checked })}
+                            className="w-4 h-4 rounded text-primary"
+                          />
+                          <label htmlFor="mathCheck" className="text-xs text-foreground font-medium cursor-pointer">
+                            I have studied Mathematics in Class 12 / Engineering Diploma (Required for BCS)
+                          </label>
                         </div>
-                        <h2 className="text-2xl font-bold text-primary mb-2">Analyzing Profile...</h2>
-                        <p className="text-muted-foreground">Checking criteria against current admission rules.</p>
-                      </motion.div>
-                    ) : (
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-                        className="w-full max-w-lg"
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3: DOCUMENTS */}
+            {step === 2 && (
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Step 3: Document Readiness Check</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Select the official certificates and records currently in your possession.</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {DOCUMENTS_LIST.map((doc, idx) => {
+                    const isChecked = formData.documents.includes(doc);
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => handleDocumentToggle(doc)}
+                        className={`p-3 rounded-xl border text-xs font-medium cursor-pointer flex items-center justify-between transition-all ${
+                          isChecked
+                            ? "bg-primary/10 border-primary text-primary"
+                            : "bg-background border-border text-muted-foreground hover:border-primary/40"
+                        }`}
                       >
-                        {eligibilityResult.isEligible ? (
-                          <>
-                            <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 ring-8 ring-green-50">
-                              <CheckCircle2 className="w-12 h-12" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-primary mb-4">Congratulations, {formData.name || 'Student'}!</h2>
-                            <p className="text-lg text-muted-foreground mb-8">
-                              Based on the data provided, you appear to be <strong>eligible</strong> for the {formData.course} program. 
-                              Your profile has been forwarded to our admission counsellors.
-                            </p>
-                            <div className="p-6 bg-accent/10 rounded-2xl border border-accent/20 mb-8">
-                              <div className="flex items-center justify-center gap-3 text-accent font-bold mb-2">
-                                <Send className="w-5 h-5" /> Details Sent Securely
-                              </div>
-                              <p className="text-sm text-primary/80">Our team will contact you at <strong>{formData.email || 'your email'}</strong> within 24 hours to guide you through the next steps.</p>
-                            </div>
-                          </>
+                        <span>{doc}</span>
+                        {isChecked ? (
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                         ) : (
-                          <>
-                            <div className="w-24 h-24 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6 ring-8 ring-red-50">
-                              <XCircle className="w-12 h-12" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-primary mb-4">Action Required</h2>
-                            <p className="text-lg text-muted-foreground mb-8">
-                              Currently, your profile does not meet all the mandatory requirements for the {formData.course} program.
-                            </p>
-                            <div className="bg-red-50 border border-red-100 rounded-2xl p-6 text-left mb-8">
-                              <h3 className="font-bold text-red-900 mb-4 flex items-center gap-2">
-                                <ShieldAlert className="w-5 h-5" /> What's Missing:
-                              </h3>
-                              <ul className="space-y-3">
-                                {eligibilityResult.missing.map((issue, idx) => (
-                                  <li key={idx} className="flex items-start gap-3 text-red-800">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
-                                    {issue}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </>
+                          <div className="w-4 h-4 rounded-full border border-border" />
                         )}
-                        <Button 
-                          onClick={() => { setStep(0); setFormData({...formData, score12th: "", entranceScore: "", documents: []}); }}
-                          variant="outline"
-                          className="border-primary text-primary hover:bg-primary hover:text-white"
-                        >
-                          Check Another Profile
-                        </Button>
-                      </motion.div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 4: RESULT */}
+            {step === 3 && (
+              <div className="space-y-6">
+                {isProcessing ? (
+                  <div className="text-center py-12 space-y-3">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+                    <p className="text-sm font-semibold text-primary">Evaluating eligibility parameters against SPPU and MSBSHSE regulations...</p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    <div className={`p-6 rounded-2xl border flex items-start gap-4 ${
+                      eligibilityResult.isEligible
+                        ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-950 dark:text-emerald-200"
+                        : "bg-amber-500/10 border-amber-500/30 text-amber-950 dark:text-amber-200"
+                    }`}>
+                      {eligibilityResult.isEligible ? (
+                        <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0 mt-0.5" />
+                      ) : (
+                        <XCircle className="w-8 h-8 text-amber-600 shrink-0 mt-0.5" />
+                      )}
+                      <div className="space-y-1">
+                        <h4 className="text-lg font-bold">
+                          {eligibilityResult.isEligible
+                            ? "Congratulations! You Meet The Minimum Eligibility Criteria."
+                            : "Action Items Required to Complete Eligibility"}
+                        </h4>
+                        <p className="text-xs opacity-90 leading-relaxed">
+                          {eligibilityResult.isEligible
+                            ? `You qualify for admission to ${PROGRAM_OPTIONS.find(p => p.id === formData.course)?.label} at Indrayani Mahavidyalaya.`
+                            : "Please review the missing credentials or documentation requirements below:"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {eligibilityResult.missing.length > 0 && (
+                      <div className="space-y-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-amber-700 block">Missing Requirements:</span>
+                        <ul className="space-y-1.5">
+                          {eligibilityResult.missing.map((m, idx) => (
+                            <li key={idx} className="text-xs text-muted-foreground flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0" />
+                              <span>{m}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     )}
+
+                    <div className="pt-4 border-t border-border flex flex-wrap gap-4 justify-between items-center">
+                      <Button variant="outline" size="sm" onClick={() => setStep(0)}>
+                        Test Another Program
+                      </Button>
+                      <Link href="/admissions">
+                        <Button className="bg-primary hover:bg-accent text-white font-semibold">
+                          Proceed to Admission Application
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 )}
+              </div>
+            )}
 
-              </motion.div>
-            </AnimatePresence>
+            {/* Bottom Step Navigation (for steps 0, 1, 2) */}
+            {step < 3 && (
+              <div className="pt-6 border-t border-border flex justify-between items-center">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={prevStep}
+                  disabled={step === 0}
+                  className="text-xs"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5 mr-1" /> Back
+                </Button>
+
+                {step < 2 ? (
+                  <Button size="sm" onClick={nextStep} className="bg-primary hover:bg-accent text-white text-xs font-semibold">
+                    Next Step <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                ) : (
+                  <Button size="sm" onClick={calculateEligibility} className="bg-accent hover:bg-accent/90 text-primary font-bold text-xs">
+                    Calculate Eligibility Now
+                  </Button>
+                )}
+              </div>
+            )}
+
           </div>
-          
-          {/* Controls Footer */}
-          {step < 3 && (
-            <div className="flex items-center justify-between mt-8 max-w-4xl mx-auto px-2">
-              <Button 
-                variant="ghost" 
-                onClick={prevStep}
-                disabled={step === 0}
-                className={`gap-2 ${step === 0 ? 'opacity-0' : 'opacity-100'}`}
-              >
-                <ArrowLeft className="w-4 h-4" /> Back
-              </Button>
-              
-              {step < 2 ? (
-                <Button 
-                  onClick={nextStep}
-                  className="bg-primary text-white hover:bg-primary/90 gap-2 px-8 py-6 rounded-full shadow-lg"
-                >
-                  Next Step <ChevronRight className="w-4 h-4" />
-                </Button>
-              ) : (
-                <Button 
-                  onClick={calculateEligibility}
-                  className="bg-accent text-primary hover:bg-accent/90 gap-2 px-8 py-6 rounded-full shadow-[0_0_30px_rgba(244,182,9,0.3)] font-bold"
-                >
-                  <ShieldAlert className="w-5 h-5" /> Check Eligibility Now
-                </Button>
-              )}
-            </div>
-          )}
-
         </div>
-      </div>
+      </section>
     </AppLayout>
   );
 }

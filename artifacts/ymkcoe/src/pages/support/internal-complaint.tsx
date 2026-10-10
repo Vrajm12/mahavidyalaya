@@ -367,7 +367,7 @@ export default function InternalComplaint() {
                                 required
                                 value={contactDetail}
                                 onChange={(e) => setContactDetail(e.target.value)}
-                                placeholder="e.g. priya.j@student.kbiper.edu.in"
+                                placeholder="e.g. priya.j@student.indrayanicollege.com"
                                 className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-muted-foreground/35"
                               />
                             </div>

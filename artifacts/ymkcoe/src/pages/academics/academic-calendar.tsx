@@ -36,8 +36,8 @@ const ODD_SEM_EVENTS: CalendarEvent[] = [
   { srNo: "11", activity: "Practical Submission", schedule: "Last Week of November 2026", category: "academic" },
   { srNo: "12", activity: "Internal Assessment – III (if applicable)", schedule: "Last Week of November 2026", category: "exam" },
   { srNo: "13", activity: "End Semester Practical Examination", schedule: "December 2026", category: "exam" },
-  { srNo: "14", activity: "End Semester Theory Examination", schedule: "As per University / MSBTE Schedule", category: "exam" },
-  { srNo: "15", activity: "Declaration of Semester Completion", schedule: "After University / MSBTE Examinations", category: "academic" }
+  { srNo: "14", activity: "End Semester Theory Examination", schedule: "As per SPPU University / MSBSHSE Board Schedule", category: "exam" },
+  { srNo: "15", activity: "Declaration of Semester Completion", schedule: "After University / Board Examinations", category: "academic" }
 ];
 
 const EVEN_SEM_EVENTS: CalendarEvent[] = [

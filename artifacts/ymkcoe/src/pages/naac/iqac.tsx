@@ -24,13 +24,13 @@ interface IQACMember {
 }
 
 const IQAC_MEMBERS: IQACMember[] = [
-  { name: "Dr. Rekha Patil", role: "Chairperson", designation: "Principal, KBIPER" },
-  { name: "Prof. Sandeep R. Bhegade", role: "IQAC Coordinator", designation: "Assistant Professor, Pharmaceutics" },
-  { name: "Shri. Ramdas Bhegade", role: "Management Representative", designation: "Secretary, Indrayani Vidya Mandir" },
-  { name: "Dr. Nilesh Patil", role: "Faculty Member", designation: "Associate Professor, Quality Assurance" },
-  { name: "Mrs. Priya Deshpande", role: "Faculty Member", designation: "Assistant Professor, Pharmaceutics" },
-  { name: "Dr. Sunil Patil", role: "External Expert (Industry)", designation: "Principal Scientist, Lupin Research Park" },
-  { name: "Mr. Rohit Jagtap", role: "Student Representative", designation: "Final Year B.Pharm" }
+  { name: "Dr. S. K. Malghe", role: "Chairperson", designation: "Principal, Indrayani Mahavidyalaya" },
+  { name: "Prof. S. R. Deshmukh", role: "IQAC Coordinator", designation: "Assistant Professor & HOD Arts" },
+  { name: "Shri. Chandrakant Shete", role: "Management Representative", designation: "Secretary, Indrayani Vidya Mandir Trust" },
+  { name: "Dr. V. R. Bhalerao", role: "Faculty Member", designation: "HOD Commerce" },
+  { name: "Dr. P. S. Kadam", role: "Faculty Member", designation: "HOD Science" },
+  { name: "Prof. K. N. Patil", role: "Faculty Member", designation: "HOD Computer Science" },
+  { name: "Mr. Rohit Jagtap", role: "Student Representative", designation: "Final Year BCS" }
 ];
 
 const MEETING_MINUTES = [
@@ -103,7 +103,7 @@ export default function IQACCell() {
               Internal Quality <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Assurance</span> Cell
             </h1>
             <p className="text-base md:text-lg text-white/80 font-light max-w-2xl mx-auto">
-              IQAC (Internal Quality Assurance Cell) plans, guides, and monitors quality enhancement and sustenance initiatives at KBIPER.
+              IQAC (Internal Quality Assurance Cell) plans, guides, and monitors quality enhancement and sustenance initiatives at Indrayani Mahavidyalaya.
             </p>
           </motion.div>
         </div>
@@ -334,9 +334,9 @@ export default function IQACCell() {
                         onChange={(e) => setSenderRole(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent text-foreground animate-in"
                       >
-                        <option value="Student">Student (B.Pharm / D.Pharm)</option>
+                        <option value="Student">Student (Junior / B.Sc. / BCS)</option>
                         <option value="Faculty">Teaching Staff</option>
-                        <option value="Alumni">KBIPER Alumni</option>
+                        <option value="Alumni">Indrayani Alumni</option>
                         <option value="Parent">Parent / Guardian</option>
                       </select>
                     </div>

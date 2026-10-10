@@ -36,7 +36,7 @@ export const PAST_EVENTS_REPORTS: ExtracurricularEvent[] = [
     "id": "ashwamedh_2026",
     "title": "ASHWAMEDH Cultural Festival 2026",
     "date": "April 17, 2026",
-    "venue": "IVM Campus / KBIPER College Ground",
+    "venue": "IVM Campus / Indrayani Ground",
     "guest": "Dr. Harshadeep Joshi (Registrar, DBATU University) & Shri Chandrakant Shete Sir (Secretary, IVM)",
     "participantsCount": "450+ Students",
     "staffCount": "40+ Staff",
@@ -81,8 +81,8 @@ export const PAST_EVENTS_REPORTS: ExtracurricularEvent[] = [
     "id": "euphoria_zest_2026",
     "title": "EUPHORIA ZEST 2026 (Days Celebration)",
     "date": "April 15 - 16, 2026",
-    "venue": "KBIPER Campus",
-    "guest": "Hon'ble Mrs. Nirupa Kanitkar Madam & KBIPER Faculty Members",
+    "venue": "Indrayani Mahavidyalaya Campus",
+    "guest": "Hon'ble Mrs. Nirupa Kanitkar Madam & Indrayani Mahavidyalaya Faculty Members",
     "participantsCount": "450+ Students",
     "staffCount": "40+ Staff",
     "objective": "Provide a creative space for students to showcase confidence and individuality through themed activities, promoting active collaboration and institutional camaraderie.",
@@ -105,7 +105,7 @@ export const PAST_EVENTS_REPORTS: ExtracurricularEvent[] = [
     "id": "freshers_party_2025",
     "title": "Fresher's Party 2025",
     "date": "December 6, 2025",
-    "venue": "KBIPER College Lawn",
+    "venue": "Indrayani Mahavidyalaya Lawn",
     "guest": "Dr. Lalit Gore (Chief Guest) & Hon'ble Mrs. Nirupa Kanitkar Madam",
     "participantsCount": "300+ Students",
     "staffCount": "40+ Staff",
@@ -134,7 +134,7 @@ export const PAST_EVENTS_REPORTS: ExtracurricularEvent[] = [
     "id": "teachers_day_2025",
     "title": "Teachers' Day Celebration 2025",
     "date": "September 4, 2025",
-    "venue": "KBIPER Seminar Hall",
+    "venue": "Indrayani Mahavidyalaya Seminar Hall",
     "guest": "Hon'ble Mrs. Nirupa Kanitkar Madam & IVM Sanstha Dignitaries",
     "participantsCount": "200+ Students",
     "staffCount": "40+ Staff",
@@ -161,7 +161,7 @@ export const PAST_EVENTS_REPORTS: ExtracurricularEvent[] = [
     "id": "farewell_chemonara_2026",
     "title": "Chemonara 2026 (Farewell & Prize Distribution)",
     "date": "June 5, 2026",
-    "venue": "KBIPER Seminar Hall",
+    "venue": "Indrayani Mahavidyalaya Seminar Hall",
     "guest": "Prof. (Dr.) Narendra Narve (Campus Director, IVM) & Mrs. Nirupa Kanitkar (Treasurer, IVM)",
     "participantsCount": "350+ Students",
     "staffCount": "40+ Staff",
@@ -276,10 +276,10 @@ export default function Cultural() {
               <Music className="w-8 h-8" />
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-none">
-              Pharma <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-amber-200 to-indigo-300">Fiesta</span>
+              Indrayani <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-amber-200 to-indigo-300">Mahotsav</span>
             </h1>
             <p className="text-sm md:text-base text-white/60 font-light max-w-xl mx-auto leading-relaxed">
-              Celebrating creativity and cultural diversity. KBIPER's annual cultural week showcases student talent in performing arts, literature, and design.
+              Celebrating creativity and cultural diversity. Indrayani Mahavidyalaya's annual cultural week showcases student talent in performing arts, literature, and design.
             </p>
           </motion.div>
         </div>

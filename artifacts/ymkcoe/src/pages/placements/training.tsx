@@ -119,17 +119,17 @@ const TRAINING_DATABASE: Record<string, {
         title: "Pharma Ethics, Professional Morale & Communication",
         category: "Soft Skills",
         trainer: "Prof. Sandeep R. Bhegade",
-        agency: "KBIPER Professional Cell",
+        agency: "Indrayani Professional Cell",
         hours: 20,
         dateRange: "Feb 12 - Feb 25, 2023",
-        target: "All B.Pharm & D.Pharm Students",
-        description: "Seminars regarding pharmacist code of conduct, physician interaction etiquettes, and patient counseling oral guidelines."
+        target: "Junior & Senior College Students",
+        description: "Seminars regarding professional ethics, corporate interview preparation, and effective communication skills."
       },
       {
-        title: "Pharmaceutical Chemistry Analytical Training",
+        title: "Advanced Computing & Scientific Analytical Training",
         category: "Technical",
-        trainer: "Dr. Rekha Patil",
-        agency: "KBIPER Labs & Analytical Systems",
+        trainer: "Prof. K. N. Patil",
+        agency: "Indrayani Labs & Computer Center",
         hours: 35,
         dateRange: "Mar 02 - Mar 25, 2023",
         target: "Final Year B.Pharm & M.Pharm Students",

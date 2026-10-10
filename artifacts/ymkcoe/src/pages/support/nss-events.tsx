@@ -95,7 +95,7 @@ export default function NssEvents() {
               NSS & <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Social Desk</span>
             </h1>
             <p className="text-base md:text-lg text-white/80 font-light max-w-2xl mx-auto">
-              Cultivating social responsibility. The National Service Scheme (NSS) unit at KBIPER organizes community development initiatives and health camps.
+              Cultivating social responsibility. The National Service Scheme (NSS) unit at Indrayani Mahavidyalaya organizes community development initiatives and health camps.
             </p>
           </motion.div>
         </div>

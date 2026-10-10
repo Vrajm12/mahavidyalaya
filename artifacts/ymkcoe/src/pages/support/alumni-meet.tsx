@@ -77,7 +77,7 @@ export default function AlumniMeet() {
     setIsRSVPed(true);
     toast({
       title: "RSVP Submitted",
-      description: "We are excited to see you at the KBIPER Alumni Meet!",
+      description: "We are excited to see you at the Indrayani Mahavidyalaya Alumni Meet!",
     });
   };
 
@@ -178,7 +178,7 @@ export default function AlumniMeet() {
                         <MapPin className="w-5 h-5 text-accent" />
                         <div>
                           <span className="text-[9px] uppercase text-white/50 block">Venue Location</span>
-                          <span>KBIPER Seminar Hall & Lawns</span>
+                          <span>Indrayani Mahavidyalaya Seminar Hall & Lawns</span>
                         </div>
                       </div>
                     </div>

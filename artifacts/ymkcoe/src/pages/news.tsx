@@ -33,7 +33,7 @@ export default function News() {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">News & Events</h1>
           <p className="text-lg text-primary-foreground/80 max-w-2xl">
-            Stay updated with the latest happenings, achievements, and upcoming events at Krishnarao Bhegade Institute of Pharmaceutical Education and Research (KBIPER).
+            Stay updated with the latest happenings, academic achievements, sports championships, and upcoming cultural events at Indrayani Mahavidyalaya (Junior & Senior College).
           </p>
         </div>
       </section>

@@ -39,40 +39,40 @@ interface CommitteeMember {
 const GRIEVANCE_MEMBERS: CommitteeMember[] = [
   { 
     id: "1", 
-    name: "Dr. Sanjay R. Arote", 
+    name: "Dr. S. K. Malghe", 
     role: "Chairman", 
     designation: "Principal", 
-    department: "College Administration", 
-    phone: "9960365969", 
-    email: "principal.iiper@gmail.com",
+    department: "Indrayani Mahavidyalaya Administration", 
+    phone: "02114-222225", 
+    email: "principal@indrayanicollege.com",
     isHead: true 
   },
   { 
     id: "2", 
-    name: "Dr. Mayuri V. Gurav", 
-    role: "Teaching Representative", 
-    designation: "Assistant Professor", 
-    department: "KBIPER", 
-    phone: "8149457732", 
-    email: "Mayuriguravmvg.iper@gmail.com" 
+    name: "Prof. S. R. Deshmukh", 
+    role: "Teaching Representative (Arts)", 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Arts", 
+    phone: "02114-222225", 
+    email: "deshmukh@indrayanicollege.com" 
   },
   { 
     id: "3", 
-    name: "Ms. Sohini Ganguly", 
-    role: "Teaching Representative", 
-    designation: "Assistant Professor", 
-    department: "KBIPER", 
-    phone: "8605544989", 
-    email: "iipsohini@gmail.com" 
+    name: "Dr. V. R. Bhalerao", 
+    role: "Teaching Representative (Commerce)", 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Commerce", 
+    phone: "02114-222225", 
+    email: "bhalerao@indrayanicollege.com" 
   },
   { 
     id: "4", 
-    name: "Dr. Payal K. Thorat", 
-    role: "Teaching Representative", 
-    designation: "Assistant Professor", 
-    department: "KBIPER", 
-    phone: "8275391357", 
-    email: "payal.pansare57@gmail.com" 
+    name: "Dr. P. S. Kadam", 
+    role: "Teaching Representative (Science)", 
+    designation: "Assistant Professor & HOD", 
+    department: "Department of Science", 
+    phone: "02114-222225", 
+    email: "kadam@indrayanicollege.com" 
   },
   { 
     id: "5", 
@@ -498,7 +498,7 @@ export default function Grievance() {
                                 required
                                 value={contactDetail}
                                 onChange={(e) => setContactDetail(e.target.value)}
-                                placeholder="e.g. amit.patil@student.kbiper.edu.in"
+                                placeholder="e.g. amit.patil@student.indrayanicollege.com"
                                 className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-muted-foreground/35"
                               />
                             </div>

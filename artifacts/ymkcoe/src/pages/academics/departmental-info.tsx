@@ -1,253 +1,219 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useLocation } from "wouter";
-import { Pill, FlaskConical, Beaker, Microscope, ArrowRight } from "lucide-react";
+import { useLocation, Link } from "wouter";
+import { Palette, Briefcase, Atom, Layers, Cpu, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const DEPARTMENTS = [
   {
-    id: "bpharm",
-    title: "B. Pharmacy",
-    subtitle: "Bachelor of Pharmacy",
-    duration: "4 Years",
-    intake: 100,
-    accent: "text-blue-500",
-    bgAccent: "bg-blue-500",
-    description: "A comprehensive four-year undergraduate program designed to produce competent pharmacists with profound knowledge of drug manufacturing, dispensing, and patient care. This degree forms the bedrock of pharmaceutical sciences, blending rigorous theoretical knowledge with extensive hands-on laboratory experience.",
+    id: "arts",
+    title: "Junior College Arts",
+    subtitle: "Classes 11 (FYJC) & 12 (SYJC)",
+    duration: "2 Years",
+    intake: 240,
+    accent: "text-amber-500",
+    bgAccent: "bg-amber-500",
+    description: "A comprehensive higher secondary humanities program cultivating critical reasoning, linguistic eloquence, historical inquiry, and socio-political awareness. Serves as a prime foundation for civil services, law, journalism, and social research.",
     modules: [
-      { title: "Pharmaceutics & Formulations", desc: "Design and development of novel drug delivery systems." },
-      { title: "Pharmacology & Toxicology", desc: "Understanding drug action, interactions, and therapeutic uses." },
-      { title: "Pharmaceutical Chemistry", desc: "Synthesis, characterization, and analysis of drug molecules." },
-      { title: "Pharmacognosy", desc: "Extraction and study of drugs from natural botanical sources." }
+      { title: "Languages & Literature", desc: "Compulsory English and Modern Indian Languages (Marathi / Hindi)." },
+      { title: "Historical & Cultural Studies", desc: "Indian history, ancient civilizations, and Maval heritage historiography." },
+      { title: "Social & Political Governance", desc: "Constitutional democracy, governance structures, and international relations." },
+      { title: "Economic & Human Geography", desc: "Microeconomics, national development, cartography, and physical geography." }
     ],
-    icon: Pill
+    link: "/arts",
+    icon: Palette
   },
   {
-    id: "dpharm",
-    title: "D. Pharmacy",
-    subtitle: "Diploma in Pharmacy",
+    id: "commerce",
+    title: "Junior College Commerce",
+    subtitle: "Classes 11 (FYJC) & 12 (SYJC)",
     duration: "2 Years",
-    intake: 60,
+    intake: 360,
     accent: "text-emerald-500",
     bgAccent: "bg-emerald-500",
-    description: "A foundational two-year diploma program focusing on the practical aspects of pharmacy, preparing students for vital roles in community and hospital pharmacy. It provides the quickest pathway to becoming a registered pharmacist.",
+    description: "Foundational commercial and financial curriculum designed to develop proficient accountants, enterprise managers, and financial analysts. Provides springboard training for CA, CS, CMA, and MBA degrees.",
     modules: [
-      { title: "Community Pharmacy", desc: "Patient counseling, prescription handling, and inventory management." },
-      { title: "Hospital Pharmacy", desc: "Clinical workflows, inpatient drug distribution, and safety." },
-      { title: "Drug Store Management", desc: "Regulatory compliance, storage logistics, and business operations." },
-      { title: "Basic Therapeutics", desc: "Fundamental understanding of common diseases and their treatments." }
+      { title: "Book-Keeping & Accountancy", desc: "Double-entry bookkeeping, ledger systems, partnership accounts, and balance sheets." },
+      { title: "Organization of Commerce", desc: "Forms of enterprise, corporate management, marketing, and consumer law." },
+      { title: "Commercial Mathematics / SP", desc: "Secretarial practice compliance or commercial statistics and calculus." },
+      { title: "Macro & Applied Economics", desc: "National income, monetary and fiscal policy, banking, and public finance." }
     ],
-    icon: FlaskConical
+    link: "/commerce",
+    icon: Briefcase
   },
   {
-    id: "mpharm",
-    title: "M. Pharmacy",
-    subtitle: "Master of Pharmacy",
+    id: "science",
+    title: "Junior College Science",
+    subtitle: "Classes 11 (FYJC) & 12 (SYJC)",
     duration: "2 Years",
-    intake: 30,
-    accent: "text-[#F4B609]",
-    bgAccent: "bg-[#F4B609]",
-    description: "An advanced postgraduate program offering specializations in Pharmaceutics and Quality Assurance, aimed at creating industry-ready research professionals and future leaders in pharmaceutical manufacturing.",
+    intake: 240,
+    accent: "text-cyan-500",
+    bgAccent: "bg-cyan-500",
+    description: "Rigorous scientific instruction combined with hands-on laboratory experimentation. Aligned with state board requirements and competitive national entrance examinations (MHT-CET, JEE, NEET).",
     modules: [
-      { title: "Advanced Pharmaceutics", desc: "Targeted drug delivery, nanotechnology, and biopharmaceutics." },
-      { title: "Quality Assurance", desc: "TQM, validation, cGMP compliance, and regulatory affairs." },
-      { title: "Research Methodology", desc: "Experimental design, biostatistics, and scientific writing." },
-      { title: "Industrial Pharmacokinetics", desc: "Absorption, distribution, metabolism, and excretion modeling." }
+      { title: "Physics Laboratory & Theory", desc: "Mechanics, thermodynamics, electrodynamics, optics, and semiconductor physics." },
+      { title: "Chemical Synthesis & Analysis", desc: "Organic mechanisms, inorganic periodicity, physical chemistry, and qualitative analysis." },
+      { title: "Mathematics & Computing", desc: "Calculus, differential equations, vectors, statistics, and information technology." },
+      { title: "Biological Sciences", desc: "Cellular biology, genetics, plant physiology, animal taxonomy, and ecology." }
     ],
-    icon: Beaker
+    link: "/science",
+    icon: Atom
+  },
+  {
+    id: "bsc",
+    title: "B.Sc. — Bachelor of Science",
+    subtitle: "Undergraduate Degree (SPPU)",
+    duration: "3 Years",
+    intake: 120,
+    accent: "text-blue-500",
+    bgAccent: "bg-blue-500",
+    description: "Three-year comprehensive university undergraduate program affiliated with Savitribai Phule Pune University (SPPU). Focuses on deep experimental research across physical, chemical, and biological sciences.",
+    modules: [
+      { title: "Advanced Chemistry", desc: "Spectroscopy, coordination compounds, physical chemistry, and green synthesis." },
+      { title: "Experimental & Modern Physics", desc: "Quantum mechanics, solid state physics, nuclear physics, and optics." },
+      { title: "Botanical & Life Sciences", desc: "Plant morphology, biochemistry, physiology, and microbiology laboratory work." },
+      { title: "Applied Mathematics", desc: "Linear algebra, multivariable calculus, and numerical computation." }
+    ],
+    link: "/bsc",
+    icon: Layers
+  },
+  {
+    id: "bcs",
+    title: "BCS — Bachelor of Computer Science",
+    subtitle: "Undergraduate Degree (SPPU)",
+    duration: "3 Years",
+    intake: 80,
+    accent: "text-indigo-500",
+    bgAccent: "bg-indigo-500",
+    description: "Our premier technical computing degree affiliated with Savitribai Phule Pune University. Equips students with software development skills, algorithmic analysis, full stack engineering, database systems, and AI.",
+    modules: [
+      { title: "Software Development Toolchains", desc: "C/C++, Core Java, Python, and modern web application development." },
+      { title: "Data Structures & Algorithms", desc: "Time complexity analysis, trees, graphs, dynamic programming, and data systems." },
+      { title: "Database & Cloud Architecture", desc: "SQL relational databases, NoSQL, Linux systems, and cloud fundamentals." },
+      { title: "Applied AI & Data Analytics", desc: "Machine learning algorithms, predictive modeling, and capstone software projects." }
+    ],
+    link: "/bcs",
+    icon: Cpu
   }
 ];
 
 export default function DepartmentalInfo() {
-  const [location] = useLocation();
-  const [activeTab, setActiveTab] = useState(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const tab = params.get("tab");
-      if (tab && DEPARTMENTS.some(d => d.id === tab)) {
-        return tab;
-      }
-    }
-    return DEPARTMENTS[0].id;
-  });
+  const [activeTab, setActiveTab] = useState(DEPARTMENTS[0].id);
 
+  // Sync tab with query parameters if present
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const tab = params.get("tab");
-    if (tab && DEPARTMENTS.some(d => d.id === tab)) {
-      setActiveTab(tab);
+    const tabParam = params.get("tab");
+    if (tabParam && DEPARTMENTS.some(d => d.id === tabParam)) {
+      setActiveTab(tabParam);
     }
-  }, [location]);
-  
-  const activeDept = DEPARTMENTS.find(d => d.id === activeTab) || DEPARTMENTS[0];
+  }, []);
+
+  const currentDept = DEPARTMENTS.find(d => d.id === activeTab) || DEPARTMENTS[0];
+  const IconComponent = currentDept.icon;
 
   return (
     <AppLayout>
-      
-      {/* Compact 50/50 Hero Section */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-primary text-white overflow-hidden">
-        {/* Dynamic deep background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/20 via-primary to-[#011a2a]" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            
-            {/* Left: Text */}
-            <div className="md:w-1/2 text-center md:text-left">
-              <motion.h1 
-                initial={{ opacity: 0, x: -30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-tight mb-6"
-              >
-                Academic <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#e6d080] to-accent drop-shadow-2xl">
-                  Departments
-                </span>
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, x: -30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-lg md:text-xl text-white/70 font-light max-w-lg leading-relaxed mx-auto md:mx-0"
-              >
-                Explore the cornerstone programs that define our legacy in pharmaceutical education and research.
-              </motion.p>
-            </div>
-            
-            {/* Right: Graphic / Faded Overlay Element */}
-            <div className="md:w-1/2 flex justify-center md:justify-end relative">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }} 
-                animate={{ opacity: 0.15, scale: 1 }} 
-                transition={{ duration: 1.5, ease: "easeOut" }} 
-                className="absolute bg-accent/30 blur-[100px] w-64 h-64 md:w-96 md:h-96 rounded-full right-0" 
-              />
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.4 }}
-                className="relative z-10 opacity-20"
-              >
-                <Microscope className="w-40 h-40 md:w-64 md:h-64 text-white" strokeWidth={0.5} />
-              </motion.div>
-            </div>
-
-          </div>
+      {/* Hero */}
+      <section className="bg-primary text-white py-16">
+        <div className="container mx-auto px-4 max-w-5xl text-center space-y-3">
+          <span className="text-accent text-xs font-bold tracking-widest uppercase">Academic Disciplines</span>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Departmental Information</h1>
+          <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            Detailed overview of academic streams and degree programs offered at Indrayani Mahavidyalaya under Indrayani Vidya Mandir Trust.
+          </p>
         </div>
       </section>
 
-      {/* Interactive Tabbed Canvas */}
-      <section className="py-16 md:py-24 bg-background min-h-screen">
-        <div className="container mx-auto px-4 max-w-6xl">
-          
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap gap-2 md:gap-4 mb-16 border-b border-muted pb-4">
+      {/* Tabs Bar */}
+      <section className="py-6 bg-background border-b border-border sticky top-[64px] md:top-[80px] z-40 shadow-sm">
+        <div className="container mx-auto px-4 max-w-5xl overflow-x-auto pb-2 -mb-2">
+          <div className="flex gap-2 min-w-max">
             {DEPARTMENTS.map((dept) => {
-              const isActive = activeTab === dept.id;
               const Icon = dept.icon;
+              const isActive = activeTab === dept.id;
               return (
                 <button
                   key={dept.id}
                   onClick={() => setActiveTab(dept.id)}
-                  className={`relative flex items-center gap-2 px-6 py-4 rounded-xl text-lg font-bold transition-all duration-300 ${
-                    isActive ? "text-primary bg-muted/50" : "text-muted-foreground hover:text-primary hover:bg-muted/30"
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                    isActive
+                      ? "bg-primary text-white shadow-md shadow-primary/20"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? dept.accent : ""}`} />
-                  {dept.title}
-                  
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabIndicator"
-                      className="absolute bottom-[-17px] left-0 right-0 h-[2px] bg-accent"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
+                  <Icon className="w-4 h-4" />
+                  <span>{dept.title}</span>
                 </button>
               );
             })}
           </div>
-
-          {/* Dynamic Content Area (No Bento Boxes) */}
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeDept.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex flex-col gap-16"
-              >
-                
-                {/* Header & Stats */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-                  <div>
-                    <h2 className="text-4xl md:text-5xl font-black text-primary mb-2 tracking-tight">
-                      {activeDept.title}
-                    </h2>
-                    <h3 className="text-xl text-muted-foreground font-light tracking-wide">
-                      {activeDept.subtitle}
-                    </h3>
-                  </div>
-                  
-                  <div className="flex gap-12">
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Intake</span>
-                      <span className={`text-5xl font-black ${activeDept.accent}`}>{activeDept.intake}</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Duration</span>
-                      <span className={`text-5xl font-black ${activeDept.accent}`}>{activeDept.duration.split(' ')[0]} <span className="text-2xl font-medium text-muted-foreground tracking-normal">{activeDept.duration.split(' ')[1]}</span></span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Elegant Overview (Border Left style, no box) */}
-                <div className="relative pl-6 md:pl-10">
-                  <div className={`absolute left-0 top-2 bottom-2 w-1 ${activeDept.bgAccent} rounded-full`} />
-                  <p className="text-xl md:text-2xl font-light text-primary/80 leading-relaxed max-w-4xl">
-                    {activeDept.description}
-                  </p>
-                </div>
-
-                {/* Floating Modules List (Staggered, no boxes) */}
-                <div>
-                  <h4 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Core Competencies</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-                    {activeDept.modules.map((mod, idx) => (
-                      <motion.div 
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 + (idx * 0.1), duration: 0.5 }}
-                        className="flex items-start gap-6 group"
-                      >
-                        <div className={`mt-1.5 w-1.5 h-1.5 rounded-full ${activeDept.bgAccent} group-hover:scale-150 transition-transform duration-300 shrink-0 shadow-[0_0_10px_rgba(0,0,0,0.1)]`} />
-                        <div>
-                          <h5 className="text-xl font-bold text-primary mb-2 flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
-                            {mod.title}
-                            <ArrowRight className={`w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${activeDept.accent}`} />
-                          </h5>
-                          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                            {mod.desc}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-              </motion.div>
-            </AnimatePresence>
-          </div>
-          
         </div>
       </section>
-      
+
+      {/* Department Detail View */}
+      <section className="py-16 bg-muted/20">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="bg-card border border-border/70 rounded-3xl p-8 md:p-12 shadow-lg space-y-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-border/70 pb-6">
+              <div className="flex items-center gap-4">
+                <div className={`w-14 h-14 rounded-2xl ${currentDept.bgAccent}/15 ${currentDept.accent} flex items-center justify-center shrink-0`}>
+                  <IconComponent className="w-7 h-7" />
+                </div>
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">{currentDept.title}</h2>
+                  <p className="text-sm text-muted-foreground">{currentDept.subtitle}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 text-xs font-semibold text-muted-foreground">
+                <div className="bg-muted px-3 py-1.5 rounded-lg">
+                  Duration: <strong className="text-foreground">{currentDept.duration}</strong>
+                </div>
+                <div className="bg-muted px-3 py-1.5 rounded-lg">
+                  Intake: <strong className="text-foreground">{currentDept.intake} Seats</strong>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-sm text-foreground/80 leading-relaxed text-base">
+              {currentDept.description}
+            </p>
+
+            {/* Modules Grid */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-foreground">Curriculum & Subject Modules</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {currentDept.modules.map((mod, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-muted/30 border border-border/60 space-y-1.5">
+                    <div className="flex items-center gap-2 text-primary font-bold text-sm">
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                      <span>{mod.title}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed pl-6">{mod.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct Action Link */}
+            <div className="pt-4 border-t border-border flex flex-wrap justify-between items-center gap-4">
+              <Link href={currentDept.link}>
+                <Button className="bg-primary hover:bg-accent text-white font-semibold flex items-center gap-2">
+                  <span>Visit Dedicated {currentDept.title} Portal</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+              <Link href="/admissions">
+                <Button variant="outline">
+                  Apply for Admission
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </AppLayout>
   );
 }

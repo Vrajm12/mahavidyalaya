@@ -192,7 +192,7 @@ export default function Media() {
     setIsSyncing(true);
     toast({
       title: "Syncing Social Feeds",
-      description: "Querying Meta Graph API for kbiper_pharmacy and facebook.com/kbiper.pune...",
+      description: "Querying Meta Graph API for indrayani_mahavidyalaya and facebook.com/indrayanicollege.pune...",
     });
 
     setTimeout(() => {
@@ -375,7 +375,7 @@ export default function Media() {
                         <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                         <span className="text-[9px] font-bold text-emerald-600 uppercase">Live Connected</span>
                       </div>
-                      <p className="text-muted-foreground text-[10px] mt-0.5">Directly syncing 3 recent posts of Instagram (@kbiper_pharmacy) and Facebook (/kbiper.pune).</p>
+                      <p className="text-muted-foreground text-[10px] mt-0.5">Directly syncing 3 recent posts of Instagram (@indrayani_mahavidyalaya) and Facebook (/indrayanicollege.pune).</p>
                     </div>
                   </div>
 
@@ -490,11 +490,11 @@ export default function Media() {
                       {/* Header */}
                       <div className="p-4 flex items-center gap-3 border-b border-muted">
                         <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-yellow-500 to-purple-600 text-white font-bold flex items-center justify-center text-xs">
-                          KB
+                          IM
                         </div>
                         <div className="text-xs">
                           <span className="font-extrabold text-primary flex items-center gap-1">
-                            kbiper_pharmacy <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
+                            indrayani_mahavidyalaya <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
                           </span>
                           <span className="text-[10px] text-muted-foreground">Talegaon Dabhade, Pune</span>
                         </div>
@@ -524,8 +524,8 @@ export default function Media() {
                         </div>
 
                         <p className="leading-relaxed text-muted-foreground text-xs">
-                          <strong className="text-primary font-extrabold mr-1">kbiper_pharmacy</strong>
-                          National Conference on Herbal Formulation starts today! Principal Dr. Sanjay Arote welcoming delegates to advanced drug delivery validations. 🌿📚 #education #pharmacy #seminar #pune
+                          <strong className="text-primary font-extrabold mr-1">indrayani_mahavidyalaya</strong>
+                          Annual Science Exhibition & Innovation Fair starts today! Principal Dr. S. K. Malghe welcoming junior and senior scholars to project demonstrations. 🔬📚 #education #science #indrayani #pune
                         </p>
                       </div>
                     </div>
@@ -535,11 +535,11 @@ export default function Media() {
                       {/* Header */}
                       <div className="p-4 flex items-center gap-3 border-b border-muted">
                         <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-yellow-500 to-purple-600 text-white font-bold flex items-center justify-center text-xs">
-                          KB
+                          IM
                         </div>
                         <div className="text-xs">
                           <span className="font-extrabold text-primary flex items-center gap-1">
-                            kbiper_pharmacy <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
+                            indrayani_mahavidyalaya <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
                           </span>
                           <span className="text-[10px] text-muted-foreground">Talegaon Dabhade, Pune</span>
                         </div>
@@ -569,8 +569,8 @@ export default function Media() {
                         </div>
 
                         <p className="leading-relaxed text-muted-foreground text-xs">
-                          <strong className="text-primary font-extrabold mr-1">kbiper_pharmacy</strong>
-                          PLACEMENT SUCCESS! Heartiest congratulations to our final year topper Amit Gade for securing placement at Lupin Research Park with 6.5 LPA package. 🎓💼 #placements #success #kbiper #careers
+                          <strong className="text-primary font-extrabold mr-1">indrayani_mahavidyalaya</strong>
+                          PLACEMENT SUCCESS! Heartiest congratulations to our final year BCS topper Siddharth Kadam for securing placement at TCS Digital with 7.2 LPA package. 🎓💼 #placements #success #bcs #indrayani
                         </p>
                       </div>
                     </div>
@@ -589,11 +589,11 @@ export default function Media() {
                       {/* Header */}
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs shadow-md">
-                          KB
+                          IM
                         </div>
                         <div className="text-xs">
                           <h4 className="font-extrabold text-primary flex items-center gap-1">
-                            Krishnarao Bhegade Institute of Pharmaceutical Education (KBIPER)
+                            Indrayani Mahavidyalaya (Junior & Senior College)
                             <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
                           </h4>
                           <p className="text-[10px] text-muted-foreground">1 day ago • Public</p>
@@ -639,11 +639,11 @@ export default function Media() {
                       {/* Header */}
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs shadow-md">
-                          KB
+                          IM
                         </div>
                         <div className="text-xs">
                           <h4 className="font-extrabold text-primary flex items-center gap-1">
-                            Krishnarao Bhegade Institute of Pharmaceutical Education (KBIPER)
+                            Indrayani Mahavidyalaya (Junior & Senior College)
                             <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
                           </h4>
                           <p className="text-[10px] text-muted-foreground">5 days ago • Public</p>
@@ -689,11 +689,11 @@ export default function Media() {
                       {/* Header */}
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-extrabold flex items-center justify-center text-xs shadow-md">
-                          KB
+                          IM
                         </div>
                         <div className="text-xs">
                           <h4 className="font-extrabold text-primary flex items-center gap-1">
-                            Krishnarao Bhegade Institute of Pharmaceutical Education (KBIPER)
+                            Indrayani Mahavidyalaya (Junior & Senior College)
                             <span className="h-3.5 w-3.5 bg-blue-500 rounded-full flex items-center justify-center text-[7px] text-white">✓</span>
                           </h4>
                           <p className="text-[10px] text-muted-foreground">2 weeks ago • Public</p>
@@ -743,12 +743,12 @@ export default function Media() {
                         Our full community, event coverage photos, and live notifications are regularly broadcasted to the official Facebook page.
                       </p>
                       <a 
-                        href="https://www.facebook.com/kbiper.pune" 
+                        href="https://www.facebook.com/indrayanicollege.pune" 
                         target="_blank" 
                         rel="noreferrer"
                         className="cursor-pointer inline-flex items-center gap-1 text-xs font-bold text-accent hover:text-white transition-colors"
                       >
-                        Visit official page (facebook.com/kbiper.pune) <ExternalLink className="w-3.5 h-3.5" />
+                        Visit official page (facebook.com/indrayanicollege.pune) <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     </div>
 

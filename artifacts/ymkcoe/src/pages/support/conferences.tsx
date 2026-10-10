@@ -271,7 +271,7 @@ export default function Conferences() {
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="e.g. shraddha.m@student.kbiper.edu.in"
+                            placeholder="e.g. shraddha.m@student.indrayanicollege.com"
                             className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-muted-foreground/35"
                           />
                         </div>

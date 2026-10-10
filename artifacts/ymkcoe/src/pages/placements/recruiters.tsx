@@ -33,7 +33,7 @@ const RECRUITERS_DATA: Recruiter[] = [
     category: "R&D & Formulation",
     hiresCount: 38,
     packageRange: "4.5 - 7.5 LPA",
-    testimonial: "KBIPER graduates show strong sterile manufacturing awareness, logical R&D reasoning capabilities, and outstanding lab ethics.",
+    testimonial: "Indrayani Mahavidyalaya graduates show strong scientific acumen, logical reasoning capabilities, and outstanding professional ethics.",
     hrName: "Dr. Nitin Salvi (R&D Panel)"
   },
   {
@@ -57,7 +57,7 @@ const RECRUITERS_DATA: Recruiter[] = [
     category: "Clinical Research",
     hiresCount: 28,
     packageRange: "4.0 - 6.8 LPA",
-    testimonial: "KBIPER candidates demonstrate absolute proficiency in pharmacovigilance safety coding and clinical data logging.",
+    testimonial: "Indrayani candidates demonstrate absolute proficiency in algorithmic problem solving, software engineering, and technical communication.",
     hrName: "Mr. Ramesh More (Clinical HR)"
   },
   {

@@ -53,7 +53,7 @@ export default function AdminLogin() {
           <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-4 text-accent border border-accent/20">
             <Lock className="h-7 w-7" />
           </div>
-          <CardTitle className="text-2xl font-black tracking-tight text-primary">KBIPER Console</CardTitle>
+          <CardTitle className="text-2xl font-black tracking-tight text-primary">Indrayani Admin Console</CardTitle>
           <p className="text-xs text-muted-foreground uppercase font-bold tracking-wider mt-1.5">Administrative Login</p>
         </CardHeader>
         <CardContent className="p-8">

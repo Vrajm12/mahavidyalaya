@@ -33,9 +33,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         {/* Brand Logo Box */}
         <div className="h-20 flex flex-col justify-center px-6 border-b border-slate-800/60 bg-gradient-to-br from-[#0a1e2f] to-[#040e17]">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center font-bold text-white shadow-md text-sm shrink-0 border border-white/10">KB</div>
+            <div className="h-8 w-8 rounded-lg bg-accent flex items-center justify-center font-bold text-white shadow-md text-sm shrink-0 border border-white/10">IM</div>
             <div>
-              <span className="font-extrabold text-sm tracking-wide text-white block">KBIPER Console</span>
+              <span className="font-extrabold text-sm tracking-wide text-white block">Indrayani Admin Console</span>
               <span className="text-[9px] text-accent/80 font-bold uppercase tracking-widest block -mt-0.5">Admin Portal</span>
             </div>
           </div>

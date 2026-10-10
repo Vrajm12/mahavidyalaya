@@ -1,39 +1,101 @@
 import { AppLayout } from "@/components/layout/AppLayout";
-import { useGetCourses } from "@workspace/api-client-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Users, BookOpen } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Clock, Users, BookOpen, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Link } from "wouter";
 
 const DEPARTMENTS = [
   "All",
-  "Diploma",
-  "Undergraduate",
-  "Postgraduate",
+  "Junior College — Arts",
+  "Junior College — Commerce",
+  "Junior College — Science",
+  "Senior College — B.Sc.",
+  "Senior College — BCS",
+];
+
+const STATIC_PROGRAMS = [
+  {
+    name: "Junior College — Arts (FYJC & SYJC)",
+    department: "Junior College — Arts",
+    type: "Higher Secondary (Class 11 & 12)",
+    duration: "2 Years",
+    seats: 240,
+    eligibility: "Class 10 (SSC) passed from recognized board with English",
+    fees: "Govt. of Maharashtra Grant-in-Aid norms",
+    description: "Focuses on English, modern Indian languages, history, geography, economics, political science, and sociology. Strong orientation towards civil services, law, journalism, and humanities.",
+    link: "/arts",
+  },
+  {
+    name: "Junior College — Commerce (FYJC & SYJC)",
+    department: "Junior College — Commerce",
+    type: "Higher Secondary (Class 11 & 12)",
+    duration: "2 Years",
+    seats: 360,
+    eligibility: "Class 10 (SSC) passed from recognized board",
+    fees: "Govt. of Maharashtra Grant-in-Aid norms",
+    description: "Covers Book-Keeping & Accountancy, Organization of Commerce, Economics, and Secretarial Practice / Mathematics. Preparation for CA, CS, CMA, banking, and commerce degrees.",
+    link: "/commerce",
+  },
+  {
+    name: "Junior College — Science (FYJC & SYJC)",
+    department: "Junior College — Science",
+    type: "Higher Secondary (Class 11 & 12)",
+    duration: "2 Years",
+    seats: 240,
+    eligibility: "Class 10 (SSC) passed with minimum 35% in Science & Maths",
+    fees: "Govt. of Maharashtra Grant-in-Aid norms",
+    description: "Rigorous curriculum in Physics, Chemistry, Mathematics, Biology, and IT with practical laboratory training. Comprehensive guidance for MHT-CET, JEE, and NEET.",
+    link: "/science",
+  },
+  {
+    name: "B.Sc. — Bachelor of Science",
+    department: "Senior College — B.Sc.",
+    type: "Undergraduate Degree (SPPU)",
+    duration: "3 Years (6 Semesters)",
+    seats: 120,
+    eligibility: "HSC (10+2) passed in Science stream",
+    fees: "Affordable fee structure as prescribed by SPPU",
+    description: "Three-year comprehensive degree affiliated with Savitribai Phule Pune University in Physics, Chemistry, Mathematics, Botany, and Microbiology with specialized experimental projects.",
+    link: "/bsc",
+  },
+  {
+    name: "BCS — Bachelor of Computer Science",
+    department: "Senior College — BCS",
+    type: "Undergraduate Degree (SPPU)",
+    duration: "3 Years (6 Semesters)",
+    seats: 80,
+    eligibility: "HSC (10+2) Science with Mathematics or 3-Year Polytechnic Diploma",
+    fees: "As prescribed by Savitribai Phule Pune University",
+    description: "Premier technical undergraduate degree program specializing in Data Structures, Modern Web Architecture, Relational Databases, Python, Cloud Computing, and Artificial Intelligence.",
+    link: "/bcs",
+  },
 ];
 
 export default function Courses() {
   const [selectedDept, setSelectedDept] = useState<string>("All");
-  
-  const { data: coursesData, isLoading } = useGetCourses(
-    selectedDept !== "All" ? { department: selectedDept } : undefined
-  );
-  const courses = Array.isArray(coursesData) ? coursesData : [];
+
+  const filtered = STATIC_PROGRAMS.filter((p) => {
+    if (selectedDept === "All") return true;
+    return p.department === selectedDept;
+  });
 
   return (
     <AppLayout>
       <section className="bg-primary text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Academic Programs</h1>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl">
-            Explore our comprehensive range of diploma, undergraduate, and postgraduate pharmacy programs designed to build healthcare excellence.
+        <div className="container mx-auto px-4 max-w-5xl">
+          <Badge className="bg-accent/20 text-accent border-accent/40 text-xs font-semibold mb-3">
+            Academics Directory
+          </Badge>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Academic Programs</h1>
+          <p className="text-lg text-primary-foreground/80 mt-2 max-w-2xl leading-relaxed">
+            Explore our comprehensive range of Junior College programs in Arts, Commerce, and Science alongside University Undergraduate Degrees in B.Sc. and BCS.
           </p>
         </div>
       </section>
 
-      <section className="py-12 bg-background border-b border-border sticky top-[64px] md:top-[80px] z-40 shadow-sm">
+      <section className="py-8 bg-background border-b border-border sticky top-[64px] md:top-[80px] z-40 shadow-sm">
         <div className="container mx-auto px-4 overflow-x-auto pb-2 -mb-2">
           <div className="flex gap-2 min-w-max">
             {DEPARTMENTS.map((dept) => (
@@ -41,7 +103,7 @@ export default function Courses() {
                 key={dept}
                 variant={selectedDept === dept ? "default" : "outline"}
                 onClick={() => setSelectedDept(dept)}
-                className={selectedDept === dept ? "bg-accent hover:bg-accent/90" : ""}
+                className={selectedDept === dept ? "bg-primary text-white font-semibold" : "text-xs"}
               >
                 {dept}
               </Button>
@@ -51,74 +113,58 @@ export default function Courses() {
       </section>
 
       <section className="py-16 bg-muted/20">
-        <div className="container mx-auto px-4">
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="overflow-hidden">
-                  <Skeleton className="h-48 w-full rounded-none" />
-                  <CardContent className="p-6">
-                    <Skeleton className="h-4 w-24 mb-4" />
-                    <Skeleton className="h-6 w-full mb-4" />
-                    <Skeleton className="h-4 w-full mb-2" />
-                    <Skeleton className="h-4 w-2/3 mb-6" />
-                    <div className="flex gap-4">
-                      <Skeleton className="h-4 w-20" />
-                      <Skeleton className="h-4 w-20" />
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : courses.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {courses.map((course) => (
-                <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full border-border">
-                  <div className="h-48 bg-secondary/10 relative">
-                    {(course as any).imageUrl ? (
-                      <img src={(course as any).imageUrl} alt={course.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground bg-muted">
-                        <BookOpen className="h-12 w-12 opacity-20" />
-                      </div>
-                    )}
-                    <Badge className="absolute top-4 right-4 bg-primary text-white">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {filtered.map((course, idx) => (
+              <Card key={idx} className="border-border/60 hover:shadow-xl transition-all flex flex-col justify-between group overflow-hidden">
+                <div className="p-8 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline" className="text-xs text-primary border-primary/30">
                       {course.type}
                     </Badge>
+                    <span className="text-xs font-mono font-bold text-muted-foreground flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {course.duration}
+                    </span>
                   </div>
-                  <CardContent className="p-6 flex-1 flex flex-col">
-                    <div className="text-xs font-semibold text-accent uppercase tracking-wider mb-2">
-                      {course.department}
-                    </div>
-                    <h3 className="text-xl font-bold text-primary mb-3">{course.name}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-3 mb-6 flex-1">
-                      {course.description || "No description provided."}
+
+                  <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                    {course.name}
+                  </h3>
+
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {course.description}
+                  </p>
+
+                  <div className="space-y-1.5 pt-2 border-t border-border/60 text-xs">
+                    <p className="text-muted-foreground">
+                      <strong className="text-foreground">Eligibility:</strong> {course.eligibility}
                     </p>
-                    
-                    <div className="grid grid-cols-2 gap-4 text-sm bg-muted/50 p-4 rounded-lg mt-auto">
-                      <div className="flex items-center text-foreground">
-                        <Clock className="h-4 w-4 mr-2 text-accent" />
-                        <span>{course.duration}</span>
-                      </div>
-                      <div className="flex items-center text-foreground">
-                        <Users className="h-4 w-4 mr-2 text-accent" />
-                        <span>{course.seats} Seats</span>
-                      </div>
-                      <div className="col-span-2 text-xs text-muted-foreground pt-2 border-t border-border mt-2">
-                        <span className="font-semibold text-foreground">Eligibility:</span> {course.eligibility || "Standard university norms"}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-white rounded-xl border border-border">
-              <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-primary mb-2">No courses found</h3>
-              <p className="text-muted-foreground">We couldn't find any courses matching your criteria.</p>
-            </div>
-          )}
+                    <p className="text-muted-foreground">
+                      <strong className="text-foreground">Intake Seats:</strong> {course.seats}
+                    </p>
+                    <p className="text-muted-foreground">
+                      <strong className="text-foreground">Fees:</strong> {course.fees}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-8 pt-0 flex gap-3">
+                  <Link href={course.link} className="flex-1">
+                    <Button className="w-full bg-primary hover:bg-accent text-white font-medium flex items-center justify-center gap-2 transition-colors">
+                      <span>Explore Program Details</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/admissions">
+                    <Button variant="outline" className="text-xs">
+                      Apply
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </AppLayout>

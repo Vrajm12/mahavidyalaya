@@ -111,7 +111,7 @@ export default function PlacementsIndustrialVisit() {
                 <Building className="w-5 h-5 text-accent" /> Visualizing Industry Standards
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Industrial visits are a core competency requirement at KBIPER. By visiting state-of-the-art analytical research hubs and traditional formulations manufacturers, students experience the strict standards of GMP, sterile areas, quality controls, and advanced machinery.
+                Industrial visits are a core competency requirement at Indrayani Mahavidyalaya. By visiting state-of-the-art analytical research hubs, industrial tech centers, and corporate facilities, students experience firsthand modern industry standards, quality protocols, and advanced workflows.
               </p>
             </div>
             <div className="flex gap-4 shrink-0 bg-primary/5 p-4 rounded-2xl border border-primary/10">

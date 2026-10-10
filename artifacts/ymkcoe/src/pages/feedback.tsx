@@ -301,7 +301,7 @@ export default function Feedback() {
                           required
                           value={contactInfo}
                           onChange={(e) => setContactInfo(e.target.value)}
-                          placeholder="e.g. john@kbiper.edu.in"
+                          placeholder="e.g. john@student.indrayanicollege.com"
                           className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent transition-all placeholder:text-muted-foreground/40"
                         />
                       </div>
@@ -310,9 +310,9 @@ export default function Feedback() {
                     <div className="grid grid-cols-1 gap-4">
                       <div>
                         <label className="block text-[10px] font-bold text-primary mb-1 uppercase tracking-wide">
-                          {activeRole === "student" && "Current Year & Batch (e.g. Third Year B.Pharm 2023-27)"}
-                          {activeRole === "alumni" && "Graduating Year & Batch (e.g. Graduated 2021-22)"}
-                          {activeRole === "faculty" && "Designation & Department (e.g. Associate Professor - Pharmaceutics)"}
+                          {activeRole === "student" && "Current Year & Stream (e.g. Third Year BCS / Class 12 Science)"}
+                          {activeRole === "alumni" && "Graduating Year & Stream (e.g. B.Sc. Graduated 2024)"}
+                          {activeRole === "faculty" && "Designation & Department (e.g. Assistant Professor - Computer Science)"}
                         </label>
                         <input
                           type="text"

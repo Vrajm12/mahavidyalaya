@@ -128,7 +128,7 @@ export function FacultyManager() {
                     <FormItem><FormLabel>Name</FormLabel><FormControl><Input placeholder="Enter full name" {...field} /></FormControl><FormMessage/></FormItem>
                   )} />
                   <FormField control={form.control} name="email" render={({ field }) => (
-                    <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" placeholder="email@kbiper.edu.in" {...field} /></FormControl><FormMessage/></FormItem>
+                    <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" placeholder="faculty@indrayanicollege.com" {...field} /></FormControl><FormMessage/></FormItem>
                   )} />
                 </div>
 

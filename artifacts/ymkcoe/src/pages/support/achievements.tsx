@@ -34,20 +34,20 @@ interface Achievement {
 const ACHIEVEMENTS_DATA: Achievement[] = [
   {
     id: "1",
-    title: "Best Pharmacy Institute Award 2024",
+    title: "Best Academic & College Excellence Award 2024",
     category: "Institutional",
     year: "2024",
-    description: "Awarded by the State Education Board for excellence in pharmaceutical education and research infrastructure.",
-    detailText: "Evaluated across 50+ professional institutes, KBIPER secured first rank in infrastructure expansion and academic indicators.",
+    description: "Awarded by State Higher Education authorities for holistic excellence in arts, commerce, and science education.",
+    detailText: "Evaluated across regional institutes, Indrayani Mahavidyalaya secured top honors in academic expansion, faculty development, and community impact.",
     icon: Trophy,
     colorClass: "from-yellow-400 to-yellow-600"
   },
   {
     id: "2",
-    title: "First Prize - National Pharma Hackathon",
+    title: "First Prize - Inter-Collegiate Tech & Code Hackathon",
     category: "Student Success",
     year: "2025",
-    description: "Our final year B.Pharm team won 1st prize for their innovative AI-driven drug interaction checker app.",
+    description: "Our BCS and Science scholars won 1st prize for their innovative full-stack software application and analytics system.",
     detailText: "Team members Rohit Jagtap and Sneha Kulkarni presented to corporate drug developers and won a cash prize of ₹1,00,000.",
     icon: Medal,
     colorClass: "from-slate-300 to-slate-500"
@@ -141,14 +141,14 @@ export default function Achievements() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6"
           >
             <Trophy className="w-4 h-4 text-accent animate-bounce" />
-            <span className="text-sm font-medium tracking-wide uppercase text-accent">KBIPER Milestones</span>
+            <span className="text-sm font-medium tracking-wide uppercase text-accent">Indrayani Milestones</span>
           </motion.div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#e6d080]">Achievements</span>
           </h1>
           <p className="text-base md:text-lg text-white/70 max-w-2xl font-light">
-            Explore the awards, national milestones, research grants, and student innovations that define our pursuit of excellence in pharmacy education.
+            Explore the awards, university milestones, sports laurels, and student innovations that define our pursuit of excellence in Junior and Senior College education.
           </p>
         </div>
       </section>

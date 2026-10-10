@@ -457,7 +457,7 @@ export default function RDPage() {
                   <h3 className="text-base font-extrabold text-primary flex items-center gap-1.5">
                     <Share2 className="w-5 h-5 text-accent" /> Research Collaboration Desk
                   </h3>
-                  <p className="text-xs text-muted-foreground mt-1">Submit a research draft or proposal to seek collaboration with KBIPER analytical departments.</p>
+                  <p className="text-xs text-muted-foreground mt-1">Submit a research draft or proposal to seek collaboration with Indrayani Mahavidyalaya scientific and computing departments.</p>
                 </div>
 
                 {!isSubmitted ? (
@@ -559,9 +559,9 @@ export default function RDPage() {
           <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mx-auto border border-white/20">
             <Bookmark className="w-5 h-5 text-accent" />
           </div>
-          <h3 className="text-lg font-extrabold tracking-tight">Institutional Biosafety & Ethical Clearances</h3>
+          <h3 className="text-lg font-extrabold tracking-tight">Institutional Research Ethics & Compliance</h3>
           <p className="text-xs text-white/80 max-w-lg mx-auto leading-relaxed">
-            All pharmacological trials and formulation syntheses at KBIPER laboratories comply strictly with CPCSEA approvals and institutional biosafety committees.
+            All scientific investigations and research projects at Indrayani Mahavidyalaya laboratories comply strictly with university regulations and academic research ethics standards.
           </p>
         </div>
       </section>

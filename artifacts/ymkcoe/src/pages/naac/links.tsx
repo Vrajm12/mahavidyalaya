@@ -34,21 +34,21 @@ const REGULATORY_APPROVALS: ApprovalLink[] = [
     year: "AY 2026-27"
   },
   {
-    title: "PCI Approval & Sanction Certificate",
-    body: "Pharmacy Council of India approvals for D.Pharm, B.Pharm, and M.Pharm intake allocations.",
-    refNo: "PCI-4402/2025-Decision-Board",
+    title: "SPPU Affiliation Approval Statement",
+    body: "Savitribai Phule Pune University (SPPU) affiliation certificates for B.Sc. and BCS degree programs.",
+    refNo: "SPPU/Affil/Indrayani/2025-26",
     year: "AY 2025-26"
   },
   {
-    title: "DBATU Affiliation Approval Statement",
-    body: "Dr. Babasaheb Ambedkar Technological University (DBATU) affiliation letters for curriculum validation.",
-    refNo: "DBATU/Affilet/KBIPER/2025-26",
+    title: "Maharashtra State Board (MSBSHSE) Sanction",
+    body: "MSBSHSE Pune Divisional Board sanction letters for Junior College (Arts, Commerce, Science).",
+    refNo: "MSBSHSE/PUN/JR-4402/2025-26",
     year: "AY 2025-26"
   },
   {
-    title: "DTE Maharashtra Intake Clearance",
-    body: "Directorate of Technical Education (DTE) code allotment and institutional intake approvals.",
-    refNo: "DTE-Code-6902/Admission-Audit",
+    title: "Government of Maharashtra Higher Education Clearance",
+    body: "Department of Higher and Technical Education institutional recognition and intake approvals.",
+    refNo: "HE-PUN/Indrayani-Mahavidyalaya/Audit",
     year: "AY 2026-27"
   }
 ];

@@ -36,197 +36,179 @@ interface CommitteeMember {
 const COMMITTEE_MEMBERS: CommitteeMember[] = [
   {
     id: "1",
-    name: "Dr. Sanjay R. Arote",
+    name: "Dr. S. K. Malghe",
     role: "Chairman",
     designation: "Principal",
-    department: "College Administration",
-    phone: "9960365969",
-    email: "principal.iiper@gmail.com",
+    department: "Indrayani Mahavidyalaya Administration",
+    phone: "02114-222225",
+    email: "principal@indrayanicollege.com",
     isHead: true
   },
   {
     id: "2",
     name: "Mr. Paresh Parekh",
     role: "Civil Representative",
-    designation: "Social worker",
-    department: "Civil Representative",
+    designation: "Social Worker & Community Leader",
+    department: "Talegaon Dabhade Civic Forum",
     phone: "9823030979",
-    email: "principal.iiper@gmail.com"
+    email: "civic@indrayanicollege.com"
   },
   {
     id: "3",
     name: "Mrs. Anuja G. Phadtare",
     role: "Police Representative",
-    designation: "API, Training center Lonawala",
+    designation: "API, Talegaon Dabhade Police Station",
     department: "Police Department",
     phone: "9028948595",
-    email: "anujaphadtare@gmail.com"
+    email: "police.talegaon@mahapolice.gov.in"
   },
   {
     id: "4",
     name: "Dr. Suhas Kanitkar",
     role: "NGO Representative",
     designation: "M.B.B.S., A.F.I.H.",
-    department: "NGO Representative",
+    department: "Community Health NGO",
     phone: "9552514361",
     email: "suhas27@gmail.com"
   },
   {
     id: "5",
     name: "Mrs. Rekha B. Bhegade",
-    role: "Local media Representative",
-    designation: "Representative",
-    department: "Local Media",
+    role: "Local Media Representative",
+    designation: "Journalist",
+    department: "Local Press & Media",
     phone: "8956323150",
-    email: "principal.iiper@gmail.com"
+    email: "media@indrayanicollege.com"
   },
   {
     id: "6",
-    name: "Dr. Gulab S. Shinde",
-    role: "Teaching Representative (D.Pharm)",
-    designation: "HOD D.Pharm",
-    department: "Diploma in Pharmacy",
-    phone: "8975251496",
-    email: "shindegss@gmail.com"
+    name: "Prof. S. R. Deshmukh",
+    role: "Faculty Representative (Arts)",
+    designation: "HOD, Department of Arts",
+    department: "Junior & Senior Arts",
+    phone: "9822451020",
+    email: "deshmukh@indrayanicollege.com"
   },
   {
     id: "7",
-    name: "Dr. Ganesh R. Phadtare",
-    role: "Representative (B.Pharm)",
-    designation: "Asso. Professor, KBIPER",
-    department: "B. Pharmacy",
-    phone: "8652858595",
-    email: "gpcology@gmail.com"
+    name: "Dr. V. R. Bhalerao",
+    role: "Faculty Representative (Commerce)",
+    designation: "HOD, Department of Commerce",
+    department: "Junior & Senior Commerce",
+    phone: "9850123450",
+    email: "bhalerao@indrayanicollege.com"
   },
   {
     id: "8",
-    name: "Dr. Amol Rakte",
-    role: "Teaching Representative (M.Pharm)",
-    designation: "Asso. Professor, KBIPER",
-    department: "M. Pharmacy",
-    phone: "9867395656",
-    email: "amolsrakte@gmail.com"
+    name: "Dr. P. S. Kadam",
+    role: "Faculty Representative (Science & B.Sc.)",
+    designation: "HOD, Department of Science",
+    department: "Faculty of Science",
+    phone: "9890456120",
+    email: "kadam@indrayanicollege.com"
   },
   {
     id: "9",
-    name: "Mr. Ruturaj K Karande",
-    role: "Non-Teaching Representative",
-    designation: "O.S. KBIPER",
-    department: "Administrative Office",
-    phone: "9921351889",
-    email: "ruturajkarande0@gmail.com"
+    name: "Prof. K. N. Patil",
+    role: "Faculty Representative (BCS)",
+    designation: "HOD, Department of Computer Science",
+    department: "Faculty of Computer Science",
+    phone: "9763214580",
+    email: "patil@indrayanicollege.com"
   },
   {
     id: "10",
     name: "Mrs. Sheetal S. Thakar",
-    role: "Parents Representative (D.Pharm)",
+    role: "Parents Representative (Junior College)",
     designation: "Parents Representative",
-    department: "D. Pharmacy",
+    department: "Parent Teacher Association",
     phone: "9356248040",
     email: "siathakar21@gmail.com"
   },
   {
     id: "11",
     name: "Mr. Somnath Sonawane",
-    role: "Parents Representative (B.Pharm)",
+    role: "Parents Representative (Senior College)",
     designation: "Parents Representative",
-    department: "B. Pharmacy",
+    department: "Parent Teacher Association",
     phone: "9767551507",
     email: "sonvanesomnath9767@gmail.com"
   },
   {
     id: "12",
-    name: "Mr. Ravindra J. Patil",
-    role: "Parents Representative (M.Pharm)",
-    designation: "Parents Representative",
-    department: "M. Pharmacy",
-    phone: "7875979445",
-    email: "ravindrapatil@gmail.com"
+    name: "Ms. Riya R. Rai",
+    role: "Student Representative (Class 12 Science)",
+    designation: "Student Representative",
+    department: "Junior Science",
+    phone: "9529653271",
+    email: "student.rep1@indrayanicollege.com"
   },
   {
     id: "13",
-    name: "Ms. Riya R. Rai",
-    role: "Student Representative (D.Pharm)",
+    name: "Mr. Vinit N. Dagade",
+    role: "Student Representative (Class 12 Commerce)",
     designation: "Student Representative",
-    department: "D. Pharmacy",
-    phone: "9529653271",
-    email: "rairriya@gmail.com"
+    department: "Junior Commerce",
+    phone: "7387120712",
+    email: "student.rep2@indrayanicollege.com"
   },
   {
     id: "14",
-    name: "Mr. Vinit N. Dagade",
-    role: "Student Representative (D.Pharm)",
+    name: "Ms. Shruti S. Sonawane",
+    role: "Student Representative (Class 12 Arts)",
     designation: "Student Representative",
-    department: "D. Pharmacy",
-    phone: "7387120712",
-    email: "vinitdagade77@gmail.com"
+    department: "Junior Arts",
+    phone: "9373060484",
+    email: "student.rep3@indrayanicollege.com"
   },
   {
     id: "15",
-    name: "Ms. Shruti S. Sonawane",
-    role: "Student Representative (B.Pharm)",
+    name: "Ms. Samruddhi S. Kajulkar",
+    role: "Student Representative (T.Y. B.Sc.)",
     designation: "Student Representative",
-    department: "B. Pharmacy",
-    phone: "9373060484",
-    email: "sonavaneshruti03@gmail.com"
+    department: "Senior Science",
+    phone: "9579421915",
+    email: "student.rep4@indrayanicollege.com"
   },
   {
     id: "16",
-    name: "Ms. Samruddhi S. Kajulkar",
-    role: "Student Representative (B.Pharm)",
-    designation: "Student Representative",
-    department: "B. Pharmacy",
-    phone: "9579421915",
-    email: "samruddhikajulkar@gmail.com"
-  },
-  {
-    id: "17",
-    name: "Ms. Dimpal R. Patil",
-    role: "Student Representative (M.Pharm)",
-    designation: "Student Representative",
-    department: "M. Pharmacy",
-    phone: "9665959445",
-    email: "dimpalpatil4455@gmail.com"
-  },
-  {
-    id: "18",
     name: "Mr. Rohit Sonawane",
-    role: "Student Representative (M.Pharm)",
+    role: "Student Representative (T.Y. BCS)",
     designation: "Student Representative",
-    department: "M. Pharmacy",
+    department: "Computer Science",
     phone: "7498792872",
-    email: "sonawanerohit158@gmail.com"
+    email: "student.rep5@indrayanicollege.com"
   }
 ];
 
 const SQUAD_MEMBERS: CommitteeMember[] = [
   {
     id: "1",
-    name: "Dr. Sanjay R. Arote",
-    role: "Chairman",
+    name: "Dr. S. K. Malghe",
+    role: "Squad Chairman",
     designation: "Principal",
     department: "College Administration",
-    phone: "9960365969",
-    email: "principal.iiper@gmail.com",
+    phone: "02114-222225",
+    email: "principal@indrayanicollege.com",
     isHead: true
   },
   {
     id: "2",
-    name: "Prof. Shyam S. Awate",
-    role: "Teaching Representative",
-    designation: "Assi. Professor, KBIPER",
+    name: "Prof. S. R. Deshmukh",
+    role: "Faculty Squad Member",
+    designation: "HOD Arts",
     department: "Teaching Staff",
-    phone: "9545713667",
-    email: "shyamsawate@gmail.com"
+    phone: "9822451020",
+    email: "deshmukh@indrayanicollege.com"
   },
   {
     id: "3",
-    name: "Mrs. Komal A. Thakar",
-    role: "Teaching Representative",
-    designation: "Assi. Professor, KBIPER",
+    name: "Prof. K. N. Patil",
+    role: "Faculty Squad Member",
+    designation: "HOD BCS",
     department: "Teaching Staff",
-    phone: "9921987644",
-    email: "komalgade113@gmail.com"
+    phone: "9763214580",
+    email: "patil@indrayanicollege.com"
   },
   {
     id: "4",
@@ -511,7 +493,7 @@ export default function AntiRagging() {
                                 required
                                 value={contactDetail}
                                 onChange={(e) => setContactDetail(e.target.value)}
-                                placeholder="e.g. rahul@kbiper.edu.in"
+                                placeholder="e.g. rahul@student.indrayanicollege.com"
                                 className="w-full px-4 py-3 rounded-xl border border-muted bg-white text-sm focus:outline-none focus:ring-2 focus:ring-accent placeholder:text-muted-foreground/35"
                               />
                             </div>

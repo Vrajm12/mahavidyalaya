@@ -97,8 +97,8 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-foreground text-lg mb-1">Phone Number</h3>
                       <p className="text-muted-foreground">
-                        <a href="tel:+918983683005" className="hover:text-primary transition-colors">+91 89836 83005</a><br/>
-                        <a href="tel:+918983673005" className="hover:text-primary transition-colors">+91 89836 73005</a> (Admissions)
+                        <a href="tel:+912114222225" className="hover:text-primary transition-colors">+91 2114 222225</a><br/>
+                        <a href="tel:+912114223555" className="hover:text-primary transition-colors">+91 2114 223555</a> (Admissions Desk)
                       </p>
                     </div>
                   </div>
@@ -110,7 +110,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-foreground text-lg mb-1">Email Address</h3>
                       <p className="text-muted-foreground">
-                        <a href="mailto:principal.iiper@gmail.com" className="hover:text-primary transition-colors">principal.iiper@gmail.com</a>
+                        <a href="mailto:principal@indrayanicollege.com" className="hover:text-primary transition-colors">principal@indrayanicollege.com</a>
                       </p>
                     </div>
                   </div>

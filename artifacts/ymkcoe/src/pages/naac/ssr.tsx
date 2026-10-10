@@ -92,7 +92,7 @@ const SSR_DATABASE: Criterion[] = [
     codeName: "Criterion 6",
     description: "Institutional vision, strategic plans, professional development, and financial audits.",
     metrics: [
-      { code: "6.1.1", name: "Governance in Tune with Vision and Mission of KBIPER", type: "QlM", size: "1.3 MB" },
+      { code: "6.1.1", name: "Governance in Tune with Vision and Mission of Indrayani Mahavidyalaya", type: "QlM", size: "1.3 MB" },
       { code: "6.3.3", name: "Professional Development/Administrative Training Programs Organized", type: "QnM", size: "1.9 MB" },
       { code: "6.5.1", name: "Quality Assurance Initiatives of the Institution", type: "QlM", size: "1.6 MB" }
     ]
@@ -101,7 +101,7 @@ const SSR_DATABASE: Criterion[] = [
     id: 7,
     title: "Institutional Values and Best Practices",
     codeName: "Criterion 7",
-    description: "Gender sensitization, environment/energy audits, best practices (Pharma-Fiesta, Sudumbare welfare).",
+    description: "Gender sensitization, environment/energy audits, best practices (Indrayani Mahotsav, local community outreach).",
     metrics: [
       { code: "7.1.1", name: "Gender Equity Promotion Initiatives & Facilities", type: "QlM", size: "2.2 MB" },
       { code: "7.1.3", name: "Environmental/Green Audits and Waste Management Logs", type: "QnM", size: "2.9 MB" },
@@ -177,7 +177,7 @@ export default function SSRPage() {
                 <ShieldCheck className="w-5 h-5 text-accent animate-pulse" /> NAAC Accreditation Data Hub
               </h2>
               <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto">
-                KBIPER maintains transparent standards of governance, curriculum delivery, and student support. Search the database below to download individual metrics for the SSR accreditation cycles.
+                Indrayani Mahavidyalaya maintains transparent standards of governance, curriculum delivery, and student support. Search the database below to download individual metrics for the SSR accreditation cycles.
               </p>
             </div>
 
@@ -298,9 +298,9 @@ export default function SSRPage() {
           <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mx-auto border border-white/20">
             <Bookmark className="w-5 h-5 text-accent" />
           </div>
-          <h3 className="text-lg font-extrabold tracking-tight">Excellence in Pharmaceutical Governance</h3>
+          <h3 className="text-lg font-extrabold tracking-tight">Excellence in Academic Governance & Accreditation</h3>
           <p className="text-xs text-white/80 max-w-lg mx-auto leading-relaxed">
-            KBIPER aligns all academic operations to national NAAC specifications. All criteria reports are certified by the internal cell and external review bodies.
+            Indrayani Mahavidyalaya aligns all academic operations to national NAAC specifications. All criteria reports are certified by the internal cell and external review bodies.
           </p>
         </div>
       </section>

@@ -33,77 +33,77 @@ const COUNCIL_MEMBERS: CouncilMember[] = [
     id: "1",
     name: "Mr. Rohit Jagtap",
     role: "Student Council President",
-    designation: "Student (Final Year B.Pharm)",
+    designation: "Student (Final Year BCS)",
     department: "Student Representative Board",
-    email: "rohit.jagtap@student.kbiper.edu.in",
+    email: "president.council@indrayanicollege.com",
     photoInitials: "RJ"
   },
   {
     id: "2",
     name: "Ms. Sneha Kulkarni",
     role: "General Secretary",
-    designation: "Student (Third Year B.Pharm)",
+    designation: "Student (Third Year B.Sc.)",
     department: "Student Representative Board",
-    email: "sneha.k@student.kbiper.edu.in",
+    email: "gs.council@indrayanicollege.com",
     photoInitials: "SK"
   },
   {
     id: "3",
     name: "Mr. Rahul Shinde",
     role: "Sports Secretary",
-    designation: "Student (Final Year B.Pharm)",
+    designation: "Student (Class 12 Science)",
     department: "Sports Department Board",
-    email: "rahul.s@student.kbiper.edu.in",
+    email: "sports.council@indrayanicollege.com",
     photoInitials: "RS"
   },
   {
     id: "4",
     name: "Ms. Ananya Deshpande",
     role: "Cultural Secretary",
-    designation: "Student (Third Year B.Pharm)",
+    designation: "Student (Class 12 Arts)",
     department: "Cultural Department Board",
-    email: "ananya.d@student.kbiper.edu.in",
+    email: "cultural.council@indrayanicollege.com",
     photoInitials: "AD"
   },
   {
     id: "5",
     name: "Mr. Vicky Salve",
-    role: "NSS Representative",
-    designation: "Student (Second Year B.Pharm)",
+    role: "NSS & Social Representative",
+    designation: "Student (Class 12 Commerce)",
     department: "Social Services Unit",
-    email: "vicky.s@student.kbiper.edu.in",
+    email: "nss.council@indrayanicollege.com",
     photoInitials: "VS"
   }
 ];
 
 const STUDENT_CLUBS = [
   {
-    name: "KBIPER Pharma Club",
-    desc: "Organizes pharmaceutical debates, GPAT quiz sessions, guest workshops, and scientific model design competitions.",
-    coordinator: "Prof. Milind Gaikwad",
-    email: "milind.gaikwad@kbiper.edu.in",
-    activities: "Annual GPAT Mock Tests, Model Exhibitions"
+    name: "Indrayani Tech & Coders Forum",
+    desc: "Organizes coding hackathons, web development workshops, algorithm leagues, and tech exhibitions for BCS and Science scholars.",
+    coordinator: "Prof. K. N. Patil",
+    email: "techforum@indrayanicollege.com",
+    activities: "Annual CodeFest, Web Dev Bootcamps, Tech Quiz"
   },
   {
-    name: "Cultural Fiesta Committee",
-    desc: "Coordinates dance contests, singing contests, drama fests, and KBIPER's annual 'Pharma-Fiesta'.",
-    coordinator: "Prof. Anjali Jadhav",
-    email: "anjali.jadhav@kbiper.edu.in",
-    activities: "Pharma-Fiesta, Independence Day fests"
+    name: "Cultural & Literary Parishad",
+    desc: "Coordinates Marathi bhasha samvardhan, youth theater festivals, singing contests, poetry symposia, and annual gathering.",
+    coordinator: "Prof. S. R. Deshmukh",
+    email: "cultural@indrayanicollege.com",
+    activities: "Annual Gathering 'Indrayani Mahotsav', Street Play"
   },
   {
-    name: "KBIPER Sports Association",
-    desc: "Schedules annual cricket tournaments, chess meets, football leagues, and badminton championships.",
-    coordinator: "Prof. Sushma Kamble",
-    email: "sushma.kamble@kbiper.edu.in",
-    activities: "Pharma-Cup Annual Sports Week"
+    name: "Indrayani Commerce & Economics Club",
+    desc: "Drives mock stock-exchange sessions, CA/CS career clinics, budget analysis roundtables, and entrepreneurship summits.",
+    coordinator: "Dr. V. R. Bhalerao",
+    email: "commerceclub@indrayanicollege.com",
+    activities: "Budget Watch, Mock Stock League, Startup Expo"
   },
   {
-    name: "Literary & Research Society",
-    desc: "Publishes the campus wall-magazine, student research newsletters, and hosts seminar presentations.",
-    coordinator: "Dr. Vivek Sharma",
-    email: "vivek.sharma@kbiper.edu.in",
-    activities: "Wall-Magazine editing, Research workshops"
+    name: "Science & Innovation Circle",
+    desc: "Coordinates experimental science exhibitions, national science day fairs, scientific guest seminars, and observatory visits.",
+    coordinator: "Dr. P. S. Kadam",
+    email: "sciencecircle@indrayanicollege.com",
+    activities: "Science Day Expo, Laboratory Olympiad"
   }
 ];
 
