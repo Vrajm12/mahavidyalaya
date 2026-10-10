@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <AppLayout>
       {/* 1. CINEMATIC COLLEGIATE HERO */}
-      <section className="relative w-full min-h-[660px] lg:min-h-[780px] flex items-center bg-[#071626] overflow-hidden text-white">
+      <section className="relative w-full min-h-[660px] lg:min-h-[780px] flex items-center bg-[#0B1F3A] overflow-hidden text-white">
         
         {/* Campus Architectural Background Image with Deep Collegiate Lighting */}
         <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[60%] h-full z-0 select-none">
@@ -49,32 +49,32 @@ export default function Home() {
             className="w-full h-full object-cover object-center lg:object-right opacity-85"
           />
           {/* Subtle vignette and cinematic lighting falloffs */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071626] via-[#071626]/75 to-transparent lg:hidden" />
-          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#071626] via-[#071626]/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B1F3A] via-[#0B1F3A]/75 to-transparent lg:hidden" />
+          <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#0B1F3A] via-[#0B1F3A]/85 to-transparent" />
         </div>
 
         {/* Ambient atmospheric glows */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-4 md:px-6 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Hero Headline & Identity */}
           <div className="lg:col-span-8 space-y-6 text-left max-w-3xl">
             
             {/* Sanstha Trust Tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-amber-300 text-xs font-semibold tracking-wider uppercase">
-              <Landmark className="w-3.5 h-3.5 text-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-blue-200 text-xs font-semibold tracking-wider uppercase">
+              <Landmark className="w-3.5 h-3.5 text-blue-300" />
               <span>Indrayani Vidya Mandir Trust • Est. 1965</span>
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs sm:text-sm font-mono tracking-widest text-amber-400 uppercase font-bold block">
+              <span className="text-xs sm:text-sm font-mono tracking-widest text-blue-300 uppercase font-bold block">
                 Junior & Senior College • Talegaon Dabhade, Pune
               </span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-extrabold tracking-tight text-white leading-[1.06]">
                 INDRAYANI <br />
-                <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-white">
+                <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-blue-100 to-white">
                   MAHAVIDYALAYA
                 </span>
               </h1>
@@ -87,23 +87,23 @@ export default function Home() {
             {/* Quick Program Links */}
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-semibold">
               <Link href="/arts">
-                <span className="px-3.5 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-amber-300 cursor-pointer transition-all flex items-center gap-1.5">
-                  <Scroll className="w-3 h-3" /> Arts (11th & 12th)
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white cursor-pointer transition-all flex items-center gap-1.5">
+                  <Scroll className="w-3 h-3 text-blue-300" /> Arts (11th & 12th)
                 </span>
               </Link>
               <Link href="/commerce">
-                <span className="px-3.5 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-emerald-300 cursor-pointer transition-all flex items-center gap-1.5">
-                  <BarChart3 className="w-3 h-3" /> Commerce (11th & 12th)
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white cursor-pointer transition-all flex items-center gap-1.5">
+                  <BarChart3 className="w-3 h-3 text-blue-300" /> Commerce (11th & 12th)
                 </span>
               </Link>
               <Link href="/science">
-                <span className="px-3.5 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/30 text-cyan-300 cursor-pointer transition-all flex items-center gap-1.5">
-                  <Atom className="w-3 h-3" /> Science (11th & 12th)
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white cursor-pointer transition-all flex items-center gap-1.5">
+                  <Atom className="w-3 h-3 text-blue-300" /> Science (11th & 12th)
                 </span>
               </Link>
               <Link href="/senior-college">
-                <span className="px-3.5 py-1.5 rounded-full bg-blue-500/15 hover:bg-blue-500/25 border border-blue-400/30 text-blue-300 cursor-pointer transition-all flex items-center gap-1.5">
-                  <GraduationCap className="w-3 h-3" /> Senior College (B.Sc. & BCS)
+                <span className="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white cursor-pointer transition-all flex items-center gap-1.5">
+                  <GraduationCap className="w-3 h-3 text-blue-300" /> Senior College (B.Sc. & BCS)
                 </span>
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default function Home() {
             {/* Primary Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
               <Link href="/admissions">
-                <Button size="lg" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 h-12 rounded-xl shadow-xl shadow-amber-950/40 text-sm">
+                <Button size="lg" className="bg-[#173B75] hover:bg-[#244F82] text-white font-bold px-8 h-12 rounded-xl shadow-xl border border-blue-400/30 text-sm">
                   Admissions Open 2026-27 <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -129,12 +129,12 @@ export default function Home() {
 
         {/* Heritage Corner Seal */}
         <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-black/40 backdrop-blur-md border border-white/15 text-white/90 select-none">
-          <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/30 flex items-center justify-center font-serif font-bold text-amber-300 text-sm">
+          <div className="w-8 h-8 rounded-lg bg-[#173B75] border border-blue-400/30 flex items-center justify-center font-serif font-bold text-white text-sm">
             IVM
           </div>
           <div className="text-left text-xs leading-tight">
             <span className="block font-bold">Indrayani Vidya Mandir</span>
-            <span className="text-[10px] text-amber-300/80 font-mono">Talegaon Dabhade • Maval</span>
+            <span className="text-[10px] text-blue-200 font-mono">Talegaon Dabhade • Maval</span>
           </div>
         </div>
       </section>

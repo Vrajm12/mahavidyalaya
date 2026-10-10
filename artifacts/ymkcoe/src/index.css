@@ -70,65 +70,66 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* LIGHT MODE */
+/* LIGHT MODE - White + Midnight Navy + Royal Blue Design System */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(11, 31, 58, 0.10);
+  --badge-outline: rgba(11, 31, 58, 0.05);
 
   --opaque-button-border-intensity: -8;
 
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  --elevate-1: rgba(11, 31, 58, 0.03);
+  --elevate-2: rgba(11, 31, 58, 0.08);
 
-  /* Backgrounds: White and off-whites */
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%; /* Text Dark #0F172A */
+  /* Backgrounds & Surfaces */
+  --background: 216 33% 97%; /* #F3F6FA Light Neutral */
+  --foreground: 214 31% 22%; /* #263548 Dark Navy Slate Text */
 
-  --border: 210 31% 95%; /* Light Grey #EEF2F6 */
+  --border: 214 30% 90%; /* #DCE4EE Light Border */
   
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --card-border: 210 31% 95%;
+  --card: 0 0% 100%; /* #FFFFFF Crisp White Cards */
+  --card-foreground: 214 31% 22%; /* #263548 */
+  --card-border: 214 30% 90%; /* #DCE4EE */
 
-  --sidebar: 203 96% 18%; /* Dark Azure #023859 */
+  --sidebar: 214 68% 14%; /* #0B1F3A Midnight Navy Header/Sidebar */
   --sidebar-foreground: 0 0% 100%;
-  --sidebar-border: 210 31% 95%;
-  --sidebar-primary: 44 93% 50%; /* Orange Gold */
+  --sidebar-border: 214 68% 20%;
+  --sidebar-primary: 217 67% 28%; /* #173B75 Royal Blue */
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 48 44% 62%; /* Grey Yellow */
+  --sidebar-accent: 213 57% 33%; /* #244F82 Accent Blue */
   --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 44 93% 50%;
+  --sidebar-ring: 217 67% 28%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --popover-border: 210 31% 95%;
+  --popover-foreground: 214 31% 22%;
+  --popover-border: 214 30% 90%;
 
-  /* Primary: Medical Green */
-  --primary: 203 96% 18%; /* Dark Azure */
+  /* Primary: Royal Blue #173B75 */
+  --primary: 217 67% 28%; 
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Teal */
-  --secondary: 48 44% 62%; /* Grey Yellow */
+  /* Secondary: Accent Blue #244F82 */
+  --secondary: 213 57% 33%; 
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 210 40% 98%; /* Off White #F8FAFC */
-  --muted-foreground: 215.4 16.3% 46.9%;
+  /* Muted: Soft Blue Surface #E8EEF8 */
+  --muted: 216 56% 94%; 
+  --muted-foreground: 211 19% 40%; /* #526579 */
 
-  /* Accent: Medical Blue */
-  --accent: 44 93% 50%; /* Orange Gold */
+  /* Accent: Royal Blue #173B75 */
+  --accent: 217 67% 28%;
   --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --input: 210 31% 95%;
-  --ring: 44 93% 50%;
+  --input: 214 30% 90%;
+  --ring: 217 67% 28%;
   
-  --chart-1: 203 96% 18%;
-  --chart-2: 48 44% 62%;
-  --chart-3: 44 93% 50%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
+  --chart-1: 217 67% 28%;
+  --chart-2: 213 57% 33%;
+  --chart-3: 214 68% 14%;
+  --chart-4: 216 56% 94%;
+  --chart-5: 211 19% 40%;
 
   --app-font-sans: 'Google Sans', 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --app-font-serif: 'Google Sans', 'Plus Jakarta Sans', sans-serif;
@@ -137,14 +138,14 @@
   
   --radius: 0.5rem;
   
-  --shadow-2xs: 0px 2px 0px 0px hsl(240 28% 14% / 0.03);
-  --shadow-xs: 0px 2px 0px 0px hsl(240 28% 14% / 0.05);
-  --shadow-sm: 0px 2px 0px 0px hsl(240 28% 14% / 0.05), 0px 1px 2px -1px hsl(240 28% 14% / 0.05);
-  --shadow: 0px 2px 0px 0px hsl(240 28% 14% / 0.05), 0px 1px 2px -1px hsl(240 28% 14% / 0.1);
-  --shadow-md: 0px 2px 0px 0px hsl(240 28% 14% / 0.05), 0px 2px 4px -1px hsl(240 28% 14% / 0.1);
-  --shadow-lg: 0px 2px 0px 0px hsl(240 28% 14% / 0.05), 0px 4px 6px -1px hsl(240 28% 14% / 0.1);
-  --shadow-xl: 0px 2px 0px 0px hsl(240 28% 14% / 0.05), 0px 8px 10px -1px hsl(240 28% 14% / 0.1);
-  --shadow-2xl: 0px 2px 0px 0px hsl(240 28% 14% / 0.1);
+  --shadow-2xs: 0px 2px 0px 0px hsl(214 68% 14% / 0.03);
+  --shadow-xs: 0px 2px 0px 0px hsl(214 68% 14% / 0.05);
+  --shadow-sm: 0px 2px 0px 0px hsl(214 68% 14% / 0.05), 0px 1px 2px -1px hsl(214 68% 14% / 0.05);
+  --shadow: 0px 2px 0px 0px hsl(214 68% 14% / 0.05), 0px 1px 2px -1px hsl(214 68% 14% / 0.1);
+  --shadow-md: 0px 2px 0px 0px hsl(214 68% 14% / 0.05), 0px 2px 4px -1px hsl(214 68% 14% / 0.1);
+  --shadow-lg: 0px 2px 0px 0px hsl(214 68% 14% / 0.05), 0px 4px 6px -1px hsl(214 68% 14% / 0.1);
+  --shadow-xl: 0px 2px 0px 0px hsl(214 68% 14% / 0.05), 0px 8px 10px -1px hsl(214 68% 14% / 0.1);
+  --shadow-2xl: 0px 2px 0px 0px hsl(214 68% 14% / 0.1);
   
   --tracking-normal: 0em;
   --spacing: 0.25rem;
@@ -167,52 +168,52 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  /* Backgrounds: Deep Navy */
-  --background: 240 28% 10%;
+  /* Backgrounds: Midnight Navy */
+  --background: 214 68% 10%; /* #071527 */
   --foreground: 0 0% 100%;
 
-  --border: 240 28% 18%;
+  --border: 214 60% 18%;
 
-  --card: 240 28% 14%;
+  --card: 214 68% 14%; /* #0B1F3A */
   --card-foreground: 0 0% 100%;
-  --card-border: 240 28% 18%;
+  --card-border: 214 60% 20%;
 
-  --sidebar: 240 28% 12%;
+  --sidebar: 214 68% 12%;
   --sidebar-foreground: 0 0% 100%;
-  --sidebar-border: 240 28% 18%;
-  --sidebar-primary: 141 49% 47%;
+  --sidebar-border: 214 60% 18%;
+  --sidebar-primary: 217 67% 38%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 56% 22%;
+  --sidebar-accent: 213 57% 33%;
   --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-ring: 141 49% 47%;
+  --sidebar-ring: 217 67% 38%;
 
-  --popover: 240 28% 14%;
+  --popover: 214 68% 14%;
   --popover-foreground: 0 0% 100%;
-  --popover-border: 240 28% 18%;
+  --popover-border: 214 60% 20%;
 
-  --primary: 160 84% 30%;
+  --primary: 217 67% 45%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 173 58% 39%;
+  --secondary: 213 57% 38%;
   --secondary-foreground: 0 0% 100%;
 
-  --muted: 160 84% 15%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 214 60% 18%;
+  --muted-foreground: 211 19% 65%;
 
-  --accent: 212 100% 48%;
+  --accent: 217 67% 45%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --input: 240 28% 18%;
-  --ring: 39 100% 50%;
+  --input: 214 60% 18%;
+  --ring: 217 67% 45%;
   
-  --chart-1: 39 100% 50%;
-  --chart-2: 240 28% 14%;
-  --chart-3: 220 56% 22%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
+  --chart-1: 217 67% 45%;
+  --chart-2: 214 68% 14%;
+  --chart-3: 213 57% 38%;
+  --chart-4: 216 56% 94%;
+  --chart-5: 211 19% 65%;
 }
 
 @layer base {

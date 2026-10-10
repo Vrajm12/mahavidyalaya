@@ -202,8 +202,8 @@ export function CampusShowcase() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-semibold tracking-wide uppercase">
             <Compass className="h-4 w-4 animate-spin-[20s] linear infinite" /> Interactive Campus Tour
           </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
-            Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#d4af37]">College Infrastructure</span> & Life
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#0B1F3A] tracking-tight">
+            Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#173B75] to-[#244F82]">College Infrastructure</span> & Life
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Take a deep-dive into our modern labs, dynamic student communities, sporting assets, and green campus. Touch the tabs to explore.
